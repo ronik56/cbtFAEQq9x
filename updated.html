@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Friday Night Activity Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Slate Blue Accent -->
+    <!-- Application Structure Plan: This SPA is an "Interactive Activity Funnel." It starts with the broadest choice: "Going Out" or "Staying In." This immediately splits the user's path based on their primary intention. From there, secondary filters for "Vibe" (e.g., "High-Energy," "Creative") and "Location" ("Tel Aviv," "Anywhere") allow for progressive disclosure, narrowing down a comprehensive list of activities. This structure is more intuitive than a flat list, guiding the user from a general idea to a specific, actionable plan. A modal provides deep-dive info, and a comparison chart adds a data-driven decision layer, creating a complete planning tool within a single page. -->
+    <!-- Visualization & Content Choices: Report data is structured into JS objects with new properties like 'category' ('out', 'in') and 'location' ('tlv', 'anywhere'). Goal: Initial Choice -> Method: Two large "Going Out"/"Staying In" buttons -> Interaction: Click to set primary filter -> Justification: Simplifies the starting point. Goal: Refine Search -> Method: Vibe/Location buttons -> Interaction: Click to apply secondary filters -> Justification: Offers powerful, multi-faceted filtering. Goal: Compare Activities -> Method: Interactive Radar Chart (Chart.js) -> Interaction: Hover to see details on Cost, Energy, and Planning levels -> Justification: Provides a multi-dimensional visual comparison beyond a simple bar chart. Goal: Practical Tips -> Method: Accordion -> Justification: Hides dense text until needed. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f4f5; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 400px; max-height: 60vh; }
+        .modal-enter { opacity: 0; transform: scale(0.95); }
+        .modal-enter-active { opacity: 1; transform: scale(1); transition: all 300ms; }
+        .modal-leave-active { opacity: 0; transform: scale(0.95); transition: all 300ms; }
+        .card-enter-active { transition: all 300ms; }
+        .btn-active { background-color: #4f46e5 !important; color: white !important; }
+        .btn-active .mt-2 { color: white !important; }
+    </style>
+</head>
+<body class="text-stone-800">
+
+    <div id="app-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-bold text-stone-900">The Ultimate Friday Night Planner</h1>
+            <p class="mt-4 text-lg text-stone-600 max-w-3xl mx-auto">Your interactive guide to crafting the perfect Friday night for two friends, anywhere in the world.</p>
+        </header>
+
+        <main>
+            <section id="initial-filter" class="mb-12">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-stone-800 mb-2">What's the plan?</h2>
+                    <p class="text-stone-600">Start here. This choice will shape your options. Are you heading out for an adventure or planning a cozy evening at home? This first step helps tailor all the suggestions to your core preference for the night.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                    <button data-category="out" class="category-btn bg-white text-slate-700 p-8 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all text-left">
+                        <span class="text-4xl">🏙️</span>
+                        <h3 class="text-2xl font-bold mt-4">Going Out</h3>
+                        <p class="mt-2 text-stone-600">Explore the city, discover new venues, and soak in the energy.</p>
+                    </button>
+                    <button data-category="in" class="category-btn bg-white text-slate-700 p-8 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all text-left">
+                        <span class="text-4xl">🏠</span>
+                        <h3 class="text-2xl font-bold mt-4">Staying In</h3>
+                        <p class="mt-2 text-stone-600">Get cozy with games, movies, and creative projects at home.</p>
+                    </button>
+                </div>
+            </section>
+            
+            <section id="secondary-filters" class="mb-12 hidden">
+                 <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-stone-800 mb-2">Refine Your Search</h2>
+                     <p class="text-stone-600">Now, let's narrow it down. Use these filters to find activities that perfectly match the vibe and location you have in mind. Your selections here will dynamically update the grid of suggestions below.</p>
+                </div>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10">
+                    <div>
+                        <h4 class="font-semibold text-center mb-2">Filter by Vibe:</h4>
+                        <div id="vibe-buttons" class="flex flex-wrap justify-center gap-2"></div>
+                    </div>
+                     <div>
+                        <h4 class="font-semibold text-center mb-2">Filter by Location:</h4>
+                        <div id="location-buttons" class="flex flex-wrap justify-center gap-2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="results">
+                <div id="results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                </div>
+                 <p id="no-results" class="text-center text-stone-500 hidden mt-8">No activities match your filters. Try a different combination!</p>
+            </section>
+
+            <section id="planner-tool" class="mt-16 bg-white rounded-2xl p-6 sm:p-8 shadow-lg">
+                <div class="mb-6 text-center">
+                    <h2 class="text-2xl font-bold text-stone-800 mb-2">Activity Comparison Tool</h2>
+                    <p class="text-stone-600 max-w-3xl mx-auto">This radar chart provides a visual comparison of different activities based on three key factors: potential cost, energy level, and planning required. It's a quick way to see how various options stack up and helps in making a balanced decision for your night.</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="activities-chart"></canvas>
+                </div>
+            </section>
+
+             <section id="practical-tips" class="mt-16">
+                 <div class="mb-6 text-center">
+                    <h2 class="text-2xl font-bold text-stone-800 mb-2">Practical Pointers</h2>
+                    <p class="text-stone-600 max-w-3xl mx-auto">Here are some essential tips to ensure your Friday night goes smoothly. From booking tables to planning an at-home movie night, this information will help you prepare. Click any topic to expand it.</p>
+                </div>
+                <div id="accordion-container" class="max-w-3xl mx-auto space-y-4">
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-70 hidden z-40"></div>
+    <div id="modal" class="fixed inset-0 p-4 hidden z-50 overflow-y-auto">
+        <div class="flex items-center justify-center min-h-full">
+            <div id="modal-content" class="bg-white rounded-2xl shadow-xl w-full max-w-2xl relative max-h-[90vh] flex flex-col transition-all duration-300">
+                <div class="p-6 sm:p-8 flex-grow overflow-y-auto">
+                    <h3 id="modal-title" class="text-3xl font-bold text-stone-900 mb-2"></h3>
+                    <p id="modal-location" class="text-md font-medium text-indigo-600 mb-4"></p>
+                    <div id="modal-tags" class="flex flex-wrap gap-2 mb-6"></div>
+                    <p id="modal-description" class="text-stone-700 leading-relaxed"></p>
+                </div>
+                 <div class="p-4 bg-stone-50 rounded-b-2xl border-t border-stone-200">
+                    <button id="modal-close-button" class="w-full bg-stone-200 text-stone-700 font-bold py-2 px-4 rounded-lg hover:bg-stone-300 transition-colors">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const activities = [
+                { id: 1, name: "Kuli Alma", location: "tlv", category: "out", vibe: "High-Energy", cost: 2, energy: 3, planning: 1, tags: ["Alternative", "Artsy", "Dance Floor"], description: "A hugely popular underground bar attracting locals and tourists, with art, live concerts, and DJ sets. Known for its lively dance floor. Open 9 PM - 5 AM." },
+                { id: 3, name: "The Prince", location: "tlv", category: "out", vibe: "Chill", cost: 2, energy: 1, planning: 2, tags: ["Rooftop", "Chic", "Vintage"], description: "A unique rooftop bar on an old Bauhaus building with vintage sofas. Recommended for its chill atmosphere and great views for a laid-back drink." },
+                { id: 6, name: "Port Said", location: "tlv", category: "out", vibe: "Culinary", cost: 3, energy: 2, planning: 3, tags: ["Lively", "Shared Plates", "Israeli"], description: "By chef Eyal Shani, this spot serves delicious Israeli food in a very lively setting with vinyl music. Reservations recommended." },
+                { id: 9, name: "Live Concert", location: "anywhere", category: "out", vibe: "High-Energy", cost: 3, energy: 3, planning: 3, tags: ["Music", "Social", "Event"], description: "Experience the energy of a live show. Check local listings (e.g., Eventbrite, Zappa TLV) for artists performing on a Friday night. Booking tickets in advance is essential." },
+                { id: 12, name: "Neighborhood Exploration", location: "anywhere", category: "out", vibe: "Chill", cost: 1, energy: 2, planning: 1, tags: ["Discovery", "Scenic", "Casual"], description: "Explore a local neighborhood you don't know well. Discover hidden gems, appreciate the architecture, and find a unique spot for a drink or a bite. In Tel Aviv, consider Florentin or Neve Tzedek." },
+                { id: 15, name: "Bowling Night", location: "anywhere", category: "out", vibe: "Active", cost: 2, energy: 2, planning: 2, tags: ["Playful", "Competitive", "Social"], description: "A classic for a reason! Bowling is a fun, light-hearted activity. Modern alleys often have music and food service. Check for lane reservations on a Friday." },
+                { id: 16, name: "Mini-Golf Challenge", location: "anywhere", category: "out", vibe: "Active", cost: 1, energy: 1, planning: 1, tags: ["Playful", "Whimsical", "Outdoor/Indoor"], description: "Navigate creative and quirky courses for a dose of friendly competition. A relaxed activity that allows for plenty of conversation between holes." },
+                { id: 17, name: "Board Game Night", location: "anywhere", category: "in", vibe: "Creative", cost: 1, energy: 1, planning: 2, tags: ["Cozy", "Interactive", "Strategic"], description: "Gather your favorite 2-player board games or try a new cooperative one. Add some snacks and drinks for a perfect, low-key interactive night." },
+                { id: 18, name: "Movie Marathon", location: "anywhere", category: "in", vibe: "Chill", cost: 1, energy: 1, planning: 2, tags: ["Cozy", "Relaxing", "Immersive"], description: "Pick a theme (director, genre, actor) and settle in. Get comfy with blankets and pillows, and don't forget the themed snacks and popcorn!" },
+                { id: 19, name: "Collaborative Cooking", location: "anywhere", category: "in", vibe: "Culinary", cost: 2, energy: 2, planning: 3, tags: ["Creative", "Interactive", "Rewarding"], description: "Turn dinner into a fun activity. Pick a recipe together (e.g., homemade pizza, tacos), shop for ingredients, put on some music, and create a delicious meal." },
+                { id: 20, name: "Co-op Video Gaming", location: "anywhere", category: "in", vibe: "Active", cost: 1, energy: 2, planning: 1, tags: ["Teamwork", "Fun", "Digital"], description: "Team up in a digital world. Choose a fun cooperative game like 'Overcooked' or 'It Takes Two' for a night of laughter and teamwork." },
+                { id: 21, name: "Joint Creative Project", location: "anywhere", category: "in", vibe: "Creative", cost: 1, energy: 1, planning: 2, tags: ["Artistic", "Bonding", "Relaxing"], description: "Unleash your creativity together. Try a joint painting session, make friendship bracelets, or tackle a large jigsaw puzzle. A satisfying and unique way to spend the evening." },
+                { id: 22, name: "Start a New TV Series", location: "anywhere", category: "in", vibe: "Chill", cost: 1, energy: 1, planning: 1, tags: ["Shared Discovery", "Cozy", "Ongoing"], description: "The joy of discovering a new show together is unmatched. Agree on a genre, get comfortable, and enjoy discussing theories and characters in real-time." }
+            ];
+
+            const practicalTips = [
+                 { title: "Planning for a Night Out", content: "For popular restaurants or ticketed events, securing reservations is crucial, especially on a Friday. Check venue websites or use booking platforms. For transport, ride-sharing apps are reliable; public transit may be limited. Dress code is usually stylishly casual, but comfort is key if you're walking." },
+                 { title: "Crafting the Perfect Night In", content: "A great night in starts with a little prep. For game nights, choose a game you both enjoy. For cooking, shop for ingredients in advance. For movie marathons, create a comfy nest with blankets and have all your snacks ready to go. The goal is to maximize relaxation and minimize mid-evening hassle." },
+                 { title: "Budgeting for Fun", content: "Discussing a general budget beforehand can make the night more enjoyable for everyone. At-home activities are generally low-cost. Outings like bowling or dining can range from $20-$50+ per person. Setting expectations prevents any awkwardness and helps in choosing an activity you can both enjoy stress-free." },
+                 { title: "Tel Aviv Specifics (Shabbat)", content: "If you're in Tel Aviv, remember that Shabbat begins at sunset on Friday. This means public transport largely stops, but the city's entertainment districts, including restaurants and bars, remain very active and are often at their busiest." }
+            ];
+
+            const elements = {
+                categoryButtons: document.querySelectorAll('.category-btn'),
+                secondaryFilters: document.getElementById('secondary-filters'),
+                vibeButtonsContainer: document.getElementById('vibe-buttons'),
+                locationButtonsContainer: document.getElementById('location-buttons'),
+                resultsGrid: document.getElementById('results-grid'),
+                noResults: document.getElementById('no-results'),
+                modalBackdrop: document.getElementById('modal-backdrop'),
+                modal: document.getElementById('modal'),
+                modalContent: document.getElementById('modal-content'),
+                modalCloseButton: document.getElementById('modal-close-button'),
+                accordionContainer: document.getElementById('accordion-container'),
+            };
+
+            let filters = { category: null, vibe: 'All', location: 'anywhere' };
+            let activitiesChart;
+
+            function updateFilters(newFilters) {
+                filters = { ...filters, ...newFilters };
+                renderVibeButtons();
+                renderLocationButtons();
+                renderActivities();
+            }
+
+            function renderVibeButtons() {
+                const availableVibes = ['All', ...new Set(activities.filter(a => a.category === filters.category).map(a => a.vibe))];
+                elements.vibeButtonsContainer.innerHTML = availableVibes.map(vibe => `
+                    <button data-vibe="${vibe}" class="vibe-btn filter-btn ${filters.vibe === vibe ? 'btn-active bg-indigo-600 text-white' : 'bg-white text-slate-600'} font-semibold py-2 px-4 rounded-full shadow-sm hover:bg-indigo-100 transition-colors">
+                        ${vibe}
+                    </button>
+                `).join('');
+            }
+            
+            function renderLocationButtons() {
+                 elements.locationButtonsContainer.innerHTML = `
+                    <button data-location="anywhere" class="location-btn filter-btn ${filters.location === 'anywhere' ? 'btn-active bg-indigo-600 text-white' : 'bg-white text-slate-600'} font-semibold py-2 px-4 rounded-full shadow-sm hover:bg-indigo-100 transition-colors">
+                        Anywhere
+                    </button>
+                    <button data-location="tlv" class="location-btn filter-btn ${filters.location === 'tlv' ? 'btn-active bg-indigo-600 text-white' : 'bg-white text-slate-600'} font-semibold py-2 px-4 rounded-full shadow-sm hover:bg-indigo-100 transition-colors">
+                        Tel Aviv
+                    </button>
+                 `;
+            }
+
+            function renderActivities() {
+                const filteredActivities = activities.filter(a => {
+                    const categoryMatch = a.category === filters.category;
+                    const vibeMatch = filters.vibe === 'All' || a.vibe === filters.vibe;
+                    const locationMatch = filters.location === 'anywhere' ? true : a.location === 'tlv';
+                    return categoryMatch && vibeMatch && locationMatch;
+                });
+                
+                elements.resultsGrid.innerHTML = '';
+                if (filteredActivities.length === 0) {
+                    elements.noResults.classList.remove('hidden');
+                } else {
+                     elements.noResults.classList.add('hidden');
+                }
+
+                filteredActivities.forEach((activity, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 opacity-0 transform translate-y-5';
+                    card.style.transitionDelay = `${index * 50}ms`;
+                    card.innerHTML = `
+                        <div class="p-6 flex-grow">
+                            <p class="text-sm font-medium text-indigo-600 mb-1">${activity.vibe}</p>
+                            <h3 class="text-xl font-bold text-stone-900 mb-3">${activity.name}</h3>
+                            <div class="flex flex-wrap gap-2">
+                                ${activity.tags.map(tag => `<span class="text-xs font-semibold bg-stone-100 text-stone-600 px-2 py-1 rounded-full">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="bg-stone-50 p-4 border-t border-stone-200">
+                             <button data-id="${activity.id}" class="more-info-btn w-full text-center font-bold text-indigo-600 hover:text-indigo-800 transition-colors">More Info →</button>
+                        </div>
+                    `;
+                    elements.resultsGrid.appendChild(card);
+                    requestAnimationFrame(() => {
+                        card.classList.remove('opacity-0', 'translate-y-5');
+                    });
+                });
+            }
+
+            function openModal(activityId) {
+                const activity = activities.find(a => a.id === activityId);
+                if (!activity) return;
+
+                document.getElementById('modal-title').textContent = activity.name;
+                const locationText = activity.location === 'tlv' ? 'Tel Aviv Specific' : 'Available Anywhere';
+                document.getElementById('modal-location').textContent = locationText;
+                document.getElementById('modal-description').innerHTML = activity.description;
+                
+                const costTag = `<span class="text-sm font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">Cost: ${'$'.repeat(activity.cost)}</span>`;
+                const energyTag = `<span class="text-sm font-semibold bg-rose-100 text-rose-800 px-3 py-1 rounded-full">Energy: ${'⚡️'.repeat(activity.energy)}</span>`;
+                 const planningTag = `<span class="text-sm font-semibold bg-sky-100 text-sky-800 px-3 py-1 rounded-full">Planning: ${'🗓️'.repeat(activity.planning)}</span>`;
+
+                document.getElementById('modal-tags').innerHTML = activity.tags.map(tag => `<span class="text-sm font-semibold bg-slate-100 text-slate-800 px-3 py-1 rounded-full">${tag}</span>`).join('') + costTag + energyTag + planningTag;
+                
+                elements.modalBackdrop.classList.remove('hidden');
+                elements.modal.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    elements.modalContent.classList.add('modal-enter', 'modal-enter-active');
+                    elements.modalContent.classList.remove('modal-leave-active');
+                });
+            }
+
+            function closeModal() {
+                 elements.modalContent.classList.remove('modal-enter-active');
+                 elements.modalContent.classList.add('modal-leave-active');
+                 setTimeout(() => {
+                    elements.modalBackdrop.classList.add('hidden');
+                    elements.modal.classList.add('hidden');
+                 }, 300);
+            }
+            
+            function renderAccordion() {
+                elements.accordionContainer.innerHTML = practicalTips.map((tip, index) => `
+                    <div class="bg-white rounded-xl shadow-sm">
+                        <h2>
+                            <button type="button" class="accordion-toggle flex items-center justify-between w-full p-5 font-medium text-left text-stone-700 hover:bg-stone-50 transition-colors" data-accordion-target="#accordion-body-${index}">
+                                <span>${tip.title}</span>
+                                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                </svg>
+                            </button>
+                        </h2>
+                        <div id="accordion-body-${index}" class="hidden p-5 border-t border-stone-200">
+                            <p class="text-stone-600">${tip.content}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            function createOrUpdateChart() {
+                const ctx = document.getElementById('activities-chart').getContext('2d');
+                if (activitiesChart) {
+                    activitiesChart.destroy();
+                }
+
+                const chartData = activities.slice(0, 7); // Show a selection of diverse activities
+
+                activitiesChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Cost', 'Energy Level', 'Planning Needed'],
+                        datasets: chartData.map((a, i) => ({
+                            label: a.name,
+                            data: [a.cost, a.energy, a.planning],
+                            backgroundColor: `rgba(${i*40}, ${150 - i*10}, 200, 0.2)`,
+                            borderColor: `rgba(${i*40}, ${150 - i*10}, 200, 1)`,
+                            pointBackgroundColor: `rgba(${i*40}, ${150 - i*10}, 200, 1)`,
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: `rgba(${i*40}, ${150 - i*10}, 200, 1)`,
+                        })),
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        elements: { line: { borderWidth: 3 } },
+                        scales: {
+                            r: {
+                                angleLines: { display: true },
+                                suggestedMin: 0,
+                                suggestedMax: 3,
+                                pointLabels: { font: { size: 14, family: 'Inter', weight: '600' } },
+                                ticks: {
+                                    stepSize: 1,
+                                    backdropColor: 'transparent',
+                                    callback: (value) => {
+                                        if (value === 1) return 'Low';
+                                        if (value === 2) return 'Medium';
+                                        if (value === 3) return 'High';
+                                        return '';
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: { font: { size: 12, family: 'Inter'} }
+                            }
+                        }
+                    },
+                });
+            }
+
+            elements.categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    elements.categoryButtons.forEach(btn => btn.classList.remove('btn-active'));
+                    button.classList.add('btn-active');
+                    elements.secondaryFilters.classList.remove('hidden');
+                    updateFilters({ category: button.dataset.category, vibe: 'All' });
+                });
+            });
+
+            elements.vibeButtonsContainer.addEventListener('click', (e) => {
+                const button = e.target.closest('.vibe-btn');
+                if (button) updateFilters({ vibe: button.dataset.vibe });
+            });
+            
+            elements.locationButtonsContainer.addEventListener('click', (e) => {
+                const button = e.target.closest('.location-btn');
+                if(button) updateFilters({ location: button.dataset.location });
+            });
+
+            elements.resultsGrid.addEventListener('click', (e) => {
+                const button = e.target.closest('.more-info-btn');
+                if (button) {
+                    const activityId = parseInt(button.dataset.id, 10);
+                    openModal(activityId);
+                }
+            });
+            
+            elements.accordionContainer.addEventListener('click', e => {
+                const button = e.target.closest('.accordion-toggle');
+                if (button) {
+                    const targetPanel = document.querySelector(button.getAttribute('data-accordion-target'));
+                    button.querySelector('svg').classList.toggle('rotate-180');
+                    targetPanel.classList.toggle('hidden');
+                }
+            });
+
+            elements.modalCloseButton.addEventListener('click', closeModal);
+            elements.modalBackdrop.addEventListener('click', closeModal);
+            
+            renderAccordion();
+            createOrUpdateChart();
+        });
+    </script>
+</body>
+</html>
