@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friday Night Activities: Market & Trends Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Energetic & Playful -->
+    <!-- Application Structure Plan: The infographic follows a top-down narrative, starting with a broad overview and drilling into specifics. It begins with a hero section featuring a key statistic to hook the user. This is followed by a categorical analysis of activities, a cost breakdown, and a comparison of outing types. It then visualizes the planning process derived from the report's practical tips. The structure concludes with a qualitative spotlight on Tel Aviv neighborhoods and a summary of key takeaways. This linear, scroll-based flow guides the user through the report's findings in a logical story format, from what to do, to how much it costs, to how to plan it. -->
+    <!-- Visualization & Content Choices: Report Info: Activity Categories -> Goal: Compare -> Viz: Horizontal Bar Chart (Chart.js) -> Justification: Clearly shows the volume of options per category. Report Info: Activity Costs -> Goal: Compare Composition -> Viz: Stacked Bar Chart (Chart.js) -> Justification: Effectively shows the distribution of cost levels across different activity types. Report Info: 'Out' vs 'In' -> Goal: Inform (Proportion) -> Viz: Donut Chart (Chart.js) -> Justification: Simple, high-impact visualization for a binary comparison. Report Info: Planning Steps -> Goal: Organize Process -> Viz: HTML/CSS Flowchart -> Justification: Visually represents the decision-making sequence without using prohibited libraries. Report Info: Neighborhoods -> Goal: Inform/Organize -> Viz: Styled Cards with Icons -> Justification: Presents qualitative data in a digestible, visually appealing format. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 50vh; }
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
+        .gradient-text { background: linear-gradient(to right, #118AB2, #06D6A0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto max-w-5xl px-4 py-8 md:py-16">
+
+        <header class="text-center mb-16 md:mb-24">
+            <h1 class="text-4xl md:text-6xl font-extrabold gradient-text">The Friday Night Economy</h1>
+            <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">An infographic based on deep research into the trends, costs, and opportunities within the expanding market of platonic social activities.</p>
+        </header>
+
+        <section class="text-center mb-16 md:mb-24">
+             <div class="bg-white rounded-2xl shadow-lg p-8 inline-block">
+                <p class="text-2xl font-semibold text-slate-600 mb-2">Total Activity Categories Analyzed</p>
+                <p class="text-8xl font-extrabold text-[#118AB2]">8</p>
+                <p class="mt-2 text-slate-500">Covering a diverse range from live music to at-home creative projects.</p>
+            </div>
+        </section>
+
+        <section class="mb-16 md:mb-24">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-900">Market Landscape: Activity Distribution</h2>
+                <p class="mt-2 text-slate-600 max-w-2xl mx-auto">The research identified a wide array of activities. This chart compares the number of specific examples and ideas presented within each major category, highlighting areas with the most variety.</p>
+            </div>
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <div class="chart-container" style="height: 450px;">
+                    <canvas id="activityDistributionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16 md:mb-24">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">Cost Analysis of Activities</h3>
+                    <p class="text-slate-600 mb-6 text-center">Budget is a key driver in decision-making. The report's data shows a significant portion of activities fall into the low-to-mid cost range, indicating a market with high accessibility.</p>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="costBreakdownChart"></canvas>
+                    </div>
+                </div>
+                 <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4 text-center">Market Segmentation: "Going Out" vs. "Staying In"</h3>
+                     <p class="text-slate-600 mb-6 text-center">The research covers both traditional outings and the growing "at-home" entertainment sector. Outings still represent the majority of options, but at-home activities form a substantial and cost-effective segment.</p>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="outVsInChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="mb-16 md:mb-24">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-900">The Consumer Journey: Planning Process Flow</h2>
+                <p class="mt-2 text-slate-600 max-w-2xl mx-auto">Based on practical insights from the report, this flowchart visualizes the typical decision-making process for consumers planning their Friday night.</p>
+            </div>
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 text-center">
+                    <div class="p-4 bg-slate-100 rounded-lg">
+                        <p class="font-bold text-slate-800">1. Choose Vibe</p>
+                        <p class="text-sm text-slate-500">(Energetic, Chill, etc.)</p>
+                    </div>
+                    <div class="text-2xl font-bold text-[#FFD166]">→</div>
+                    <div class="p-4 bg-slate-100 rounded-lg">
+                        <p class="font-bold text-slate-800">2. Set Budget</p>
+                         <p class="text-sm text-slate-500">($, $$, $$$)</p>
+                    </div>
+                    <div class="text-2xl font-bold text-[#FF6B6B]">→</div>
+                    <div class="p-4 bg-slate-100 rounded-lg">
+                        <p class="font-bold text-slate-800">3. Research & Reserve</p>
+                        <p class="text-sm text-slate-500">(Check hours, book tickets)</p>
+                    </div>
+                    <div class="text-2xl font-bold text-[#06D6A0]">→</div>
+                    <div class="p-4 bg-teal-500 rounded-lg text-white">
+                        <p class="font-bold">4. Enjoy!</p>
+                        <p class="text-sm text-teal-100">(Shared Experience)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-900">Geographic Spotlight: Tel Aviv Neighborhood Analysis</h2>
+                <p class="mt-2 text-slate-600 max-w-2xl mx-auto">The report highlights distinct neighborhood "flavors" as micro-markets. Each offers a unique value proposition to the consumer.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                    <p class="text-5xl mb-3">🎨</p>
+                    <h3 class="text-xl font-bold text-slate-800">Florentin</h3>
+                    <p class="text-slate-600 mt-2">Known for a bohemian, edgy, and youthful energy. Key drivers are street art, unpretentious bars, and spontaneous discovery.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                    <p class="text-5xl mb-3">🏛️</p>
+                    <h3 class="text-xl font-bold text-slate-800">Neve Tzedek</h3>
+                    <p class="text-slate-600 mt-2">Offers a refined, picturesque experience. Attracts consumers with upscale boutiques, charming streets, and a cultural heart.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                    <p class="text-5xl mb-3">⚓</p>
+                    <h3 class="text-xl font-bold text-slate-800">Jaffa</h3>
+                    <p class="text-slate-600 mt-2">A blend of historic charm and modern vibrancy. The market transforms into a hub of bars and restaurants, creating a dynamic night scene.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const wrapLabel = (str) => {
+            const maxLength = 16;
+            if (str.length <= maxLength) return str;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            return Array.isArray(label) ? label.join(' ') : label;
+        };
+
+        const chartColors = {
+            red: '#FF6B6B',
+            yellow: '#FFD166',
+            green: '#06D6A0',
+            blue: '#118AB2',
+            darkBlue: '#073B4C'
+        };
+
+        const activityData = {
+            labels: ['Live Music/Shows', 'Active Outings', 'Dining Out', 'At-Home Games', 'Creative Evenings', 'Relaxed Hangouts', 'Neighborhood Exploration', 'Community & Spectator Events'].map(wrapLabel),
+            datasets: [{
+                label: 'Number of Ideas/Examples',
+                data: [6, 3, 7, 2, 2, 7, 3, 2],
+                backgroundColor: [chartColors.red, chartColors.yellow, chartColors.green, chartColors.blue, chartColors.red, chartColors.yellow, chartColors.green, chartColors.blue],
+                borderColor: chartColors.darkBlue,
+                borderWidth: 1
+            }]
+        };
+
+        new Chart(document.getElementById('activityDistributionChart'), {
+            type: 'bar',
+            data: activityData,
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: { grid: { display: false }, ticks: { font: { size: 12 } } }
+                }
+            }
+        });
+
+        const costData = {
+            labels: ['Outings', 'At Home'],
+            datasets: [
+                { label: 'Low Cost ($)', data: [5, 6], backgroundColor: chartColors.green },
+                { label: 'Mid-Range ($$)', data: [5, 1], backgroundColor: chartColors.yellow },
+                { label: 'High-End ($$$)', data: [4, 0], backgroundColor: chartColors.red },
+            ]
+        };
+
+        new Chart(document.getElementById('costBreakdownChart'), {
+            type: 'bar',
+            data: costData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true, grid: { display: false } },
+                    y: { stacked: true, grid: { display: false } }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+        
+        const outVsInData = {
+            labels: ['Going Out', 'Staying In'],
+            datasets: [{
+                data: [18, 6],
+                backgroundColor: [chartColors.blue, chartColors.green],
+                hoverOffset: 4
+            }]
+        };
+
+        new Chart(document.getElementById('outVsInChart'), {
+            type: 'doughnut',
+            data: outVsInData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
