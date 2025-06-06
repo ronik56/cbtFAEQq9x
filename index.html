@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Tel Aviv Friday Night Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Subtle Teal -->
+    <!-- Application Structure Plan: The SPA is designed as a "Vibe-First Interactive Planner." The user is immediately presented with broad "vibe" categories (e.g., "Live Music," "Chill & Conversation"). Clicking a vibe filters a grid of activity cards below. This is more intuitive for planning a night out than a linear report. Clicking a card opens a modal with details, keeping the user on one page. An interactive chart allows for quantitative comparison of venues (by cost/hours), and practical tips are tucked into an accordion. This structure transforms the report from a static document into a user-driven planning tool, prioritizing task-based navigation (finding the right spot) over a passive reading experience. -->
+    <!-- Visualization & Content Choices: Report info is broken into JS objects. Goal: Guide Exploration -> Method: Interactive Vibe Filters (HTML/JS) -> Interaction: Click to filter a grid of cards -> Justification: Allows users to quickly narrow options based on mood. Goal: Compare venues -> Method: Interactive Bar Chart (Chart.js) -> Interaction: Dropdown to change comparison metric (cost, closing time) -> Justification: Turns static table data into a dynamic decision-making tool. Goal: Detailed Info -> Method: Modal Pop-up (HTML/JS) -> Interaction: Click "More Info" button -> Justification: Provides depth without navigating away, maintaining the SPA flow. Goal: Organize Text -> Method: Accordion (HTML/JS) -> Justification: Hides dense practical info until needed, reducing clutter. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f5f5f4; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 400px; max-height: 60vh; }
+        .modal-enter { opacity: 0; transform: scale(0.95); }
+        .modal-enter-active { opacity: 1; transform: scale(1); transition: opacity 300ms, transform 300ms; }
+        .modal-leave { opacity: 1; transform: scale(1); }
+        .modal-leave-active { opacity: 0; transform: scale(0.95); transition: opacity 300ms, transform 300ms; }
+        .card-enter { opacity: 0; transform: translateY(20px); }
+        .card-enter-active { opacity: 1; transform: translateY(0); transition: opacity 300ms, transform 300ms; }
+    </style>
+</head>
+<body class="text-stone-800">
+
+    <div id="app-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-bold text-stone-900">Your Tel Aviv Friday Night</h1>
+            <p class="mt-4 text-lg text-stone-600 max-w-3xl mx-auto">An interactive guide for you and your friend to discover the perfect Friday night activity in the city that never stops.</p>
+        </header>
+
+        <main>
+            <section id="vibe-filter" class="mb-12">
+                <div class="mb-6 text-center">
+                     <h2 class="text-2xl font-bold text-stone-800 mb-2">What kind of night are you looking for?</h2>
+                     <p class="text-stone-600">Start by selecting a vibe to find the best spots. This section is your main control panel for exploring the diverse nightlife Tel Aviv has to offer. Click any button to instantly see curated suggestions that match the atmosphere you're seeking.</p>
+                </div>
+                <div id="vibe-buttons" class="flex flex-wrap justify-center gap-3 sm:gap-4">
+                </div>
+            </section>
+
+            <section id="results">
+                <div id="results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                </div>
+            </section>
+
+            <section id="planner-tool" class="mt-16 bg-white rounded-2xl p-6 sm:p-8 shadow-lg">
+                <div class="mb-6 text-center">
+                    <h2 class="text-2xl font-bold text-stone-800 mb-2">Nightlife Planner</h2>
+                    <p class="text-stone-600 max-w-3xl mx-auto">Use this interactive chart to compare different venues. This tool visualizes key data from the report, helping you make practical decisions. Select a category from the dropdown to see how different spots stack up against each other based on cost or operating hours.</p>
+                </div>
+                <div class="flex justify-center mb-4">
+                    <select id="chart-metric-selector" class="bg-stone-100 border-2 border-stone-200 text-stone-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full max-w-xs p-2.5">
+                        <option value="cost">Compare by Potential Cost</option>
+                        <option value="closingTime">Compare by Closing Time</option>
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <canvas id="activities-chart"></canvas>
+                </div>
+            </section>
+
+            <section id="practical-tips" class="mt-16">
+                 <div class="mb-6 text-center">
+                    <h2 class="text-2xl font-bold text-stone-800 mb-2">Practical Pointers</h2>
+                    <p class="text-stone-600 max-w-3xl mx-auto">Here are some essential tips from the report to ensure your Friday night goes smoothly. From booking tables to understanding local customs, this information will help you navigate the city like a pro. Click on any topic to expand it.</p>
+                </div>
+                <div id="accordion-container" class="max-w-3xl mx-auto space-y-4">
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-60 hidden z-40"></div>
+    <div id="modal" class="fixed inset-0 p-4 hidden z-50 overflow-y-auto">
+        <div class="flex items-center justify-center min-h-full">
+            <div id="modal-content" class="bg-white rounded-2xl shadow-xl w-full max-w-2xl relative max-h-[90vh] flex flex-col">
+                <div class="p-6 sm:p-8 flex-grow overflow-y-auto">
+                    <h3 id="modal-title" class="text-3xl font-bold text-stone-900 mb-2"></h3>
+                    <p id="modal-location" class="text-md font-medium text-teal-600 mb-4"></p>
+                    <div id="modal-tags" class="flex flex-wrap gap-2 mb-6"></div>
+                    <p id="modal-description" class="text-stone-700 leading-relaxed"></p>
+                </div>
+                 <div class="p-4 bg-stone-50 rounded-b-2xl border-t border-stone-200">
+                    <button id="modal-close-button" class="w-full bg-stone-200 text-stone-700 font-bold py-2 px-4 rounded-lg hover:bg-stone-300 transition-colors">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const activities = [
+                { id: 1, name: "Kuli Alma", neighborhood: "Mikve Israel St", vibe: "High-Energy & Social", cost: 2, closingTime: 5, reservation: "Walk-in", tags: ["Alternative", "Artsy", "Dance Floor"], description: "A hugely popular underground bar attracting locals and tourists. It's a multifaceted venue with art, live concerts, and DJ sets. Known for its lively dance floor and signature Tubi slushies. Open 9 PM - 5 AM." },
+                { id: 2, name: "Sputnik", neighborhood: "Allenby St", vibe: "High-Energy & Social", cost: 2, closingTime: 4, reservation: "Walk-in", tags: ["Underground", "Party", "Social"], description: "Tucked in an alley, this hotspot is favored by tourists and locals. A great place to hang out, grab a drink, and interact, featuring a DJ and a dance floor downstairs." },
+                { id: 3, name: "The Prince", neighborhood: "Nahalat Binyamin St", vibe: "Chill & Conversation", cost: 2, closingTime: 1, reservation: "Varies", tags: ["Rooftop", "Chic", "Vintage"], description: "A unique rooftop bar on an old Bauhaus building, furnished with vintage sofas. Recommended for its chill atmosphere, it's a memorable location with great views for a laid-back drink." },
+                { id: 4, name: "Nilus Bar", neighborhood: "Allenby, City Center", vibe: "Chill & Conversation", cost: 3, closingTime: 2, reservation: "Walk-in", tags: ["Hipster", "Artsy", "Inclusive"], description: "A 'too-cool-for-school' bar with a high-class hipster aesthetic and lesbian-friendly vibes. Attracts a crowd from Tel Aviv's art culture. Creative cocktails are a highlight." },
+                { id: 5, name: "Jasper John's", neighborhood: "Dizengoff St", vibe: "Chill & Conversation", cost: 3, closingTime: 2, reservation: "Walk-in", tags: ["Speakeasy", "Hidden Gem", "Cocktails"], description: "A hidden speakeasy in the back of the main Jasper bar. A quaint spot serving impressive cocktails and some food bites. Happy hour from 6 PM - 9 PM." },
+                { id: 6, name: "Port Said", neighborhood: "Har Sinai, Central TLV", vibe: "Foodie Favorites", cost: 3, closingTime: 23, reservation: "Recommended", tags: ["Lively", "Shared Plates", "Israeli"], description: "By chef Eyal Shani, this spot encapsulates the spirit of Tel Aviv. Serves delicious Israeli food in a very lively setting with vinyl music. Known for its buzz and fresh, simple ingredients." },
+                { id: 7, name: "Night Kitchen", neighborhood: "Lilienblum St", vibe: "Foodie Favorites", cost: 3, closingTime: 24, reservation: "Essential", tags: ["Modern Israeli", "Tapas", "Trendy"], description: "Puts a modern twist on Israeli cuisine with colorful dishes perfect for sharing, tapas-style. A lively yet relaxed atmosphere catering to night owls. Open 6 PM - 12 AM." },
+                { id: 8, name: "Romano", neighborhood: "Jaffa Road, Florentin", vibe: "Foodie Favorites", cost: 3, closingTime: 2, reservation: "Essential", tags: ["Party Vibe", "Live Music", "Israeli"], description: "Another Eyal Shani venture with a lively, trendy, and casual vibe. On Fridays, the atmosphere is amplified by a DJ or live music, turning the entire restaurant into a party. Visit after 9 PM." },
+                { id: 9, name: "Zappa TLV", neighborhood: "Midtown", vibe: "Live Music & Shows", cost: 3, closingTime: 24, reservation: "Ticketed", tags: ["Concert", "Top Artists", "Quality Sound"], description: "A premier concert venue hosting top-tier Israeli and international performers. Boasts state-of-the-art sound and lighting for an intimate, high-quality experience. Check listings for Friday shows." },
+                { id: 10, name: "Uganda", neighborhood: "Florentin", vibe: "Live Music & Shows", cost: 2, closingTime: 3, reservation: "Walk-in", tags: ["Eclectic", "Artsy", "Live Bands"], description: "A cultural hub with a cafe, book/record store, and live music space. Known for its laid-back vibe and funky happenings, from experimental bands to art exhibitions. Open 12 PM - 3 AM." },
+                { id: 11, name: "AMAMA Jazz Bar", neighborhood: "Florentin", vibe: "Live Music & Shows", cost: 2, closingTime: 1, reservation: "Varies", tags: ["Intimate", "Jazz", "Cozy"], description: "A cozy little gem and one of Tel Aviv's 'best-kept secrets.' Offers an intimate, laid-back atmosphere where incredible live jazz takes center stage." },
+                { id: 12, name: "Florentin Stroll", neighborhood: "Florentin", vibe: "Explore a Neighborhood", cost: 1, closingTime: 3, reservation: "N/A", tags: ["Bohemian", "Street Art", "Bar Hopping"], description: "Explore Florentin's bohemian, edgy, and youthful energy. Take a self-guided street art tour as shop shutters reveal murals, then hop between the area's many unpretentious, affordable bars." },
+                { id: 13, name: "Neve Tzedek Charm", neighborhood: "Neve Tzedek", vibe: "Explore a Neighborhood", cost: 2, closingTime: 24, reservation: "N/A", tags: ["Picturesque", "Upscale", "Cultural"], description: "Experience a more refined and picturesque evening in one of Tel Aviv's oldest neighborhoods. Stroll down charming Shabazi Street and enjoy pre- or post-show drinks near the Suzanne Dellal Centre." },
+                { id: 14, name: "Jaffa Nights", neighborhood: "Jaffa", vibe: "Explore a Neighborhood", cost: 2, closingTime: 3, reservation: "N/A", tags: ["Historic", "Vibrant", "Flea Market"], description: "Discover a captivating blend of history and contemporary energy. The Jaffa Flea Market area transforms after dark into a bustling hub of unique bars and restaurants set in historic alleyways." }
+            ];
+
+            const practicalTips = [
+                { title: "The Art of Reservations", content: "For many popular dinner spots (Night Kitchen, Romano) and exclusive bars (Speakeasy), securing a reservation is crucial, especially on a Friday. Use platforms like Ontopo or call directly. For walk-in places like Kuli Alma, be prepared for a potential queue at peak times." },
+                { title: "Navigating the City", content: "Taxis and ride-sharing apps are widely available. Public bus services reduce significantly or stop after sunset for Shabbat. Walking is often a great way to explore central neighborhoods and discover hidden gems." },
+                { title: "Tel Aviv Dress Code", content: "The dress code is generally stylishly casual. Smart jeans or trousers with a nice top are perfect for most bars and restaurants. Upscale venues might call for smarter attire. Comfortable footwear is always a wise choice." },
+                { title: "Shabbat Considerations", content: "Shabbat (the Sabbath) begins at sunset on Friday. Public transport largely ceases until Saturday evening. While many retail stores close, Tel Aviv's entertainment districts, including most restaurants, bars, and clubs, remain fully operational and are often at their busiest." }
+            ];
+            
+            const vibeButtonsContainer = document.getElementById('vibe-buttons');
+            const resultsGrid = document.getElementById('results-grid');
+            const modalBackdrop = document.getElementById('modal-backdrop');
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalCloseButton = document.getElementById('modal-close-button');
+            const accordionContainer = document.getElementById('accordion-container');
+            const chartMetricSelector = document.getElementById('chart-metric-selector');
+
+            let activeFilter = 'All';
+            let activitiesChart;
+
+            const vibes = ['All', ...new Set(activities.map(a => a.vibe))];
+            
+            const vibeIcons = {
+                'All': '✨',
+                'Live Music & Shows': '🎸',
+                'High-Energy & Social': '💃',
+                'Chill & Conversation': '💬',
+                'Foodie Favorites': '🍔',
+                'Explore a Neighborhood': '🗺️'
+            };
+
+            function renderVibeButtons() {
+                vibeButtonsContainer.innerHTML = vibes.map(vibe => `
+                    <button data-vibe="${vibe}" class="vibe-btn ${activeFilter === vibe ? 'bg-teal-500 text-white' : 'bg-white text-teal-600'} font-semibold py-2 px-5 rounded-full shadow-md hover:bg-teal-400 hover:text-white transition-all duration-200 ring-2 ring-teal-500/50">
+                        ${vibeIcons[vibe] || '•'} ${vibe}
+                    </button>
+                `).join('');
+            }
+
+            function renderActivities(filteredActivities) {
+                resultsGrid.innerHTML = '';
+                filteredActivities.forEach((activity, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 card-enter';
+                    card.style.transitionDelay = `${index * 50}ms`;
+                    card.innerHTML = `
+                        <div class="p-6 flex-grow">
+                            <p class="text-sm font-medium text-teal-600 mb-1">${activity.neighborhood}</p>
+                            <h3 class="text-xl font-bold text-stone-900 mb-3">${activity.name}</h3>
+                            <div class="flex flex-wrap gap-2">
+                                ${activity.tags.map(tag => `<span class="text-xs font-semibold bg-stone-100 text-stone-600 px-2 py-1 rounded-full">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="bg-stone-50 p-4 border-t border-stone-200">
+                             <button data-id="${activity.id}" class="more-info-btn w-full text-center font-bold text-teal-600 hover:text-teal-800 transition-colors">More Info →</button>
+                        </div>
+                    `;
+                    resultsGrid.appendChild(card);
+                    requestAnimationFrame(() => {
+                        card.classList.add('card-enter-active');
+                    });
+                });
+            }
+
+            function openModal(activityId) {
+                const activity = activities.find(a => a.id === activityId);
+                if (!activity) return;
+
+                document.getElementById('modal-title').textContent = activity.name;
+                document.getElementById('modal-location').textContent = activity.neighborhood;
+                document.getElementById('modal-description').innerHTML = activity.description;
+                
+                const tagsHTML = activity.tags.map(tag => `<span class="text-sm font-semibold bg-teal-100 text-teal-800 px-3 py-1 rounded-full">${tag}</span>`).join('');
+                const costTag = `<span class="text-sm font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">${'$'.repeat(activity.cost)}</span>`;
+                const reservationTag = `<span class="text-sm font-semibold bg-rose-100 text-rose-800 px-3 py-1 rounded-full">${activity.reservation}</span>`;
+
+                document.getElementById('modal-tags').innerHTML = tagsHTML + costTag + reservationTag;
+                
+                modalBackdrop.classList.remove('hidden');
+                modal.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    modalContent.classList.add('modal-enter', 'modal-enter-active');
+                    modalContent.classList.remove('modal-leave', 'modal-leave-active');
+                });
+            }
+
+            function closeModal() {
+                 modalContent.classList.remove('modal-enter', 'modal-enter-active');
+                 modalContent.classList.add('modal-leave', 'modal-leave-active');
+                 setTimeout(() => {
+                    modalBackdrop.classList.add('hidden');
+                    modal.classList.add('hidden');
+                 }, 300);
+            }
+            
+            function renderAccordion() {
+                accordionContainer.innerHTML = practicalTips.map((tip, index) => `
+                    <div class="bg-white rounded-xl shadow-sm">
+                        <h2>
+                            <button type="button" class="accordion-toggle flex items-center justify-between w-full p-5 font-medium text-left text-stone-700 hover:bg-stone-50 transition-colors" data-accordion-target="#accordion-body-${index}">
+                                <span>${tip.title}</span>
+                                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                </svg>
+                            </button>
+                        </h2>
+                        <div id="accordion-body-${index}" class="hidden p-5 border-t border-stone-200">
+                            <p class="text-stone-600">${tip.content}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            function createOrUpdateChart(metric = 'cost') {
+                const ctx = document.getElementById('activities-chart').getContext('2d');
+                if (activitiesChart) {
+                    activitiesChart.destroy();
+                }
+
+                const data = [...activities].sort((a, b) => b[metric] - a[metric]);
+                const labels = data.map(a => a.name);
+                const values = data.map(a => a[metric]);
+                
+                let label, backgroundColor, borderColor;
+                if (metric === 'cost') {
+                    label = 'Potential Cost (1=$, 4=$$$$)';
+                    backgroundColor = 'rgba(245, 158, 11, 0.6)';
+                    borderColor = 'rgba(245, 158, 11, 1)';
+                } else {
+                    label = 'Closing Time (24h format, e.g., 2 = 2 AM)';
+                    backgroundColor = 'rgba(20, 184, 166, 0.6)';
+                    borderColor = 'rgba(20, 184, 166, 1)';
+                }
+
+                activitiesChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: label,
+                            data: values,
+                            backgroundColor: backgroundColor,
+                            borderColor: borderColor,
+                            borderWidth: 1,
+                            borderRadius: 5,
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.x !== null) {
+                                            if (metric === 'closingTime') {
+                                                const time = context.parsed.x;
+                                                label += time > 12 ? `${time - 12} AM` : `${time} AM`;
+                                            } else {
+                                                label += '$'.repeat(context.parsed.x);
+                                            }
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    font: { size: 12, family: 'Inter' }
+                                }
+                            },
+                             y: {
+                                ticks: {
+                                    font: { size: 12, family: 'Inter' },
+                                    autoSkip: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+
+            vibeButtonsContainer.addEventListener('click', (e) => {
+                const button = e.target.closest('.vibe-btn');
+                if (button) {
+                    activeFilter = button.dataset.vibe;
+                    renderVibeButtons();
+                    const filtered = activeFilter === 'All' ? activities : activities.filter(a => a.vibe === activeFilter);
+                    renderActivities(filtered);
+                }
+            });
+
+            resultsGrid.addEventListener('click', (e) => {
+                const button = e.target.closest('.more-info-btn');
+                if (button) {
+                    const activityId = parseInt(button.dataset.id, 10);
+                    openModal(activityId);
+                }
+            });
+            
+            accordionContainer.addEventListener('click', e => {
+                const button = e.target.closest('.accordion-toggle');
+                if (button) {
+                    const targetId = button.getAttribute('data-accordion-target');
+                    const targetPanel = document.querySelector(targetId);
+                    const icon = button.querySelector('svg');
+                    targetPanel.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                }
+            });
+
+            modalCloseButton.addEventListener('click', closeModal);
+            modalBackdrop.addEventListener('click', closeModal);
+            chartMetricSelector.addEventListener('change', (e) => createOrUpdateChart(e.target.value));
+
+            renderVibeButtons();
+            renderActivities(activities);
+            renderAccordion();
+            createOrUpdateChart();
+        });
+    </script>
+</body>
+</html>
