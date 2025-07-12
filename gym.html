@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Very Important Question</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .question-container {
+            transition: all 0.5s ease-in-out;
+            transform-origin: top;
+        }
+        .fade-in {
+            animation: fadeIn 0.7s ease-in-out forwards;
+        }
+        .fade-out {
+            animation: fadeOut 0.5s ease-in-out forwards;
+        }
+        .scale-up {
+            animation: scaleUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); visibility: hidden; height: 0; padding: 0; margin: 0; }
+        }
+        @keyframes scaleUp {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen p-4">
+
+    <div id="main-container" class="w-full max-w-2xl mx-auto">
+        
+        <div id="initial-question" class="text-center p-8 bg-white rounded-2xl shadow-xl scale-up">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2 text-gray-900">A Critical Question...</h1>
+            <p class="text-lg text-gray-600 mb-8">The fate of the day hangs in the balance.</p>
+            <div class="question-container p-6 border border-gray-200 rounded-lg bg-gray-50">
+                <p class="text-xl md:text-2xl font-semibold mb-6">Are you coming to the gym & sauna with me today?</p>
+                <div class="flex justify-center gap-4">
+                    <button onclick="handleResponse('yes', 0)" class="btn bg-green-500 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-green-600">Yes, obviously!</button>
+                    <button onclick="handleResponse('no', 0)" class="btn bg-red-500 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-red-600">I'm bailing...</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="questions-flow" class="mt-8">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+
+    </div>
+
+    <script>
+        // --- State Management ---
+        let questionCounter = 0;
+
+        // --- Question Data ---
+        const yesQuestions = [
+            { question: "Excellent! But are you *sure*? Like, 100% sure?", type: 'choice', options: ["I'm absolutely certain", "My commitment is wavering"] },
+            { question: "Okay, what time are we meeting? Be specific.", type: 'time' },
+            { question: "Pre-workout or are we raw-dogging this workout?", type: 'choice', options: ["Pre-workout power!", "Pure adrenaline for me"] },
+            { question: "Which muscle group are we destroying today?", type: 'text', placeholder: "e.g., Legs, Back, The will to live" },
+            { question: "Got your water bottle? Hydration is key, you know.", type: 'choice', options: ["Of course!", "I'll just use the fountain"] },
+            { question: "And a towel? For the gym, not just the sauna. Don't be that person.", type: 'choice', options: ["Towel is packed", "I live life on the edge"] },
+            { question: "Sauna post-workout is non-negotiable, right?", type: 'choice', options: ["Sauna is the whole point", "I might skip it"] },
+            { question: "How long in the sauna? Are we aiming for a new personal best?", type: 'number', placeholder: "Minutes..." },
+            { question: "Are you mentally prepared for the profound thoughts one has in the sauna?", type: 'choice', options: ["My mind is ready", "Just trying not to pass out"] },
+            { question: "Post-sauna meal plan? We'll be starving.", type: 'text', placeholder: "Protein shake? Burger? Both?" },
+            { question: "Final confirmation. No backing out. Pinky promise?", type: 'final', message: "Amazing! See you there. Don't be late." },
+        ];
+
+        const noQuestions = [
+            { question: "Are you serious? Why not?", type: 'text', placeholder: "I need a valid, detailed reason..." },
+            { question: "Is it because you're scared of the sauna's heat?", type: 'choice', options: ["Yes, it's an inferno", "No, something else"] },
+            { question: "What could possibly be more important than gains and steam?", type: 'text', placeholder: "This better be good..." },
+            { question: "So you're just going to leave me to go alone?", type: 'choice', options: ["Yes, you'll be fine", "The guilt is setting in"] },
+            { question: "Fine. When can you go next? Pin it down.", type: 'date' },
+            { question: "I'm putting it in my calendar. Are you going to bail then too?", type: 'choice', options: ["I promise I won't", "Probably"] },
+            { question: "Just so we're clear, you're choosing [whatever you're doing] over our well-being?", type: 'final-no', message: "I see how it is. I'll remember this. Have a 'nice' day." },
+        ];
+
+        // --- DOM Manipulation & Logic ---
+        function handleResponse(path, index) {
+            const currentQuestionElement = document.getElementById(`question-${path}-${index}`);
+            if (currentQuestionElement) {
+                // Fade out the current question
+                currentQuestionElement.classList.add('fade-out');
+                currentQuestionElement.addEventListener('animationend', () => {
+                    currentQuestionElement.style.display = 'none';
+                });
+            } else {
+                // Fade out the initial question block
+                const initialBlock = document.getElementById('initial-question');
+                initialBlock.classList.add('fade-out');
+                initialBlock.addEventListener('animationend', () => {
+                    initialBlock.style.display = 'none';
+                });
+            }
+            
+            // Show the next question after a short delay
+            setTimeout(() => {
+                const nextIndex = index + 1;
+                const questions = path === 'yes' ? yesQuestions : noQuestions;
+                if (nextIndex < questions.length) {
+                    askQuestion(path, nextIndex);
+                } else {
+                    // This case is handled by the 'final' and 'final-no' types
+                }
+            }, 300);
+        }
+
+        function askQuestion(path, index) {
+            const questions = path === 'yes' ? yesQuestions : noQuestions;
+            const questionData = questions[index];
+            const container = document.getElementById('questions-flow');
+
+            let inputHtml = '';
+            switch(questionData.type) {
+                case 'choice':
+                    inputHtml = `<div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+                        <button onclick="handleResponse('${path}', ${index})" class="btn bg-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-600">${questionData.options[0]}</button>
+                        <button onclick="handleResponse('${path}', ${index})" class="btn bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-md hover:bg-gray-400">${questionData.options[1]}</button>
+                    </div>`;
+                    break;
+                case 'time':
+                case 'date':
+                case 'number':
+                    inputHtml = `<div class="mt-6 flex justify-center gap-2">
+                        <input type="${questionData.type}" placeholder="${questionData.placeholder || ''}" class="p-3 border border-gray-300 rounded-lg w-full max-w-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <button onclick="handleResponse('${path}', ${index})" class="btn bg-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-600">OK</button>
+                    </div>`;
+                    break;
+                case 'text':
+                     inputHtml = `<div class="mt-6 flex justify-center gap-2">
+                        <input type="text" placeholder="${questionData.placeholder}" class="p-3 border border-gray-300 rounded-lg w-full max-w-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <button onclick="handleResponse('${path}', ${index})" class="btn bg-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-600">Submit</button>
+                    </div>`;
+                    break;
+                case 'final':
+                case 'final-no':
+                    inputHtml = `<div class="mt-6 text-center">
+                        <p class="text-2xl font-bold ${questionData.type === 'final' ? 'text-green-600' : 'text-red-600'}">${questionData.message}</p>
+                    </div>`;
+                    // No further buttons for final messages
+                    break;
+            }
+
+            const newQuestion = document.createElement('div');
+            newQuestion.id = `question-${path}-${index}`;
+            newQuestion.className = 'text-center p-8 bg-white rounded-2xl shadow-xl fade-in mb-8';
+            newQuestion.innerHTML = `
+                <div class="question-container">
+                    <p class="text-xl md:text-2xl font-semibold mb-2">${questionData.question}</p>
+                    ${inputHtml}
+                </div>
+            `;
+            
+            container.appendChild(newQuestion);
+        }
+    </script>
+</body>
+</html>
