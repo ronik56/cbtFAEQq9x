@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turn 3+ Years of Outlook Emails Into Strategic Sales Intelligence</title>
+    <meta name="description" content="Transform your Outlook email conversations into predictive revenue intelligence. Built by former Google team members for growing sales organizations.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+/* CSS Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #545454;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    overflow-x: hidden;
+}
+
+/* Typography System */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+}
+
+h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+}
+
+h3 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 600;
+}
+
+h4 {
+    font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+    font-weight: 500;
+}
+
+p {
+    margin-bottom: 16px;
+    max-width: 65ch;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+strong {
+    font-weight: 500;
+    color: #3caff2;
+}
+
+/* Color System */
+:root {
+    --primary-blue: #3caff2;
+    --primary-purple: #6c2ed4;
+    --accent-teal: #0ff2b2;
+    --accent-pink: #f20fb2;
+    --dark-blue: #3850d4;
+    --dark-gray: #545454;
+    --white: #ffffff;
+    --gradient-primary: linear-gradient(135deg, #3caff2 0%, #6c2ed4 100%);
+    --gradient-hero: linear-gradient(135deg, #6c2ed4 0%, #3850d4 100%);
+    --gradient-accent: linear-gradient(135deg, #0ff2b2 0%, #f20fb2 100%);
+    --shadow-light: 0 2px 8px rgba(60, 175, 242, 0.1);
+    --shadow-medium: 0 4px 16px rgba(60, 175, 242, 0.15);
+    --shadow-heavy: 0 8px 32px rgba(60, 175, 242, 0.2);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Button System */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 200px;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-blue);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Section Styles */
+section {
+    padding: 80px 0;
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 64px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 16px;
+}
+
+/* Hero Section */
+.hero {
+    background: var(--gradient-hero);
+    color: var(--white);
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    pointer-events: none;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content {
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.hero-title {
+    color: var(--white);
+    margin-bottom: 24px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+    margin-bottom: 32px;
+    font-weight: 500;
+}
+
+.hero-copy {
+    margin-bottom: 48px;
+}
+
+.hero-copy p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.125rem;
+    max-width: none;
+    margin: 0 auto 24px;
+}
+
+.hero-hook {
+    font-size: 1.25rem !important;
+    color: var(--accent-teal) !important;
+    font-weight: 500 !important;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+}
+
+.hero-video {
+    margin-top: 48px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.video-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.125rem;
+    text-align: center;
+}
+
+/* Problem Section */
+.problem {
+    background: linear-gradient(135deg, rgba(108, 46, 212, 0.1) 0%, rgba(242, 15, 178, 0.1) 100%);
+}
+
+.problem-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.problem-intro {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.problem-intro p {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: none;
+}
+
+.problem-costs {
+    margin-bottom: 48px;
+}
+
+.problem-costs h3 {
+    color: var(--accent-pink);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.problem-list {
+    list-style: none;
+    padding: 0;
+}
+
+.problem-list li {
+    position: relative;
+    padding: 16px 0 16px 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.problem-list li::before {
+    content: '●';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    color: var(--accent-teal);
+    font-size: 1.5rem;
+}
+
+.problem-conclusion {
+    text-align: center;
+    padding: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: var(--shadow-light);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.problem-conclusion p {
+    font-size: 1.125rem;
+    font-weight: 500;
+    max-width: none;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Solution Section */
+.solution {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.solution-features {
+    display: grid;
+    gap: 32px;
+    margin-top: 64px;
+}
+
+.feature-row-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--primary-blue);
+}
+
+.feature-card h3 {
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+}
+
+.feature-card p {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: none;
+}
+
+.feature-card ul {
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.feature-card li {
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.feature-card li strong {
+    color: var(--primary-purple);
+}
+
+.predictive-features {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    margin-top: 32px;
+}
+
+.predictive-features h3 {
+    color: var(--accent-teal);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.predictive-list {
+    list-style: none;
+    padding: 0;
+}
+
+.predictive-list li {
+    position: relative;
+    padding: 16px 0 16px 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.predictive-list li::before {
+    content: '⚡';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    font-size: 1.2rem;
+}
+
+.predictive-list li:last-child {
+    border-bottom: none;
+}
+
+.predictive-list li strong {
+    color: var(--accent-teal);
+}
+
+/* Intelligence Features Section */
+.intelligence {
+    background: linear-gradient(135deg, rgba(15, 242, 178, 0.1) 0%, rgba(60, 175, 242, 0.1) 100%);
+}
+
+.intelligence-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.intelligence-content h3 {
+    text-align: center;
+    margin-bottom: 48px;
+    color: var(--primary-purple);
+}
+
+.intelligence-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+}
+
+.intelligence-feature {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--accent-teal);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.intelligence-feature:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+}
+
+.intelligence-feature h4 {
+    color: var(--primary-blue);
+    margin-bottom: 16px;
+}
+
+.intelligence-feature p {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: none;
+    margin: 0;
+}
+
+/* Team Section */
+.team {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.team-members {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 48px;
+    margin-top: 64px;
+}
+
+.team-member {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.team-member:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+}
+
+.member-photo {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.photo-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--white);
+    font-weight: bold;
+}
+
+.member-info h3 {
+    color: var(--primary-blue);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.member-title {
+    color: var(--accent-teal);
+    font-size: 1.125rem;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.member-info p {
+    text-align: center;
+    max-width: none;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+/* Transformation Section */
+.transformation {
+    background: linear-gradient(135deg, rgba(56, 80, 212, 0.2) 0%, rgba(108, 46, 212, 0.2) 100%);
+}
+
+.transformation-comparison {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 48px;
+    align-items: center;
+    margin: 64px 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.before, .after {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.before h3 {
+    color: #f20fb2;
+    margin-bottom: 20px;
+}
+
+.after h3 {
+    color: var(--accent-teal);
+    margin-bottom: 20px;
+}
+
+.before p, .after p {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: none;
+    margin: 0;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.transformation-conclusion {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: var(--shadow-light);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.transformation-conclusion p {
+    font-size: 1.125rem;
+    font-weight: 500;
+    max-width: none;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Process Section */
+.process {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    margin: 64px 0;
+}
+
+.process-step {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.process-step:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 auto 24px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.step-content h3 {
+    color: var(--primary-blue);
+    margin-bottom: 16px;
+}
+
+.step-content p {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: none;
+    margin: 0;
+}
+
+.process-conclusion {
+    text-align: center;
+    max-width: 800px;
+    margin: 48px auto 0;
+    padding: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.process-conclusion p {
+    font-size: 1.125rem;
+    max-width: none;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* CTA Section */
+.cta {
+    background: var(--gradient-primary);
+    color: var(--white);
+    text-align: center;
+}
+
+.cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta h2 {
+    color: var(--white);
+    margin-bottom: 24px;
+}
+
+.cta p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.125rem;
+    max-width: none;
+    margin: 0 auto 24px;
+}
+
+.cta-form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 48px;
+    border-radius: 16px;
+    margin: 48px 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-form {
+    display: grid;
+    gap: 24px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-teal);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(15, 242, 178, 0.2);
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group select option {
+    background: var(--dark-gray);
+    color: var(--white);
+}
+
+.form-submit {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.form-submit .btn {
+    min-width: 300px;
+    font-size: 1.25rem;
+    padding: 20px 40px;
+}
+
+.cta-hook {
+    margin-top: 32px;
+}
+
+.cta-hook p {
+    font-size: 1.25rem;
+    color: var(--accent-teal);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Loading States */
+.btn-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-loading::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        min-width: 280px;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+
+    .feature-row-top {
+        grid-template-columns: 1fr;
+    }
+
+    .team-members {
+        grid-template-columns: 1fr;
+    }
+
+    .transformation-comparison {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .arrow {
+        transform: rotate(90deg);
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .intelligence-features {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-form {
+        padding: 32px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+
+    .hero {
+        padding: 80px 0 40px;
+    }
+
+    section {
+        padding: 40px 0;
+    }
+
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .feature-card,
+    .team-member,
+    .process-step {
+        padding: 24px;
+    }
+
+    .cta-form {
+        padding: 24px 16px;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+select:focus,
+a:focus {
+    outline: 2px solid var(--accent-teal);
+    outline-offset: 2px;
+}
+
+/* Form validation styles */
+.form-group.error input,
+.form-group.error select {
+    border-color: var(--accent-pink) !important;
+    box-shadow: 0 0 0 3px rgba(242, 15, 178, 0.2) !important;
+}
+
+.form-group.error::after {
+    content: 'This field is required';
+    color: var(--accent-pink);
+    font-size: 0.875rem;
+    margin-top: 4px;
+    display: block;
+}
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Turn 3+ Years of Outlook Emails Into Strategic Sales Intelligence</h1>
+                <h2 class="hero-subtitle">Your Growing Sales Team Doesn't Need More Tools. They Need Intelligence.</h2>
+                
+                <div class="hero-copy">
+                    <p>Managing pipeline across a scaling sales team shouldn't feel like flying blind. While your competitors add more software to their already cluttered tech stack, smart companies are extracting intelligence from the data they already own.</p>
+                    
+                    <p class="hero-hook"><strong>The hidden asset sitting in plain sight? Three years of customer conversations buried in your team's Outlook inboxes.</strong></p>
+                </div>
+                
+                <div class="hero-cta">
+                    <a href="#cta" class="btn btn-primary">Book Strategic Discovery Call</a>
+                    <a href="#solution" class="btn btn-secondary">See How It Works</a>
+                </div>
+                
+                <div class="hero-video">
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <p>🎥 Sales Intelligence Demo Video</p>
+                            <p>See email intelligence transformation in action</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Scale Problem Every Growing Company Faces</h2>
+            </div>
+            
+            <div class="problem-content">
+                <div class="problem-intro">
+                    <p>Your sales team has grown from 2 reps to 15. Your pipeline has expanded significantly as you scale. But your relationship intelligence? Still stuck in individual rep's heads.</p>
+                </div>
+                
+                <div class="problem-costs">
+                    <h3>The cost of flying blind at scale:</h3>
+                    <ul class="problem-list">
+                        <li>Champion relationships cooling off weeks before reps realize it</li>
+                        <li>Deals dying in silence while your team chases new prospects</li>
+                        <li>Expansion opportunities missed because nobody sees the buying signals</li>
+                        <li>Competitive threats emerging before your reps can respond</li>
+                        <li>Pipeline forecasts based on hope instead of relationship health data</li>
+                    </ul>
+                </div>
+                
+                <div class="problem-conclusion">
+                    <p>Every day your team operates without relationship intelligence, revenue walks out the door. Even with a lean sales organization, this blindness becomes exponentially more expensive as deal sizes grow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="section-header">
+                <h2>The AI Sales Intelligence Agent That Changes Everything</h2>
+                <p class="section-subtitle">Built by former Google founding team members and Tel Aviv University AI researchers, our Sales Intelligence Agent transforms years of email conversations into predictive revenue intelligence.</p>
+            </div>
+            
+            <div class="solution-features">
+                <div class="feature-row-top">
+                    <div class="feature-card">
+                        <h3>Pure Outlook Integration - Zero Heavy Lifting</h3>
+                        <p>No new software for your reps to learn. No change management headaches for your IT team. The Agent plugs directly into the Outlook data your team already uses every day, extracting intelligence without disrupting a single workflow.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>1-Week Turnaround from Sample to Custom Demo</h3>
+                        <p>Send us 50-100 emails from your best-performing rep. Within one week, we'll show you exactly what intelligence patterns exist in your actual customer conversations. No theoretical presentations—just your data revealing insights you never knew existed.</p>
+                    </div>
+                </div>
+                
+                <div class="predictive-features">
+                    <h3>Predictive Relationship Intelligence That Prevents Revenue Loss</h3>
+                    <p style="text-align: center; margin-bottom: 32px; color: rgba(255, 255, 255, 0.9);">Our Agent doesn't just analyze what happened. It predicts what's about to happen:</p>
+                    
+                    <ul class="predictive-list">
+                        <li><strong>Champion Decay Alerts:</strong> Know when your strongest advocates are cooling off before they vocalize it, giving you time to intervene while relationships are still salvageable</li>
+                        <li><strong>Optimal Timing Intelligence:</strong> Discover when prospects are most responsive- for example, follow-ups early in the week can lead to significantly faster reply rates</li>
+                        <li><strong>Deal Intervention Signals:</strong> Spot deals going quiet long before they're officially lost. Extended silence periods often signal major risks to your pipeline</li>
+                        <li><strong>Expansion Trigger Detection:</strong> Spot customers ready for upsells based on relationship temperature and engagement patterns</li>
+                        <li><strong>Competitive Threat Prediction:</strong> See competitive threats emerging in email language patterns before RFPs hit the street</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intelligence Features Section -->
+    <section class="intelligence" id="intelligence">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Intelligence Your Competition Doesn't Have</h2>
+                <p>While your competitors guess at relationship health from CRM stages, you'll predict deal outcomes from actual conversation patterns.</p>
+            </div>
+            
+            <div class="intelligence-content">
+                <h3>What enterprise email analysis reveals:</h3>
+                
+                <div class="intelligence-features">
+                    <div class="intelligence-feature">
+                        <h4>Champion Strength Scoring</h4>
+                        <p>Quantify relationship health across your entire customer base, with automatic alerts when key relationships need attention.</p>
+                    </div>
+                    
+                    <div class="intelligence-feature">
+                        <h4>Sentiment Trajectory Mapping</h4>
+                        <p>Track how relationships progress through predictable stages—from discovery to pilot to expansion to advocacy.</p>
+                    </div>
+                    
+                    <div class="intelligence-feature">
+                        <h4>Buying Committee Intelligence</h4>
+                        <p>Map decision-maker engagement automatically, identifying who's truly driving the process versus who's just along for the ride.</p>
+                    </div>
+                    
+                    <div class="intelligence-feature">
+                        <h4>Cross-Sell Whitespace Analysis</h4>
+                        <p>Discover expansion opportunities hiding in email conversations that your reps never noticed.</p>
+                    </div>
+                    
+                    <div class="intelligence-feature">
+                        <h4>Pipeline Prediction Engine</h4>
+                        <p>Combine relationship health data with engagement patterns to forecast outcomes with unprecedented accuracy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet the Team That Makes This Possible</h2>
+            </div>
+            
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <div class="photo-placeholder">RH</div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Ronen Horen</h3>
+                        <h4 class="member-title">AI Transformative Leader</h4>
+                        <p>Former Google Israel founding team member who's engineered 50+ AI assistants and agents delivering 10X productivity gains. Transforms visionary concepts into revenue-generating machines with neuroscience-backed precision.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <div class="photo-placeholder">RF</div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Ron Fux</h3>
+                        <h4 class="member-title">AI Solutions Engineer</h4>
+                        <p>Tel Aviv University AI Master's researcher who transforms complex mathematics into revenue systems. Architects solutions that consistently outperform expectations, delivering measurable business gains where others failed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transformation Section -->
+    <section class="transformation" id="transformation">
+        <div class="container">
+            <div class="section-header">
+                <h2>From Inbox Chaos to Revenue Clarity</h2>
+            </div>
+            
+            <div class="transformation-comparison">
+                <div class="before">
+                    <h3>Before</h3>
+                    <p>Your sales reps drowning in email volume, missing relationship patterns, reacting to problems after they've already damaged deals.</p>
+                </div>
+                
+                <div class="divider">
+                    <div class="arrow">→</div>
+                </div>
+                
+                <div class="after">
+                    <h3>After</h3>
+                    <p>Your sales team equipped with predictive intelligence, preventing relationship decay, identifying expansion opportunities, and forecasting with confidence.</p>
+                </div>
+            </div>
+            
+            <div class="transformation-conclusion">
+                <p>The transformation isn't just about better data. It's about scaling smarter with your lean team instead of just scaling bigger.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>How Smart Companies Get Started</h2>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Qualify Your Challenge</h3>
+                        <p>Complete our brief assessment to ensure your sales team size and structure align with our intelligence platform capabilities.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Strategic Discovery Call</h3>
+                        <p>We'll discuss your specific pipeline challenges and explain exactly how relationship intelligence addresses your growth bottlenecks.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Custom Intelligence Demo</h3>
+                        <p>Based on your actual email patterns, we'll demonstrate the specific insights available from your customer conversations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="process-conclusion">
+                <p>The entire process from qualification to custom demo takes less than two weeks. No long implementation cycles. No complex integrations. Just immediate visibility into the intelligence hiding in your existing data.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Book Your Strategic Discovery Call</h2>
+                <p>Ready to transform 3+ years of customer conversations into competitive advantage?</p>
+                <p>The companies implementing relationship intelligence first are gaining sustainable competitive edges while their competitors remain blind to relationship decay patterns.</p>
+                
+                <div class="cta-form">
+                    <form id="contact-form" class="contact-form" action="#" method="POST">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Business Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="company" name="company" placeholder="Company Name" required>
+                        </div>
+                        <div class="form-group">
+                            <select id="team-size" name="team-size" required>
+                                <option value="">Sales Team Size</option>
+                                <option value="2-5">2-5 reps</option>
+                                <option value="6-15">6-15 reps</option>
+                                <option value="16-50">16-50 reps</option>
+                                <option value="50+">50+ reps</option>
+                            </select>
+                        </div>
+                        <div class="form-submit">
+                            <button type="submit" class="btn btn-primary" id="submit-btn">
+                                Book Discovery Call
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="cta-hook">
+                    <p><strong>Your pipeline intelligence breakthrough isn't in new data sources. It's in the conversations you already own.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+// Main JavaScript functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all components
+    initSmoothScrolling();
+    initFormHandling();
+    initScrollAnimations();
+});
+
+// Smooth scrolling functionality
+function initSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offsetTop = target.offsetTop - 20;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Form handling with validation
+function initFormHandling() {
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        // Basic validation
+        if (!validateForm()) {
+            return;
+        }
+
+        // Show loading state
+        setLoadingState(true);
+
+        // Simulate form submission (replace with actual endpoint)
+        try {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            showFormSuccess();
+            form.reset();
+        } catch (error) {
+            console.error('Form submission error:', error);
+        } finally {
+            setLoadingState(false);
+        }
+    });
+
+    function validateForm() {
+        const requiredFields = form.querySelectorAll('[required]');
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+            const value = field.value.trim();
+            const fieldGroup = field.closest('.form-group');
+            
+            // Remove previous error states
+            fieldGroup.classList.remove('error');
+            
+            if (!value) {
+                fieldGroup.classList.add('error');
+                isValid = false;
+            } else if (field.type === 'email' && !validateEmail(value)) {
+                fieldGroup.classList.add('error');
+                isValid = false;
+            }
+        });
+
+        return isValid;
+    }
+
+    function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function setLoadingState(loading) {
+        submitBtn.disabled = loading;
+        if (loading) {
+            submitBtn.classList.add('btn-loading');
+            submitBtn.textContent = 'Booking...';
+        } else {
+            submitBtn.classList.remove('btn-loading');
+            submitBtn.textContent = 'Book Discovery Call';
+        }
+    }
+
+    function showFormSuccess() {
+        submitBtn.textContent = 'Thank You! We\'ll Be In Touch Soon';
+        submitBtn.style.background = 'linear-gradient(135deg, #0ff2b2 0%, #3caff2 100%)';
+        
+        setTimeout(() => {
+            submitBtn.textContent = 'Book Discovery Call';
+            submitBtn.style.background = '';
+        }, 3000);
+    }
+}
+
+// Scroll animations using Intersection Observer
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    const animateElements = document.querySelectorAll(
+        '.feature-card, .intelligence-feature, .team-member, .process-step, .problem-conclusion, .transformation-comparison > div'
+    );
+    
+    animateElements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Performance optimization
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Enhanced scroll performance
+const throttledScroll = debounce(() => {
+    // Add any scroll-based functionality here
+}, 10);
+
+window.addEventListener('scroll', throttledScroll);
+
+// Analytics tracking (placeholder for actual implementation)
+function trackEvent(eventName, eventData = {}) {
+    console.log('Analytics event:', eventName, eventData);
+    // In a real application, this would send data to your analytics service
+}
+
+// Track form submissions
+document.addEventListener('submit', function(e) {
+    if (e.target.id === 'contact-form') {
+        trackEvent('form_submit', {
+            form_name: 'contact_form',
+            page_location: window.location.href
+        });
+    }
+});
+
+// Track button clicks
+document.addEventListener('click', function(e) {
+    if (e.target.matches('.btn-primary')) {
+        trackEvent('cta_click', {
+            button_text: e.target.textContent.trim(),
+            page_location: window.location.href
+        });
+    }
+});
+    </script>
+</body>
+</html>
