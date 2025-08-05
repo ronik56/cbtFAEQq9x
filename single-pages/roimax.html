@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Agent ROIMax System - 220 AI Optimizations Per Second</title>
+    <meta name="description" content="Transform your marketing with Multi-Agent ROIMax - 220 AI-driven optimizations per second for Google Ads and LinkedIn campaigns. Stop guessing, start multiplying marketing intelligence.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+/* CSS Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #545454;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    overflow-x: hidden;
+}
+
+/* Typography System */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+}
+
+h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+}
+
+h3 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 600;
+}
+
+h4 {
+    font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+    font-weight: 500;
+}
+
+p {
+    margin-bottom: 16px;
+    max-width: 65ch;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+strong {
+    font-weight: 500;
+    color: #3caff2;
+}
+
+/* Color System */
+:root {
+    --primary-blue: #3caff2;
+    --primary-purple: #6c2ed4;
+    --accent-teal: #0ff2b2;
+    --accent-pink: #f20fb2;
+    --dark-blue: #3850d4;
+    --dark-gray: #545454;
+    --white: #ffffff;
+    --gradient-primary: linear-gradient(135deg, #3caff2 0%, #6c2ed4 100%);
+    --gradient-hero: linear-gradient(135deg, #6c2ed4 0%, #3850d4 100%);
+    --gradient-accent: linear-gradient(135deg, #0ff2b2 0%, #f20fb2 100%);
+    --shadow-light: 0 2px 8px rgba(60, 175, 242, 0.1);
+    --shadow-medium: 0 4px 16px rgba(60, 175, 242, 0.15);
+    --shadow-heavy: 0 8px 32px rgba(60, 175, 242, 0.2);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Button System */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 200px;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-blue);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Section Styles */
+section {
+    padding: 80px 0;
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 64px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 16px;
+}
+
+/* Hero Section */
+.hero {
+    background: var(--gradient-hero);
+    color: var(--white);
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    pointer-events: none;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content {
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.hero-title {
+    color: var(--white);
+    margin-bottom: 24px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+    margin-bottom: 32px;
+    font-weight: 500;
+}
+
+.hero-copy {
+    margin-bottom: 48px;
+}
+
+.hero-copy p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.125rem;
+    max-width: none;
+    margin: 0 auto 24px;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+}
+
+.hero-video {
+    margin-top: 48px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.video-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.125rem;
+    text-align: center;
+}
+
+/* Trust Section */
+.trust-section {
+    padding: 40px 0;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.trust-content {
+    text-align: center;
+}
+
+.trust-title {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.trust-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+}
+
+.trust-logo {
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Value Proposition Section */
+.value-prop {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--primary-blue);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 24px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-teal);
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Problem Section */
+.problem {
+    background: linear-gradient(135deg, rgba(108, 46, 212, 0.1) 0%, rgba(242, 15, 178, 0.1) 100%);
+}
+
+.problem-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.problem-highlight {
+    font-size: 1.25rem;
+    color: var(--accent-pink);
+    font-weight: 500;
+    margin-bottom: 24px;
+}
+
+/* Solution Section */
+.solution {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Three Agents Section */
+.agents {
+    background: linear-gradient(135deg, rgba(15, 242, 178, 0.1) 0%, rgba(60, 175, 242, 0.1) 100%);
+}
+
+.agents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.agent-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.agent-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--accent-teal);
+}
+
+.agent-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    background: var(--gradient-accent);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.agent-title {
+    color: var(--accent-teal);
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.agent-description {
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    max-width: none;
+}
+
+/* Core Capabilities */
+.capabilities {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.capabilities-list {
+    list-style: none;
+    max-width: 800px;
+    margin: 48px auto 0;
+}
+
+.capability-item {
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    padding-left: 40px;
+}
+
+.capability-item::before {
+    content: '●';
+    position: absolute;
+    left: 0;
+    top: 24px;
+    color: var(--accent-teal);
+    font-size: 1.5rem;
+}
+
+.capability-title {
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.capability-description {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: none;
+    margin: 0;
+}
+
+/* Intelligence Factory */
+.intelligence-factory {
+    background: linear-gradient(135deg, rgba(56, 80, 212, 0.2) 0%, rgba(108, 46, 212, 0.2) 100%);
+}
+
+/* Toggle Section */
+.toggle-section {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.toggle-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.toggle-buttons {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 16px 24px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.toggle-btn.active {
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-medium);
+}
+
+.toggle-content {
+    display: none;
+}
+
+.toggle-content.active {
+    display: block;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.toggle-benefits {
+    display: grid;
+    gap: 32px;
+}
+
+.benefit-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 32px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.benefit-title {
+    color: var(--primary-blue);
+    margin-bottom: 16px;
+}
+
+.benefit-description {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: none;
+    margin: 0;
+}
+
+/* How It Works */
+.how-it-works {
+    background: linear-gradient(135deg, rgba(15, 242, 178, 0.1) 0%, rgba(242, 15, 178, 0.1) 100%);
+}
+
+.process-steps {
+    display: grid;
+    gap: 32px;
+    margin-top: 48px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.process-step {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    position: relative;
+    padding-left: 80px;
+}
+
+.step-number {
+    position: absolute;
+    left: 24px;
+    top: 32px;
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.step-title {
+    color: var(--accent-teal);
+    margin-bottom: 12px;
+}
+
+.step-description {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: none;
+    margin: 0;
+}
+
+/* Founders Section */
+.founders {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.founders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 48px;
+    margin-top: 48px;
+}
+
+.founder-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.founder-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+}
+
+.founder-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--white);
+    font-weight: bold;
+}
+
+.founder-name {
+    color: var(--primary-blue);
+    margin-bottom: 8px;
+}
+
+.founder-title {
+    color: var(--accent-teal);
+    font-size: 1.125rem;
+    margin-bottom: 16px;
+}
+
+.founder-bio {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: none;
+    margin: 0;
+}
+
+/* Urgency Section */
+.urgency {
+    background: linear-gradient(135deg, rgba(242, 15, 178, 0.2) 0%, rgba(108, 46, 212, 0.2) 100%);
+}
+
+.urgency-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.urgency-highlight {
+    font-size: 1.25rem;
+    color: var(--accent-pink);
+    font-weight: 500;
+}
+
+/* Main CTA Section */
+.main-cta {
+    background: var(--gradient-hero);
+    color: var(--white);
+}
+
+.cta-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cta-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin: 48px 0;
+}
+
+.cta-benefit {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.cta-benefit h4 {
+    color: var(--accent-teal);
+    margin-bottom: 12px;
+    font-size: 1.125rem;
+}
+
+.cta-benefit p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    max-width: none;
+}
+
+.cta-form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 48px;
+    border-radius: 16px;
+    margin: 48px 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-teal);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(15, 242, 178, 0.2);
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group select option {
+    background: var(--dark-gray);
+    color: var(--white);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-group-full {
+    grid-column: 1 / -1;
+}
+
+.required {
+    color: var(--accent-pink);
+}
+
+.form-submit {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.form-submit .btn {
+    min-width: 300px;
+    font-size: 1.25rem;
+    padding: 20px 40px;
+}
+
+/* Final CTA */
+.final-cta {
+    background: linear-gradient(135deg, rgba(60, 175, 242, 0.2) 0%, rgba(108, 46, 212, 0.2) 100%);
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 60px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 32px;
+}
+
+.footer-section h4 {
+    color: var(--primary-blue);
+    margin-bottom: 16px;
+    font-size: 1.125rem;
+}
+
+.footer-section p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    max-width: none;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        min-width: 280px;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .agents-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .founders-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .toggle-buttons {
+        flex-direction: column;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trust-logos {
+        gap: 24px;
+    }
+
+    .cta-benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+
+    .hero {
+        padding: 80px 0 40px;
+    }
+
+    section {
+        padding: 40px 0;
+    }
+
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .stat-card,
+    .agent-card,
+    .founder-card,
+    .process-step {
+        padding: 24px;
+    }
+
+    .cta-form {
+        padding: 24px;
+    }
+
+    .process-step {
+        padding-left: 24px;
+    }
+
+    .step-number {
+        position: relative;
+        left: auto;
+        top: auto;
+        margin-bottom: 16px;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus {
+    outline: 2px solid var(--accent-teal);
+    outline-offset: 2px;
+}
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">MULTI-AGENT REVENUE SYSTEM</h1>
+                <h2 class="hero-subtitle">Multi-agent ROIMax performs 220 optimizations per second, fully automatic</h2>
+                
+                <div class="hero-copy">
+                    <p>Three AI agents, one factory, optimizing Google and LinkedIn for high-intent buyers, leads.</p>
+                </div>
+                
+                <div class="hero-cta">
+                    <a href="#main-cta" class="btn btn-primary">Start My FREE Intelligence Audit</a>
+                </div>
+                
+                <div class="hero-video">
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <p>🎥 Multi-Agent ROIMax Demo Video</p>
+                            <p>See 220 optimizations per second in action</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="trust-content">
+                <p class="trust-title">Trusted by Growth-Focused Companies</p>
+                <div class="trust-logos">
+                    <div class="trust-logo">AudioCodes</div>
+                    <div class="trust-logo">Qira</div>
+                    <div class="trust-logo">DIMRI</div>
+                    <div class="trust-logo">Alomone Labs</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition Section -->
+    <section class="value-prop" id="value-prop">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Happens When You Replace Guesswork with 220 AI-Driven Optimizations Per Second</h2>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">⚙️</div>
+                    <div class="stat-number">220</div>
+                    <div class="stat-label">Optimizations Per Second</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">⏰</div>
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Reduction in Manual Tasks</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🤖</div>
+                    <div class="stat-number">90%</div>
+                    <div class="stat-label">Faster Campaign Setup</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="section-header">
+                <h2>You're Optimizing for Leads, Not Buyers - And It's Costing You Pipeline Every Single Day</h2>
+            </div>
+            
+            <div class="problem-content">
+                <p class="problem-highlight">Most of Your Impressions Are Wasted. Competitors Know It.</p>
+                <p class="problem-highlight">You Might Lose 30–40% of Buyers to AI-Optimized Teams</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Overview -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="section-header">
+                <h2>What If Every Marketing Dollar Was Optimized by AI - Every Second of the Day?</h2>
+                <p class="section-subtitle">ROImax Agent is your always-on, multi-agent optimization system- designed to transform ad spend into predictable pipeline.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Three AI Agents Section -->
+    <section class="agents" id="agents">
+        <div class="container">
+            <div class="section-header">
+                <h2>Three AI Agents. One Intelligence Factory</h2>
+            </div>
+            
+            <div class="agents-grid">
+                <div class="agent-card">
+                    <div class="agent-icon">📊</div>
+                    <h3 class="agent-title">Data Retrieval Specialist</h3>
+                    <p class="agent-description">Pulls comprehensive performance reports from Google Ads and Analytics APIs to fuel the entire optimization engine. Never misses a signal, never sleeps.</p>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="agent-icon">📈</div>
+                    <h3 class="agent-title">Performance Analytics Pro</h3>
+                    <p class="agent-description">Real-time campaign analyst that crunches numbers, calculates ROI metrics, and identifies optimization opportunities from your advertising data as they happen.</p>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="agent-icon">📋</div>
+                    <h3 class="agent-title">Executive Report Builder</h3>
+                    <p class="agent-description">Professional report creator that turns campaign data into polished Google Docs and executive-ready insights—automatically delivered.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Capabilities -->
+    <section class="capabilities" id="capabilities">
+        <div class="container">
+            <div class="section-header">
+                <h2>Core Capabilities:</h2>
+            </div>
+            
+            <ul class="capabilities-list">
+                <li class="capability-item">
+                    <h4 class="capability-title">Intelligent Budget Allocation</h4>
+                    <p class="capability-description">Shifts spend from low-converting audiences to high-value decision-makers who actually have budget and authority to buy-at 220 executions per second.</p>
+                </li>
+                
+                <li class="capability-item">
+                    <h4 class="capability-title">Precision Keyword Expansion</h4>
+                    <p class="capability-description">Automatically discovers and tests intent keywords your competitors miss, expanding reach without diluting quality.</p>
+                </li>
+                
+                <li class="capability-item">
+                    <h4 class="capability-title">Real-Time Waste Detection</h4>
+                    <p class="capability-description">Flags budget caps, low-performing ad groups, and audience segments that drain budget without generating qualified pipeline.</p>
+                </li>
+                
+                <li class="capability-item">
+                    <h4 class="capability-title">Pipeline-First Optimization</h4>
+                    <p class="capability-description">Optimizes campaigns to actual customer acquisitions, not surface-level metrics like clicks or form fills.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Intelligence Factory Section -->
+    <section class="intelligence-factory" id="intelligence-factory">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Marketing Intelligence Factory Your Competitors Wish They Had</h2>
+                <p class="section-subtitle">Stop competing on campaign creativity. Start competing on campaign intelligence that operates at machine speed.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toggle Section -->
+    <section class="toggle-section" id="toggle-section">
+        <div class="container">
+            <div class="toggle-container">
+                <div class="toggle-buttons">
+                    <button class="toggle-btn active" data-target="marketing-leaders">For Marketing Leaders</button>
+                    <button class="toggle-btn" data-target="revenue-leaders">For Revenue Leaders</button>
+                </div>
+                
+                <div class="toggle-content active" id="marketing-leaders">
+                    <div class="toggle-benefits">
+                        <div class="benefit-item">
+                            <h3 class="benefit-title">Predictable Pipeline Growth</h3>
+                            <p class="benefit-description">Transform marketing from a cost center into a revenue engine with clear attribution from ad spend to closed deals-powered by AI agents that never stop optimizing.</p>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <h3 class="benefit-title">Budget Efficiency That Scales</h3>
+                            <p class="benefit-description">Every campaign dollar works harder with 220 optimization decisions per second-automatically identifying and doubling down on what actually converts prospects to customers.</p>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <h3 class="benefit-title">Competitive Advantage</h3>
+                            <p class="benefit-description">While competitors guess at optimization, you'll have three AI agents making data-driven adjustments every hour of every day.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="toggle-content" id="revenue-leaders">
+                    <div class="toggle-benefits">
+                        <div class="benefit-item">
+                            <h3 class="benefit-title">Higher Quality Pipeline</h3>
+                            <p class="benefit-description">Marketing qualified leads that actually fit your ICP and have demonstrated buying intent through their engagement patterns-pre-qualified by AI intelligence.</p>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <h3 class="benefit-title">Faster Deal Velocity</h3>
+                            <p class="benefit-description">Prospects enter your funnel pre-qualified and pre-educated, shortening sales cycles and improving close rates.</p>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <h3 class="benefit-title">Measurable Marketing ROI</h3>
+                            <p class="benefit-description">Finally see the direct line from marketing spend to closed revenue, making budget decisions based on real-time AI analysis, not intuition.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p class="section-subtitle">Daily Intelligence Loop – Three Agents Execute via API at Enterprise Speed</p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Morning Campaign Analysis</h3>
+                    <p class="step-description">Data Retrieval Specialist scans all active campaigns for budget waste, performance drops, and optimization opportunities while you sleep-processing 220 workflows per second.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Real-Time Strategic Adjustments</h3>
+                    <p class="step-description">Performance Analytics Pro implements bid optimizations, budget allocations, and negative keyword additions based on continuous analysis.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Competitive Monitoring</h3>
+                    <p class="step-description">All agents track competitor campaign changes and market shifts that could impact your positioning.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Executive Performance Reporting</h3>
+                    <p class="step-description">Report Builder delivers actionable insights on what's working, what's not, and what to test next-formatted for stakeholders.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Continuous Learning</h3>
+                    <p class="step-description">Every campaign interaction feeds all three agents, making tomorrow's campaigns smarter than today's.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founders Section -->
+    <section class="founders" id="founders">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet the Founders - See ROIMax Agent Multi-Agent System in Action</h2>
+                <p class="section-subtitle">Our co-founder helped build and scale Google Israel's top-tier advertisers. Now, we're applying that same precision engineering to help B2B companies optimize their own revenue engines.</p>
+            </div>
+            
+            <div class="founders-grid">
+                <div class="founder-card">
+                    <div class="founder-photo">RH</div>
+                    <h3 class="founder-name">Ronen Horen</h3>
+                    <h4 class="founder-title">AI Transformative Leader</h4>
+                    <p class="founder-bio">Former Google Israel founding team member who's engineered 50+ AI assistants and agents delivering 10X productivity gains. Transforms visionary concepts into revenue-generating machines with neuroscience-backed precision.</p>
+                </div>
+                
+                <div class="founder-card">
+                    <div class="founder-photo">RF</div>
+                    <h3 class="founder-name">Ron Fux</h3>
+                    <h4 class="founder-title">AI Solutions Engineer</h4>
+                    <p class="founder-bio">Tel Aviv University AI Master's scholar who transforms complex mathematics into revenue systems. Architects solutions that consistently outperform expectations, delivering measurable business gains where others failed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Urgency Section -->
+    <section class="urgency" id="urgency">
+        <div class="container">
+            <div class="section-header">
+                <h2>Every Second Without Multi-Agent AI Is Lost Revenue</h2>
+            </div>
+            
+            <div class="urgency-content">
+                <p>While you're manually adjusting bids and guessing at keyword performance, competitors are deploying AI systems that make 220 optimization decisions per second.</p>
+                <p class="urgency-highlight">Market conditions change by the minute. Competitor strategies evolve hourly. Your campaigns need intelligence that operates at machine speed. The gap widens every day.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main CTA Section with Form -->
+    <section class="main-cta" id="main-cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="section-header">
+                    <h2>See Your Campaigns Through AI Eyes-Prove ROI Before You Commit</h2>
+                    <h3 class="section-subtitle">3-Month Campaign Intelligence Audit + Live Multi-Agent Demo</h3>
+                </div>
+                
+                <p>We'll analyze your current Google Ads and LinkedIn campaigns to identify:</p>
+                
+                <div class="cta-benefits">
+                    <div class="cta-benefit">
+                        <h4>Budget Waste Detection</h4>
+                        <p>Exact budget waste and missed opportunities that AI agents would catch instantly</p>
+                    </div>
+                    
+                    <div class="cta-benefit">
+                        <h4>Competitive Keywords</h4>
+                        <p>Keywords your competitors are winning that you're not bidding on</p>
+                    </div>
+                    
+                    <div class="cta-benefit">
+                        <h4>High-Intent Audiences</h4>
+                        <p>Audience segments with high intent that your campaigns aren't reaching</p>
+                    </div>
+                    
+                    <div class="cta-benefit">
+                        <h4>ROI Optimizations</h4>
+                        <p>Specific optimizations that could improve your cost-per-acquisition</p>
+                    </div>
+                </div>
+                
+                <div class="section-header">
+                    <h3>What You'll Receive:</h3>
+                    <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                        <li>Comprehensive campaign performance analysis processed by our AI agents</li>
+                        <li>Custom optimization roadmap with projected ROI improvements</li>
+                        <li>Live demo of ROIMax multi-agent system working with your actual campaign data</li>
+                    </ul>
+                    <p style="margin-top: 24px;"><strong>Investment Aligned to Results:</strong> Only move forward if our analysis demonstrates clear ROI potential for your specific campaigns and market.</p>
+                </div>
+                
+                <div class="cta-form">
+                    <form id="audit-form" action="#" method="POST">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="fullName">Full Name <span class="required">*</span></label>
+                                <input type="text" id="fullName" name="fullName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Business Email <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company">Company Name <span class="required">*</span></label>
+                                <input type="text" id="company" name="company" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="role">Your Role <span class="required">*</span></label>
+                                <select id="role" name="role" required>
+                                    <option value="">Select your role</option>
+                                    <option value="founder-ceo">Founder/CEO</option>
+                                    <option value="cmo">CMO</option>
+                                    <option value="vp-marketing">VP Marketing</option>
+                                    <option value="marketing-director">Marketing Director</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="adSpend">Current Ad Spend <span class="required">*</span></label>
+                                <input type="text" id="adSpend" name="adSpend" placeholder="e.g., $10,000/month" required>
+                            </div>
+                            
+                            <div class="form-group form-group-full">
+                                <label for="challenge">Biggest Marketing Challenge</label>
+                                <textarea id="challenge" name="challenge" placeholder="Tell us about your biggest marketing challenge (optional)"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-submit">
+                            <button type="submit" class="btn btn-primary">Get Your Campaign Intelligence Audit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta" id="final-cta">
+        <div class="container">
+            <div class="section-header">
+                <h2>Stop Guessing. Start Multiplying Marketing Intelligence.</h2>
+                <p class="section-subtitle">Your marketing budget deserves 220-executions-per-second intelligence, not intuition.</p>
+                <a href="#main-cta" class="btn btn-primary">Start My FREE Intelligence Audit</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Trusted By:</h4>
+                    <p>B2B technology companies from Series A to enterprise scale</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Built With:</h4>
+                    <p>Enterprise-grade multi-agent AI and proven optimization frameworks operating at 220 executions per second</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Integration Ready:</h4>
+                    <p>Works with Google Ads, LinkedIn Ads, HubSpot, Salesforce, and your existing martech stack-no workflow disruption</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Multi-Agent Architecture:</h4>
+                    <p>Three specialized AI agents working as one intelligence factory for your revenue operations</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+// Main JavaScript functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all components
+    initSmoothScrolling();
+    initToggleSection();
+    initFormHandling();
+    initScrollAnimations();
+});
+
+// Smooth scrolling functionality
+function initSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offsetTop = target.offsetTop - 20;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Toggle section functionality
+function initToggleSection() {
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    const toggleContents = document.querySelectorAll('.toggle-content');
+
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const target = this.getAttribute('data-target');
+            
+            // Remove active class from all buttons and contents
+            toggleButtons.forEach(btn => btn.classList.remove('active'));
+            toggleContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding content
+            this.classList.add('active');
+            document.getElementById(target).classList.add('active');
+        });
+    });
+}
+
+// Form handling with validation
+function initFormHandling() {
+    const form = document.getElementById('audit-form');
+    
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            if (validateForm()) {
+                // Show success message
+                showFormSuccess();
+                
+                // In a real application, you would send the data to your server
+                console.log('Form submitted successfully');
+                
+                // Reset form after successful submission
+                setTimeout(() => {
+                    form.reset();
+                }, 2000);
+            }
+        });
+    }
+}
+
+function validateForm() {
+    const requiredFields = document.querySelectorAll('#audit-form [required]');
+    let isValid = true;
+    
+    requiredFields.forEach(field => {
+        const value = field.value.trim();
+        const fieldGroup = field.closest('.form-group');
+        
+        // Remove previous error states
+        fieldGroup.classList.remove('error');
+        
+        if (!value) {
+            fieldGroup.classList.add('error');
+            isValid = false;
+        } else if (field.type === 'email' && !validateEmail(value)) {
+            fieldGroup.classList.add('error');
+            isValid = false;
+        }
+    });
+    
+    return isValid;
+}
+
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function showFormSuccess() {
+    const submitButton = document.querySelector('#audit-form .btn');
+    const originalText = submitButton.textContent;
+    
+    submitButton.textContent = 'Thank You! We\'ll Be In Touch Soon';
+    submitButton.style.background = 'linear-gradient(135deg, #0ff2b2 0%, #3caff2 100%)';
+    
+    setTimeout(() => {
+        submitButton.textContent = originalText;
+        submitButton.style.background = '';
+    }, 3000);
+}
+
+// Scroll animations using Intersection Observer
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    const animateElements = document.querySelectorAll(
+        '.stat-card, .agent-card, .founder-card, .process-step, .benefit-item, .cta-benefit'
+    );
+    
+    animateElements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Add error styling for form validation
+const style = document.createElement('style');
+style.textContent = `
+    .form-group.error input,
+    .form-group.error select,
+    .form-group.error textarea {
+        border-color: var(--accent-pink) !important;
+        box-shadow: 0 0 0 3px rgba(242, 15, 178, 0.2) !important;
+    }
+    
+    .form-group.error::after {
+        content: 'This field is required';
+        color: var(--accent-pink);
+        font-size: 0.875rem;
+        margin-top: 4px;
+        display: block;
+    }
+    
+    .form-group.error input[type="email"]::after {
+        content: 'Please enter a valid email address';
+    }
+`;
+document.head.appendChild(style);
+
+// Performance optimization
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Enhanced scroll performance
+const throttledScroll = debounce(() => {
+    // Add any scroll-based functionality here
+}, 10);
+
+window.addEventListener('scroll', throttledScroll);
+
+// Analytics tracking (placeholder for actual implementation)
+function trackEvent(eventName, eventData = {}) {
+    console.log('Analytics event:', eventName, eventData);
+    // In a real application, this would send data to your analytics service
+}
+
+// Track form submissions
+document.addEventListener('submit', function(e) {
+    if (e.target.id === 'audit-form') {
+        trackEvent('form_submit', {
+            form_name: 'audit_form',
+            page_location: window.location.href
+        });
+    }
+});
+
+// Track button clicks
+document.addEventListener('click', function(e) {
+    if (e.target.matches('.btn-primary')) {
+        trackEvent('cta_click', {
+            button_text: e.target.textContent.trim(),
+            page_location: window.location.href
+        });
+    }
+});
+    </script>
+</body>
+</html>
