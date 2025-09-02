@@ -164,7 +164,8 @@
 
         /* --- HERO SECTION --- */
         #hero {
-            background: linear-gradient(135deg, #a7e9af, #84a0c6);
+             /* New brand gradient */
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
             color: var(--white); 
         }
         
@@ -181,12 +182,13 @@
         }
 
         .hero-content h1 {
-            background: var(--gradient-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            -webkit-text-stroke: 1px var(--white); 
+            /* Using a simple white for best contrast on this new gradient */
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
+            text-fill-color: unset;
+            color: var(--white);
         }
 
         .hero-content .subheadline {
@@ -262,7 +264,8 @@
         }
 
         #case-study {
-            background: linear-gradient(45deg, #fceabb, #f8b500); 
+             /* New brand gradient */
+            background: linear-gradient(45deg, var(--accent-teal), var(--primary-blue)); 
             color: var(--black);
         }
         #case-study h2, #case-study p {
@@ -270,20 +273,19 @@
         }
         
         #advantage {
-            background: linear-gradient(135deg, #e0a3f0, #c060d4);
+            /* New brand gradient */
+            background: linear-gradient(135deg, var(--accent-pink), var(--dark-blue));
             color: var(--white);
         }
         #advantage h2, #advantage p {
             color: var(--white);
         }
-        /* Fix: #advantage bullet point background */
         #advantage .bullet-point {
             background: transparent;
             border: 2px solid rgba(255, 255, 255, 0.5);
         }
         
         #cost p {
-             /* Fix: Center paragraphs in #cost */
             margin-left: auto;
             margin-right: auto;
         }
@@ -310,10 +312,15 @@
 
         /* --- WHY VIBE SECTION --- */
         #why-vibe {
-            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+             /* New brand gradient */
+            background: linear-gradient(45deg, var(--dark-blue), var(--secondary-purple));
         }
-        #why-vibe h2, #why-vibe p {
-            color: var(--black);
+        /* Fix text contrast on new background */
+        #why-vibe h2, #why-vibe .closing-statement {
+            color: var(--white);
+        }
+        #why-vibe .closing-statement strong {
+            color: var(--accent-teal);
         }
         
         .why-vibe-grid {
@@ -495,7 +502,6 @@
             color: var(--dark-gray);
             margin-bottom: 1rem;
             font-weight: 500;
-             /* Fix: Center paragraphs in #expertise */
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
@@ -730,7 +736,7 @@
                         <p>3× more efficient, zero additional hires, and market penetration deeper than entire prospecting teams.</p>
                     </div>
                 </div>
-                <p class="closing-statement">Unlike generic AI tools, Vibe scales your communication DNA to thousands of prospects without losing personality. This combination - <strong style="color: var(--dark-blue);">authentic voice × AI velocity</strong> - has never existed before.</p>
+                <p class="closing-statement">Unlike generic AI tools, Vibe scales your communication DNA to thousands of prospects without losing personality. This combination - <strong>authentic voice × AI velocity</strong> - has never existed before.</p>
             </div>
         </section>
 
