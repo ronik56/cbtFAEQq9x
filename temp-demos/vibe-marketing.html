@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Marketing MAS | Scale Your Founder's Voice</title>
+    
+    <meta name="description" content="Vibe Marketing MAS engineers your authentic founder's voice into every campaign, turning signals into hyper-personalized outreach at AI speed. Scale personalization without hiring.">
+    <meta name="keywords" content="Vibe Marketing, MAS, Multi-Agent-System, AI Marketing, Personalized Outreach, B2B Marketing, Lead Generation, Founder Voice">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- BRAND GUIDELINES & VARIABLES --- */
+        :root {
+            --primary-blue: #3caff2;
+            --secondary-purple: #6c2ed4;
+            --accent-teal: #0ff2b2;
+            --accent-pink: #f20fb2;
+            --dark-blue: #3850d4;
+            --dark-gray: #545454;
+            --light-gray: #f4f6f9;
+            --white: #ffffff;
+            --black: #1a1a1a;
+
+            --font-headline: 'Oswald', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+
+            --gradient-main: linear-gradient(90deg, var(--primary-blue), var(--secondary-purple));
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 30px rgba(84, 84, 84, 0.12);
+            --border-radius: 12px;
+        }
+
+        /* --- GLOBAL & RESET STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--white);
+            color: var(--dark-gray);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-headline);
+            color: var(--black);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1rem;
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            max-width: 700px;
+        }
+
+        /* --- LAYOUT & HELPERS --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 0;
+        }
+
+        section {
+            overflow: hidden;
+        }
+
+        .transition-text {
+            text-align: center;
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            padding: 3rem 0;
+            background-color: var(--light-gray);
+            font-weight: 500;
+        }
+
+        /* --- BUTTON STYLES --- */
+        .cta-button {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white);
+            background: var(--gradient-main);
+            padding: 16px 32px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-light);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            text-decoration: none;
+        }
+        
+        .header-cta {
+             font-size: 0.9rem;
+             padding: 10px 22px;
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            padding-top: 4rem;
+        }
+        
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .hero-content .subheadline {
+            font-size: 1.25rem;
+            color: var(--dark-gray);
+            margin: 1.5rem 0 2.5rem;
+        }
+        
+        .video-placeholder {
+            aspect-ratio: 16 / 9;
+            background: #e0e0e0;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            background-image: linear-gradient(45deg, var(--light-gray), var(--white));
+            border: 1px solid #ddd;
+        }
+
+        .video-placeholder::after {
+            content: '►';
+            font-size: 5rem;
+            color: var(--white);
+            background: rgba(0, 0, 0, 0.4);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 10px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        .video-placeholder:hover::after {
+            transform: scale(1.1);
+        }
+
+        /* --- GENERIC SECTIONS --- */
+        #personalization, #case-study, #advantage, #cost {
+            text-align: center;
+        }
+        
+        #personalization .container, #case-study .container, 
+        #advantage .container, #cost .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #case-study {
+            background-color: var(--light-gray);
+        }
+        
+        .bullet-point {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: var(--white);
+            border-left: 5px solid var(--accent-teal);
+            text-align: left;
+            max-width: 800px;
+            box-shadow: var(--shadow-light);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        #cost .bullet-point {
+            border-left-color: var(--accent-pink);
+        }
+        
+        .emphasis {
+            font-weight: 700;
+            color: var(--accent-pink);
+        }
+
+        /* --- WHY VIBE SECTION --- */
+        .why-vibe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .pillar-card {
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            border: 1px solid #e7e7e7;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .pillar-card h4 {
+            color: var(--dark-blue);
+            font-size: 1.4rem;
+        }
+
+        .closing-statement {
+            text-align: center;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+        
+        /* --- HOW IT WORKS SECTION --- */
+        #how-it-works {
+            background-color: var(--light-gray);
+        }
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            background: var(--gradient-main);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            font-weight: 700;
+            border: 4px solid var(--light-gray);
+        }
+
+        /* --- OFFER & FORM SECTION --- */
+        #offer {
+             background-color: var(--dark-gray);
+             color: var(--white);
+             background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://uploads-ssl.webflow.com/643d93361be1745b63013854/64402377a285d836643c1ba0_waves-light.svg');
+             background-size: cover;
+             background-position: center;
+        }
+
+        #offer h2, #offer h3 {
+            color: var(--white);
+        }
+
+        .offer-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .offer-details h3 {
+            color: var(--accent-teal);
+        }
+        
+        .what-you-get-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .what-you-get-list li {
+            padding-left: 2rem;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%230ff2b2'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-size: 24px;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .why-free {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent-teal);
+        }
+        
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: var(--accent-pink);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(60, 175, 242, 0.3);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        /* --- CREDIBILITY SECTION --- */
+        #credibility {
+            background: var(--light-gray);
+            text-align: center;
+        }
+        .credibility-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .credibility-item {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        .credibility-item strong {
+            font-family: var(--font-headline);
+            color: var(--dark-blue);
+        }
+        
+        /* --- FAQ SECTION --- */
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .faq-item summary {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--black);
+            padding: 1.5rem 1rem;
+            cursor: pointer;
+            list-style: none; /* Remove default marker */
+            position: relative;
+            padding-right: 2rem;
+        }
+        
+        .faq-item summary::-webkit-details-marker {
+            display: none; /* Hide for Chrome/Safari */
+        }
+        
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: 1rem;
+            font-size: 1.8rem;
+            font-weight: 400;
+            transition: transform 0.3s ease;
+            color: var(--primary-blue);
+        }
+
+        .faq-item[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 1rem 1.5rem 1rem;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .hero-layout, .offer-layout {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-content {
+                order: 2;
+            }
+
+            .video-placeholder {
+                order: 1;
+                margin-bottom: 2rem;
+            }
+            
+            .offer-details {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 4rem 0;
+            }
+            
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        /* --- ANIMATIONS --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInAnimation 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Staggered animations */
+        .pillar-card, .step-card, .faq-item {
+            animation-delay: calc(0.1s * var(--i));
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#hero" class="logo">Vibe Marketing MAS</a>
+        <a href="#offer" class="cta-button header-cta">Book Your Demo</a>
+    </header>
+
+    <main>
+
+        <section id="hero" class="container">
+            <div class="hero-layout">
+                <div class="hero-content">
+                    <h1>Scale Your Founder's Voice to 3,000 Prospects</h1>
+                    <p class="subheadline">Our Vibe Marketing Multi-Agent-System engineers your authentic voice into every campaign - turning signals into hyper-personalized outreach at AI speed.</p>
+                    <a href="#offer" class="cta-button">Limited Sessions Available</a>
+                </div>
+                <div class="video-placeholder">
+                    </div>
+            </div>
+        </section>
+
+        <div class="transition-text">
+            Here's what happens when we put that power to work.
+        </div>
+
+        <section id="personalization" class="container">
+            <h2>Personalization at Scale: Founder Voice Delivered in Minutes</h2>
+            <p>Zero hires. Maximum reach. In minutes, our Vibe Marketing MAS generated 3,000 founder-voice campaign messages - powered by signal research, intent scoring, and pitch-perfect personalization that outperforms entire teams.</p>
+        </section>
+        
+        <div class="transition-text" style="font-style: italic; background-color: var(--white);">
+            And this isn't theory - here's a real case study.
+        </div>
+        
+        <section id="case-study">
+             <div class="container">
+                <h2>How a Leading SaaS Company Scaled Personalization Without Hiring</h2>
+                <p>A Series B SaaS company burned hundreds of hours each quarter on manual research and message crafting. With Vibe, the same cycle ran in minutes - delivering deeper insights and authentic outreach their entire team never could.</p>
+                <a href="#offer" class="cta-button" style="margin-top: 2rem;">Book Your Demo</a>
+             </div>
+        </section>
+        
+        <section id="advantage" class="container">
+            <h2>Your Competitors Already Switched to AI</h2>
+            <p>90% of campaigns in world-class companies are now AI-built. That means faster research, sharper targeting, and personalized outreach at scale. If you're still running manual playbooks, you're not just behind - you're invisible.</p>
+            <div class="bullet-point">
+                <p>While they run 3,000 authentic campaign messages in minutes, you're still stuck with manual hours. The gap isn't closing - it's compounding.</p>
+            </div>
+            <a href="#offer" class="cta-button">Book Your Demo</a>
+        </section>
+        
+        <div class="transition-text" style="background-color: var(--light-gray);">
+             And the longer you wait to adapt, the higher the price of staying manual…
+        </div>
+
+        <section id="cost" class="container">
+            <h2>The Brutal Cost of Delay</h2>
+            <p>Manual message crafting and campaign optimization isn't just slow - it's expensive. For many B2B teams, the hidden cost adds up to hundreds of wasted hours every quarter and over $240,000 per year in labor your competitors have already automated.</p>
+            <div class="bullet-point">
+                <p>The exact number depends on your team size, cycle length, and deal flow - and we'll be happy to help you calculate your real Brutal Cost of Delay in a strategy session.</p>
+            </div>
+            <p><strong class="emphasis">Every quarter you wait, that number compounds.</strong></p>
+            <a href="#offer" class="cta-button">Book Your Demo</a>
+        </section>
+        
+        <section id="why-vibe" class="container">
+            <h2>Why Vibe Marketing MAS Is Different</h2>
+            <div class="why-vibe-grid">
+                <div class="pillar-card fade-in" style="--i: 1;">
+                    <h4>Proposition</h4>
+                    <p>Authentic voice at AI velocity - campaigns engineered in your founder's real style, not templated automation.</p>
+                </div>
+                <div class="pillar-card fade-in" style="--i: 2;">
+                    <h4>Unique Differentiator</h4>
+                    <p>Our AI doesn't just automate outreach - it discovers hidden buying signals and intent your human team misses entirely.</p>
+                </div>
+                <div class="pillar-card fade-in" style="--i: 3;">
+                    <h4>Proof of Performance</h4>
+                    <p>3× more efficient, zero additional hires, and market penetration deeper than entire prospecting teams.</p>
+                </div>
+            </div>
+            <p class="closing-statement">Unlike generic AI tools, Vibe scales your communication DNA to thousands of prospects without losing personality. This combination - <strong style="color: var(--dark-blue);">authentic voice × AI velocity</strong> - has never existed before.</p>
+        </section>
+
+        <section id="how-it-works">
+            <div class="container">
+                <h2>How Vibe Multiples Your Pipeline Without Headcount</h2>
+                <div class="how-it-works-grid">
+                    <div class="step-card fade-in" style="--i: 1;">
+                        <div class="step-number">1</div>
+                        <h4>Voice DNA Extraction</h4>
+                        <p>We map your founder's real voice from calls, emails, and decks - the language that actually closes deals.</p>
+                    </div>
+                    <div class="step-card fade-in" style="--i: 2;">
+                        <div class="step-number">2</div>
+                        <h4>AI Training at Speed</h4>
+                        <p>That voice trains top AI models to research signals, score intent, and draft authentic campaigns in minutes.</p>
+                    </div>
+                    <div class="step-card fade-in" style="--i: 3;">
+                        <div class="step-number">3</div>
+                        <h4>Competitive Intelligence Mapping</h4>
+                        <p>AI surfaces conversations and gaps your competitors never see, giving you positioning they can't copy.</p>
+                    </div>
+                    <div class="step-card fade-in" style="--i: 4;">
+                        <div class="step-number">4</div>
+                        <h4>Relationship System Deployment</h4>
+                        <p>AI clears the grunt work. Your team focuses on strategy and closing, with 3× the brainpower.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="offer">
+            <div class="container">
+                <div class="offer-layout">
+                    <div class="offer-details">
+                        <h2>The Offer: Your [FREE] Vibe Marketing Strategy Session</h2>
+                        <h3>(Normally $2,250 — Yours FREE today)</h3>
+                        <p style="margin-top: 2rem;">Here's what you'll get in our session:</p>
+                        <ul class="what-you-get-list">
+                            <li>Your complete Brand Voice DNA — engineered for AI amplification</li>
+                            <li>3 competitive gaps your market is ignoring right now</li>
+                            <li>A 90-day rollout roadmap for immediate impact</li>
+                            <li>Custom AI prompts tuned to your stack and ICP</li>
+                        </ul>
+                        <div class="why-free">
+                            <p><strong>Why Free:</strong> We're investing in early adopters. In six months, these same sessions will be $2,250 - and your results will be the case study we showcase.</p>
+                        </div>
+                    </div>
+                    <form class="contact-form" action="#" method="POST">
+                        <div class="form-group">
+                            <label for="full-name">Full Name *</label>
+                            <input type="text" id="full-name" name="full_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="business-email">Business Email *</label>
+                            <input type="email" id="business-email" name="business_email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company-name">Company Name *</label>
+                            <input type="text" id="company-name" name="company_name" required>
+                        </div>
+                         <div class="form-group">
+                            <label for="role">Your Role *</label>
+                            <select id="role" name="role" required>
+                                <option value="" disabled selected>Select your role</option>
+                                <option value="founder">Founder / C-Level</option>
+                                <option value="vp-marketing">VP of Marketing</option>
+                                <option value="marketing-manager">Marketing Manager</option>
+                                <option value="vp-sales">VP of Sales</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="team-size">Marketing Team Size *</label>
+                            <select id="team-size" name="team_size" required>
+                                <option value="" disabled selected>Select team size</option>
+                                <option value="1">Just Me</option>
+                                <option value="2-5">2-5 People</option>
+                                <option value="6-10">6-10 People</option>
+                                <option value="11+">11+ People</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="challenge">Biggest Marketing Challenge</label>
+                            <textarea id="challenge" name="challenge" placeholder="What's your biggest challenge with current prospecting/research processes?"></textarea>
+                        </div>
+                        <button type="submit" class="cta-button submit-button">Book My FREE Strategy Session</button>
+                        <p class="form-footer">This session could define your next two years</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        <section id="credibility">
+            <div class="container credibility-content">
+                <div class="credibility-item">Built by <strong>Ex-Google Israel</strong></div>
+                <div class="credibility-item">50+ AI assistants, agents and multi-agent-systems</div>
+                <div class="credibility-item">Trusted by <strong>700+ companies</strong> across fintech, telcos, healthcare, and enterprise software.</div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="container">
+                <h2>FAQs: Unlocking the Power of Vibe Marketing</h2>
+                <div class="faq-accordion">
+                    <details class="faq-item fade-in" style="--i: 1;">
+                        <summary>How is Vibe Marketing different from standard AI tools?</summary>
+                        <div class="faq-answer">
+                            <p>Most AI tools churn out generic, template messages. Vibe is engineered to capture your founder's authentic voice, research signals across multiple sources, and generate hyper-personalized outreach at AI speed. It's not automation — it's authentic communication at scale.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item fade-in" style="--i: 2;">
+                        <summary>What kind of results can we realistically expect?</summary>
+                        <div class="faq-answer">
+                            <p>Every company's outcome varies by team size, ICP, and market. But here's proof: a Series B SaaS company replaced hundreds of hours of manual research per quarter with Vibe and booked more qualified demos than their human team ever could. In your strategy session, we'll help estimate your real potential impact.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item fade-in" style="--i: 3;">
+                        <summary>Does Vibe integrate with our current stack?</summary>
+                        <div class="faq-answer">
+                            <p>Yes. Vibe integrates natively with Salesforce and HubSpot (no extra licenses required) and syncs with GA4, Google Ads, and LinkedIn Ads. All activities (emails, notes, tasks) are written back into your CRM in real time.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item fade-in" style="--i: 4;">
+                        <summary>Who is this solution best suited for?</summary>
+                        <div class="faq-answer">
+                            <p>B2B companies with dedicated sales or marketing teams — especially Series A–C startups and tech companies managing complex buyer journeys, multiple stakeholders, and enterprise-scale deals.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item fade-in" style="--i: 5;">
+                        <summary>How quickly can we get started?</summary>
+                        <div class="faq-answer">
+                            <p>We typically deploy an MVP within 8 weeks, including setup, training, and testing. From there, the system continues to optimize every cycle, compounding performance over time.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <script>
+        // Simple Intersection Observer for fade-in animations on scroll
+        document.addEventListener("DOMContentLoaded", function() {
+            const animatedElements = document.querySelectorAll('.fade-in');
+
+            if ("IntersectionObserver" in window) {
+                let observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                animatedElements.forEach(el => {
+                    observer.observe(el);
+                });
+                
+                // Add a 'visible' class to trigger the animation
+                const style = document.createElement('style');
+                style.innerHTML = `.fade-in.visible { animation: fadeInAnimation 0.8s ease-out forwards; }`;
+                document.head.appendChild(style);
+            } else {
+                // Fallback for older browsers
+                animatedElements.forEach(el => {
+                    el.classList.add('visible');
+                });
+            }
+        });
+    </script>
+
+
+</body>
+</html>
+
