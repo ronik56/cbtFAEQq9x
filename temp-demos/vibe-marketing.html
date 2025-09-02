@@ -127,13 +127,22 @@
             border-radius: 50px;
             border: none;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             box-shadow: var(--shadow-light);
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-medium);
+        }
+
+        /* New: Pink CTA for gradient backgrounds */
+        .cta-button-pink {
+            background: var(--accent-pink);
+        }
+        .cta-button-pink:hover {
+            background: #d90e9f; /* Darker pink for hover */
+            box-shadow: 0 6px 20px rgba(242, 15, 178, 0.4);
         }
 
         /* --- HEADER --- */
@@ -164,7 +173,6 @@
 
         /* --- HERO SECTION --- */
         #hero {
-             /* New brand gradient */
             background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
             color: var(--white); 
         }
@@ -182,7 +190,6 @@
         }
 
         .hero-content h1 {
-            /* Using a simple white for best contrast on this new gradient */
             background: none;
             -webkit-background-clip: unset;
             -webkit-text-fill-color: unset;
@@ -264,25 +271,26 @@
         }
 
         #case-study {
-             /* New brand gradient */
-            background: linear-gradient(45deg, var(--accent-teal), var(--primary-blue)); 
-            color: var(--black);
+            /* Fix: Use same background as hero */
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple)); 
+            color: var(--white);
         }
         #case-study h2, #case-study p {
-            color: var(--black);
+            color: var(--white);
         }
         
         #advantage {
-            /* New brand gradient */
-            background: linear-gradient(135deg, var(--accent-pink), var(--dark-blue));
-            color: var(--white);
+             /* Fix: Use white background */
+            background: var(--white);
+            color: var(--dark-gray);
         }
         #advantage h2, #advantage p {
-            color: var(--white);
+            color: var(--black);
         }
         #advantage .bullet-point {
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            background: var(--light-gray);
+            border: none;
+            border-left: 5px solid var(--accent-teal);
         }
         
         #cost p {
@@ -312,10 +320,9 @@
 
         /* --- WHY VIBE SECTION --- */
         #why-vibe {
-             /* New brand gradient */
-            background: linear-gradient(45deg, var(--dark-blue), var(--secondary-purple));
+             /* Fix: Use same background as hero */
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
         }
-        /* Fix text contrast on new background */
         #why-vibe h2, #why-vibe .closing-statement {
             color: var(--white);
         }
@@ -659,7 +666,7 @@
                         <h1>Scale Your Founder's Voice to 3,000 Prospects</h1>
                         <p class="subheadline">Our Vibe Marketing Multi-Agent-System engineers your authentic voice into every campaign - turning signals into hyper-personalized outreach at AI speed.</p>
                         <div class="hero-cta-group">
-                            <a href="#offer" class="cta-button">Book Your Demo</a>
+                             <a href="#offer" class="cta-button cta-button-pink">Book Your Demo</a>
                             <p class="urgency-text">Limited sessions available</p>
                         </div>
                     </div>
@@ -688,7 +695,7 @@
              <div class="container">
                  <h2>How a Leading SaaS Company Scaled Personalization Without Hiring</h2>
                  <p>A Series B SaaS company burned hundreds of hours each quarter on manual research and message crafting. With Vibe, the same cycle ran in minutes - delivering deeper insights and authentic outreach their entire team never could.</p>
-                 <a href="#offer" class="cta-button" style="margin-top: 2rem;">Book Your Demo</a>
+                 <a href="#offer" class="cta-button cta-button-pink" style="margin-top: 2rem;">Book Your Demo</a>
              </div>
         </section>
         
