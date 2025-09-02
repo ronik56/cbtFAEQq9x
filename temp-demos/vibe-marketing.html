@@ -171,8 +171,15 @@
         /* --- HERO SECTION --- */
         #hero {
             padding-top: 4rem;
+             /* New: Colorful background for Hero */
+            background: linear-gradient(135deg, #a7e9af, #84a0c6);
+            color: var(--white); /* Adjust text color for contrast */
         }
         
+        #hero h1, #hero p, #hero .urgency-text {
+            color: var(--white);
+        }
+
         .hero-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -187,11 +194,12 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-fill-color: transparent;
+            -webkit-text-stroke: 1px var(--white); /* Subtle white stroke for contrast */
         }
 
         .hero-content .subheadline {
             font-size: 1.25rem;
-            color: var(--dark-gray);
+            color: var(--white); /* Adjusted for hero background */
             margin: 1.5rem 0 2.5rem;
         }
         
@@ -203,7 +211,7 @@
         }
         .urgency-text {
             font-size: 1rem;
-            color: var(--dark-gray);
+            color: var(--white); /* Adjusted for hero background */
             font-weight: 500;
             margin-bottom: 0;
         }
@@ -265,21 +273,28 @@
             align-items: center;
         }
 
+        /* New: Colorful background for Case Study */
         #case-study {
-            background-color: var(--light-gray);
+            background: linear-gradient(45deg, #fceabb, #f8b500); /* Warm gradient */
+            color: var(--black);
+        }
+        #case-study h2, #case-study p {
+            color: var(--black);
         }
         
-        .bullet-point {
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background-color: var(--white);
-            border-left: 5px solid var(--accent-teal);
-            text-align: left;
-            max-width: 800px;
-            box-shadow: var(--shadow-light);
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        #advantage {
+            /* New: Colorful background for Advantage */
+            background: linear-gradient(135deg, #e0a3f0, #c060d4); /* Purple gradient */
+            color: var(--white);
         }
-        
+        #advantage h2, #advantage p {
+            color: var(--white);
+        }
+        #advantage .bullet-point {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--dark-gray);
+        }
+
         #cost .bullet-point {
             border-left-color: var(--accent-pink);
         }
@@ -290,6 +305,14 @@
         }
 
         /* --- WHY VIBE SECTION --- */
+        #why-vibe {
+            /* New: Colorful background for Why Vibe */
+            background: linear-gradient(135deg, #84fab0, #8fd3f4); /* Green to Blue gradient */
+        }
+        #why-vibe h2, #why-vibe p {
+            color: var(--black);
+        }
+        
         .why-vibe-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -462,6 +485,13 @@
         /* --- EXPERTISE (Ex-Google) SECTION --- */
         #expertise {
             background-color: var(--white);
+            padding-bottom: 3rem; /* Adjusted for merged content */
+        }
+        #expertise .pre-headline {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+            font-weight: 500;
         }
         .expertise-grid {
             display: grid;
@@ -778,6 +808,7 @@
         </section>
         
         <section id="expertise" class="container">
+            <p class="pre-headline">Trusted by 700+ companies across fintech, telcos, healthcare, and enterprise software.</p>
             <h2>Built by Ex-Google Israel</h2>
             <div class="expertise-grid">
                 <div class="expert-card">
@@ -789,14 +820,8 @@
                     <p>Tel Aviv University AI Master's researcher who architects solutions that consistently outperform expectations. Delivers business gains where others fail.</p>
                 </div>
             </div>
+            <p class="pre-headline" style="margin-top: 2rem;">The more complex your sales process, the bigger your advantage.</p>
         </section>
-
-        <div class="transition-text">
-            Trusted by 700+ companies across fintech, telcos, healthcare, and enterprise software.
-        </div>
-        <div class="transition-text">
-            The more complex your sales process, the bigger your advantage.
-        </div>
 
         <section id="faq">
             <div class="container">
