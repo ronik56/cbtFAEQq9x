@@ -33,7 +33,6 @@
             --shadow-medium: 0 8px 30px rgba(84, 84, 84, 0.12);
             --border-radius: 12px;
             
-            /* Added for more interesting backgrounds */
             --bg-subtle-pattern: radial-gradient(circle, rgba(0,0,0,0.02) 1px, transparent 1px);
         }
 
@@ -102,18 +101,15 @@
 
         section {
             overflow: hidden;
-            /* Rule 2: Center all sections */
             text-align: center;
         }
 
         .transition-text {
             text-align: center;
             font-family: var(--font-headline);
-            /* Fix: Adjusted font size for impact */
             font-size: clamp(1.5rem, 3vw, 2rem);
             color: var(--dark-gray);
             padding: 3rem 1rem;
-            /* Rule 1: All transitions use grey bg */
             background-color: var(--light-gray);
             font-weight: 700;
         }
@@ -127,7 +123,6 @@
             text-decoration: none;
             color: var(--white);
             background: var(--gradient-main);
-            /* Fix: Unified button size */
             padding: 16px 32px;
             border-radius: 50px;
             border: none;
@@ -163,17 +158,14 @@
             text-decoration: none;
         }
         
-        /* Rule 3: Removed specific sizing to unify button styles */
         .header-cta {
              /* Inherits all styles from .cta-button now */
         }
 
         /* --- HERO SECTION --- */
         #hero {
-            padding-top: 4rem;
-             /* New: Colorful background for Hero */
             background: linear-gradient(135deg, #a7e9af, #84a0c6);
-            color: var(--white); /* Adjust text color for contrast */
+            color: var(--white); 
         }
         
         #hero h1, #hero p, #hero .urgency-text {
@@ -185,7 +177,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
-            text-align: left; /* Override section center align */
+            text-align: left;
         }
 
         .hero-content h1 {
@@ -194,16 +186,15 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-fill-color: transparent;
-            -webkit-text-stroke: 1px var(--white); /* Subtle white stroke for contrast */
+            -webkit-text-stroke: 1px var(--white); 
         }
 
         .hero-content .subheadline {
             font-size: 1.25rem;
-            color: var(--white); /* Adjusted for hero background */
+            color: var(--white); 
             margin: 1.5rem 0 2.5rem;
         }
         
-        /* Fix: Hero CTA structure */
         .hero-cta-group {
             display: flex;
             align-items: center;
@@ -211,7 +202,7 @@
         }
         .urgency-text {
             font-size: 1rem;
-            color: var(--white); /* Adjusted for hero background */
+            color: var(--white);
             font-weight: 500;
             margin-bottom: 0;
         }
@@ -251,14 +242,11 @@
         }
 
         /* --- GENERIC SECTIONS --- */
-        
-        /* Fix: Add interesting background to sections */
-        #personalization, #advantage {
+        #personalization {
             background-image: var(--bg-subtle-pattern);
             background-size: 20px 20px;
         }
         
-        /* Fix: font size for section 2 */
         #personalization p {
             font-size: 1.2rem;
             max-width: 800px;
@@ -273,9 +261,8 @@
             align-items: center;
         }
 
-        /* New: Colorful background for Case Study */
         #case-study {
-            background: linear-gradient(45deg, #fceabb, #f8b500); /* Warm gradient */
+            background: linear-gradient(45deg, #fceabb, #f8b500); 
             color: var(--black);
         }
         #case-study h2, #case-study p {
@@ -283,19 +270,36 @@
         }
         
         #advantage {
-            /* New: Colorful background for Advantage */
-            background: linear-gradient(135deg, #e0a3f0, #c060d4); /* Purple gradient */
+            background: linear-gradient(135deg, #e0a3f0, #c060d4);
             color: var(--white);
         }
         #advantage h2, #advantage p {
             color: var(--white);
         }
+        /* Fix: #advantage bullet point background */
         #advantage .bullet-point {
-            background-color: rgba(255, 255, 255, 0.9);
-            color: var(--dark-gray);
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        #cost p {
+             /* Fix: Center paragraphs in #cost */
+            margin-left: auto;
+            margin-right: auto;
         }
 
+        .bullet-point {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-left: 5px solid var(--accent-teal);
+            text-align: left;
+            max-width: 800px;
+            box-shadow: var(--shadow-light);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
         #cost .bullet-point {
+            background-color: var(--white);
             border-left-color: var(--accent-pink);
         }
         
@@ -306,8 +310,7 @@
 
         /* --- WHY VIBE SECTION --- */
         #why-vibe {
-            /* New: Colorful background for Why Vibe */
-            background: linear-gradient(135deg, #84fab0, #8fd3f4); /* Green to Blue gradient */
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
         }
         #why-vibe h2, #why-vibe p {
             color: var(--black);
@@ -323,6 +326,7 @@
         
         .pillar-card {
             padding: 2rem;
+            background: var(--white);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-light);
             border: 1px solid #e7e7e7;
@@ -485,13 +489,16 @@
         /* --- EXPERTISE (Ex-Google) SECTION --- */
         #expertise {
             background-color: var(--white);
-            padding-bottom: 3rem; /* Adjusted for merged content */
         }
         #expertise .pre-headline {
             font-size: 1.2rem;
             color: var(--dark-gray);
             margin-bottom: 1rem;
             font-weight: 500;
+             /* Fix: Center paragraphs in #expertise */
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .expertise-grid {
             display: grid;
@@ -639,28 +646,32 @@
 
     <main>
 
-        <section id="hero" class="container">
-            <div class="hero-layout">
-                <div class="hero-content">
-                    <h1>Scale Your Founder's Voice to 3,000 Prospects</h1>
-                    <p class="subheadline">Our Vibe Marketing Multi-Agent-System engineers your authentic voice into every campaign - turning signals into hyper-personalized outreach at AI speed.</p>
-                    <div class="hero-cta-group">
-                        <a href="#offer" class="cta-button">Book Your Demo</a>
-                        <p class="urgency-text">Limited sessions available</p>
+        <section id="hero">
+            <div class="container">
+                <div class="hero-layout">
+                    <div class="hero-content">
+                        <h1>Scale Your Founder's Voice to 3,000 Prospects</h1>
+                        <p class="subheadline">Our Vibe Marketing Multi-Agent-System engineers your authentic voice into every campaign - turning signals into hyper-personalized outreach at AI speed.</p>
+                        <div class="hero-cta-group">
+                            <a href="#offer" class="cta-button">Book Your Demo</a>
+                            <p class="urgency-text">Limited sessions available</p>
+                        </div>
                     </div>
+                    <div class="video-placeholder">
+                        </div>
                 </div>
-                <div class="video-placeholder">
-                    </div>
             </div>
         </section>
 
         <div class="transition-text">
             Here's what happens when we put that power to work.
         </div>
-
-        <section id="personalization" class="container">
-            <h2>Personalization at Scale: Founder Voice Delivered in Minutes</h2>
-            <p>Zero hires. Maximum reach. In minutes, our Vibe Marketing MAS generated 3,000 founder-voice campaign messages - powered by signal research, intent scoring, and pitch-perfect personalization that outperforms entire teams.</p>
+        
+        <section id="personalization">
+            <div class="container">
+                <h2>Personalization at Scale: Founder Voice Delivered in Minutes</h2>
+                <p>Zero hires. Maximum reach. In minutes, our Vibe Marketing MAS generated 3,000 founder-voice campaign messages - powered by signal research, intent scoring, and pitch-perfect personalization that outperforms entire teams.</p>
+            </div>
         </section>
         
         <div class="transition-text" style="font-style: italic;">
@@ -675,46 +686,52 @@
              </div>
         </section>
         
-        <section id="advantage" class="container">
-            <h2>Your Competitors Already Switched to AI</h2>
-            <p>90% of campaigns in world-class companies are now AI-built. That means faster research, sharper targeting, and personalized outreach at scale. If you're still running manual playbooks, you're not just behind - you're invisible.</p>
-            <div class="bullet-point">
-                <p>While they run 3,000 authentic campaign messages in minutes, you're still stuck with manual hours. The gap isn't closing - it's compounding.</p>
+        <section id="advantage">
+            <div class="container">
+                <h2>Your Competitors Already Switched to AI</h2>
+                <p>90% of campaigns in world-class companies are now AI-built. That means faster research, sharper targeting, and personalized outreach at scale. If you're still running manual playbooks, you're not just behind - you're invisible.</p>
+                <div class="bullet-point">
+                    <p>While they run 3,000 authentic campaign messages in minutes, you're still stuck with manual hours. The gap isn't closing - it's compounding.</p>
+                </div>
+                <a href="#offer" class="cta-button">Book Your Demo</a>
             </div>
-            <a href="#offer" class="cta-button">Book Your Demo</a>
         </section>
         
         <div class="transition-text">
              And the longer you wait to adapt, the higher the price of staying manual…
         </div>
 
-        <section id="cost" class="container">
-            <h2>The Brutal Cost of Delay</h2>
-            <p>Manual message crafting and campaign optimization isn't just slow - it's expensive. For many B2B teams, the hidden cost adds up to hundreds of wasted hours every quarter and over $240,000 per year in labor your competitors have already automated.</p>
-            <div class="bullet-point">
-                <p>The exact number depends on your team size, cycle length, and deal flow - and we'll be happy to help you calculate your real Brutal Cost of Delay in a strategy session.</p>
+        <section id="cost">
+            <div class="container">
+                <h2>The Brutal Cost of Delay</h2>
+                <p>Manual message crafting and campaign optimization isn't just slow - it's expensive. For many B2B teams, the hidden cost adds up to hundreds of wasted hours every quarter and over $240,000 per year in labor your competitors have already automated.</p>
+                <div class="bullet-point">
+                    <p>The exact number depends on your team size, cycle length, and deal flow - and we'll be happy to help you calculate your real Brutal Cost of Delay in a strategy session.</p>
+                </div>
+                <p><strong class="emphasis">Every quarter you wait, that number compounds.</strong></p>
+                <a href="#offer" class="cta-button">Book Your Demo</a>
             </div>
-            <p><strong class="emphasis">Every quarter you wait, that number compounds.</strong></p>
-            <a href="#offer" class="cta-button">Book Your Demo</a>
         </section>
         
-        <section id="why-vibe" class="container">
-            <h2>Why Vibe Marketing MAS Is Different</h2>
-            <div class="why-vibe-grid">
-                <div class="pillar-card fade-in" style="--i: 1;">
-                    <h4>Proposition</h4>
-                    <p>Authentic voice at AI velocity - campaigns engineered in your founder's real style, not templated automation.</p>
+        <section id="why-vibe">
+            <div class="container">
+                <h2>Why Vibe Marketing MAS Is Different</h2>
+                <div class="why-vibe-grid">
+                    <div class="pillar-card fade-in" style="--i: 1;">
+                        <h4>Proposition</h4>
+                        <p>Authentic voice at AI velocity - campaigns engineered in your founder's real style, not templated automation.</p>
+                    </div>
+                    <div class="pillar-card fade-in" style="--i: 2;">
+                        <h4>Unique Differentiator</h4>
+                        <p>Our AI doesn't just automate outreach - it discovers hidden buying signals and intent your human team misses entirely.</p>
+                    </div>
+                    <div class="pillar-card fade-in" style="--i: 3;">
+                        <h4>Proof of Performance</h4>
+                        <p>3× more efficient, zero additional hires, and market penetration deeper than entire prospecting teams.</p>
+                    </div>
                 </div>
-                <div class="pillar-card fade-in" style="--i: 2;">
-                    <h4>Unique Differentiator</h4>
-                    <p>Our AI doesn't just automate outreach - it discovers hidden buying signals and intent your human team misses entirely.</p>
-                </div>
-                <div class="pillar-card fade-in" style="--i: 3;">
-                    <h4>Proof of Performance</h4>
-                    <p>3× more efficient, zero additional hires, and market penetration deeper than entire prospecting teams.</p>
-                </div>
+                <p class="closing-statement">Unlike generic AI tools, Vibe scales your communication DNA to thousands of prospects without losing personality. This combination - <strong style="color: var(--dark-blue);">authentic voice × AI velocity</strong> - has never existed before.</p>
             </div>
-            <p class="closing-statement">Unlike generic AI tools, Vibe scales your communication DNA to thousands of prospects without losing personality. This combination - <strong style="color: var(--dark-blue);">authentic voice × AI velocity</strong> - has never existed before.</p>
         </section>
 
         <section id="how-it-works">
@@ -807,20 +824,22 @@
             </div>
         </section>
         
-        <section id="expertise" class="container">
-            <p class="pre-headline">Trusted by 700+ companies across fintech, telcos, healthcare, and enterprise software.</p>
-            <h2>Built by Ex-Google Israel</h2>
-            <div class="expertise-grid">
-                <div class="expert-card">
-                    <h4>Ronen Horen</h4>
-                    <p>Ex-Google Israel founding team member who engineered 50+ AI assistants and agents delivering 10X productivity gains. Transforms complex AI into measurable revenue systems.</p>
+        <section id="expertise">
+            <div class="container">
+                <p class="pre-headline">Trusted by 700+ companies across fintech, telcos, healthcare, and enterprise software.</p>
+                <h2>Built by Ex-Google Israel</h2>
+                <div class="expertise-grid">
+                    <div class="expert-card">
+                        <h4>Ronen Horen</h4>
+                        <p>Ex-Google Israel founding team member who engineered 50+ AI assistants and agents delivering 10X productivity gains. Transforms complex AI into measurable revenue systems.</p>
+                    </div>
+                    <div class="expert-card">
+                        <h4>Ron Fux</h4>
+                        <p>Tel Aviv University AI Master's researcher who architects solutions that consistently outperform expectations. Delivers business gains where others fail.</p>
+                    </div>
                 </div>
-                <div class="expert-card">
-                    <h4>Ron Fux</h4>
-                    <p>Tel Aviv University AI Master's researcher who architects solutions that consistently outperform expectations. Delivers business gains where others fail.</p>
-                </div>
+                <p class="pre-headline" style="margin-top: 2rem;">The more complex your sales process, the bigger your advantage.</p>
             </div>
-            <p class="pre-headline" style="margin-top: 2rem;">The more complex your sales process, the bigger your advantage.</p>
         </section>
 
         <section id="faq">
