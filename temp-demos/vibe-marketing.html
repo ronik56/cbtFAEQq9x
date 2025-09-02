@@ -32,6 +32,9 @@
             --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
             --shadow-medium: 0 8px 30px rgba(84, 84, 84, 0.12);
             --border-radius: 12px;
+            
+            /* Added for more interesting backgrounds */
+            --bg-subtle-pattern: radial-gradient(circle, rgba(0,0,0,0.02) 1px, transparent 1px);
         }
 
         /* --- GLOBAL & RESET STYLES --- */
@@ -99,16 +102,20 @@
 
         section {
             overflow: hidden;
+            /* Rule 2: Center all sections */
+            text-align: center;
         }
 
         .transition-text {
             text-align: center;
             font-family: var(--font-headline);
-            font-size: 1.5rem;
+            /* Fix: Adjusted font size for impact */
+            font-size: clamp(1.5rem, 3vw, 2rem);
             color: var(--dark-gray);
-            padding: 3rem 0;
+            padding: 3rem 1rem;
+            /* Rule 1: All transitions use grey bg */
             background-color: var(--light-gray);
-            font-weight: 500;
+            font-weight: 700;
         }
 
         /* --- BUTTON STYLES --- */
@@ -120,6 +127,7 @@
             text-decoration: none;
             color: var(--white);
             background: var(--gradient-main);
+            /* Fix: Unified button size */
             padding: 16px 32px;
             border-radius: 50px;
             border: none;
@@ -155,9 +163,9 @@
             text-decoration: none;
         }
         
+        /* Rule 3: Removed specific sizing to unify button styles */
         .header-cta {
-             font-size: 0.9rem;
-             padding: 10px 22px;
+             /* Inherits all styles from .cta-button now */
         }
 
         /* --- HERO SECTION --- */
@@ -170,6 +178,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
+            text-align: left; /* Override section center align */
         }
 
         .hero-content h1 {
@@ -184,6 +193,19 @@
             font-size: 1.25rem;
             color: var(--dark-gray);
             margin: 1.5rem 0 2.5rem;
+        }
+        
+        /* Fix: Hero CTA structure */
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .urgency-text {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            font-weight: 500;
+            margin-bottom: 0;
         }
         
         .video-placeholder {
@@ -221,10 +243,21 @@
         }
 
         /* --- GENERIC SECTIONS --- */
-        #personalization, #case-study, #advantage, #cost {
-            text-align: center;
+        
+        /* Fix: Add interesting background to sections */
+        #personalization, #advantage {
+            background-image: var(--bg-subtle-pattern);
+            background-size: 20px 20px;
         }
         
+        /* Fix: font size for section 2 */
+        #personalization p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         #personalization .container, #case-study .container, 
         #advantage .container, #cost .container {
             display: flex;
@@ -262,6 +295,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
+            text-align: left;
         }
         
         .pillar-card {
@@ -297,6 +331,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
+            text-align: left;
         }
 
         .step-card {
@@ -327,11 +362,11 @@
 
         /* --- OFFER & FORM SECTION --- */
         #offer {
-             background-color: var(--dark-gray);
-             color: var(--white);
-             background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://uploads-ssl.webflow.com/643d93361be1745b63013854/64402377a285d836643c1ba0_waves-light.svg');
-             background-size: cover;
-             background-position: center;
+            background-color: var(--dark-gray);
+            color: var(--white);
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://uploads-ssl.webflow.com/643d93361be1745b63013854/64402377a285d836643c1ba0_waves-light.svg');
+            background-size: cover;
+            background-position: center;
         }
 
         #offer h2, #offer h3 {
@@ -343,6 +378,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
+            text-align: left;
         }
         
         .offer-details h3 {
@@ -423,32 +459,38 @@
             color: var(--dark-gray);
         }
 
-        /* --- CREDIBILITY SECTION --- */
-        #credibility {
-            background: var(--light-gray);
-            text-align: center;
+        /* --- EXPERTISE (Ex-Google) SECTION --- */
+        #expertise {
+            background-color: var(--white);
         }
-        .credibility-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            align-items: center;
-            justify-content: center;
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
         }
-
-        .credibility-item {
-            font-size: 1.2rem;
-            font-weight: 500;
+        .expert-card {
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            border: 1px solid #e7e7e7;
+            background-color: var(--white);
         }
-        .credibility-item strong {
-            font-family: var(--font-headline);
+        .expert-card h4 {
             color: var(--dark-blue);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
         }
         
         /* --- FAQ SECTION --- */
         .faq-accordion {
             max-width: 800px;
             margin: 0 auto;
+            text-align: left;
         }
 
         .faq-item {
@@ -493,6 +535,15 @@
             .hero-layout, .offer-layout {
                 grid-template-columns: 1fr;
                 text-align: center;
+            }
+
+            .hero-layout {
+                text-align: center;
+            }
+            
+            .hero-cta-group {
+                justify-content: center;
+                flex-direction: column;
             }
             
             .hero-content {
@@ -563,7 +614,10 @@
                 <div class="hero-content">
                     <h1>Scale Your Founder's Voice to 3,000 Prospects</h1>
                     <p class="subheadline">Our Vibe Marketing Multi-Agent-System engineers your authentic voice into every campaign - turning signals into hyper-personalized outreach at AI speed.</p>
-                    <a href="#offer" class="cta-button">Limited Sessions Available</a>
+                    <div class="hero-cta-group">
+                        <a href="#offer" class="cta-button">Book Your Demo</a>
+                        <p class="urgency-text">Limited sessions available</p>
+                    </div>
                 </div>
                 <div class="video-placeholder">
                     </div>
@@ -579,15 +633,15 @@
             <p>Zero hires. Maximum reach. In minutes, our Vibe Marketing MAS generated 3,000 founder-voice campaign messages - powered by signal research, intent scoring, and pitch-perfect personalization that outperforms entire teams.</p>
         </section>
         
-        <div class="transition-text" style="font-style: italic; background-color: var(--white);">
+        <div class="transition-text" style="font-style: italic;">
             And this isn't theory - here's a real case study.
         </div>
         
         <section id="case-study">
              <div class="container">
-                <h2>How a Leading SaaS Company Scaled Personalization Without Hiring</h2>
-                <p>A Series B SaaS company burned hundreds of hours each quarter on manual research and message crafting. With Vibe, the same cycle ran in minutes - delivering deeper insights and authentic outreach their entire team never could.</p>
-                <a href="#offer" class="cta-button" style="margin-top: 2rem;">Book Your Demo</a>
+                 <h2>How a Leading SaaS Company Scaled Personalization Without Hiring</h2>
+                 <p>A Series B SaaS company burned hundreds of hours each quarter on manual research and message crafting. With Vibe, the same cycle ran in minutes - delivering deeper insights and authentic outreach their entire team never could.</p>
+                 <a href="#offer" class="cta-button" style="margin-top: 2rem;">Book Your Demo</a>
              </div>
         </section>
         
@@ -600,7 +654,7 @@
             <a href="#offer" class="cta-button">Book Your Demo</a>
         </section>
         
-        <div class="transition-text" style="background-color: var(--light-gray);">
+        <div class="transition-text">
              And the longer you wait to adapt, the higher the price of staying manual…
         </div>
 
@@ -723,13 +777,26 @@
             </div>
         </section>
         
-        <section id="credibility">
-            <div class="container credibility-content">
-                <div class="credibility-item">Built by <strong>Ex-Google Israel</strong></div>
-                <div class="credibility-item">50+ AI assistants, agents and multi-agent-systems</div>
-                <div class="credibility-item">Trusted by <strong>700+ companies</strong> across fintech, telcos, healthcare, and enterprise software.</div>
+        <section id="expertise" class="container">
+            <h2>Built by Ex-Google Israel</h2>
+            <div class="expertise-grid">
+                <div class="expert-card">
+                    <h4>Ronen Horen</h4>
+                    <p>Ex-Google Israel founding team member who engineered 50+ AI assistants and agents delivering 10X productivity gains. Transforms complex AI into measurable revenue systems.</p>
+                </div>
+                <div class="expert-card">
+                    <h4>Ron Fux</h4>
+                    <p>Tel Aviv University AI Master's researcher who architects solutions that consistently outperform expectations. Delivers business gains where others fail.</p>
+                </div>
             </div>
         </section>
+
+        <div class="transition-text">
+            Trusted by 700+ companies across fintech, telcos, healthcare, and enterprise software.
+        </div>
+        <div class="transition-text">
+            The more complex your sales process, the bigger your advantage.
+        </div>
 
         <section id="faq">
             <div class="container">
@@ -806,4 +873,3 @@
 
 </body>
 </html>
-
