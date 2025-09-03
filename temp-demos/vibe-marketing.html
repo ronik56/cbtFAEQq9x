@@ -504,6 +504,9 @@
         #expertise {
             background-color: var(--white);
         }
+        #expertise .container {
+          padding-bottom: 0;
+        }
         #expertise .pre-headline {
             font-size: 1.2rem;
             color: var(--dark-gray);
@@ -654,7 +657,7 @@
 
     <header>
         <a href="#hero" class="logo">Vibe Marketing MAS</a>
-        <a href="#offer" class="cta-button header-cta">Book Your Demo</a>
+        <a href="#offer" class="cta-button header-cta">Book Your Free Strategy Session</a>
     </header>
 
     <main>
@@ -670,8 +673,16 @@
                             <p class="urgency-text">Limited sessions available</p>
                         </div>
                     </div>
-                    <div class="video-placeholder">
-                        </div>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;">
+                      <iframe 
+                        src="https://www.youtube.com/embed/UK_NoVcjAwU" 
+                        title="YouTube video player"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                      </iframe>
+                    </div>
                 </div>
             </div>
         </section>
@@ -687,7 +698,7 @@
             </div>
         </section>
         
-        <div class="transition-text" style="font-style: italic;">
+        <div class="transition-text">
             And this isn't theory - here's a real case study.
         </div>
         
