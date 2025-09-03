@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROIMax | AI Campaign Intelligence Factory</title>
+    
+    <meta name="description" content="ROIMax's AI Intelligence Factory executes up to 220 campaign optimizations per second, shifting budget from unqualified prospects to high-intent buyers.">
+    <meta name="keywords" content="ROIMax, AI Marketing, Campaign Optimization, Multi-Agent-System, B2B Marketing, Lead Generation, Pipeline Growth">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- BRAND GUIDELINES & VARIABLES --- */
+        :root {
+            --primary-blue: #3caff2;
+            --secondary-purple: #6c2ed4;
+            --accent-teal: #0ff2b2;
+            --accent-pink: #f20fb2;
+            --dark-blue: #3850d4;
+            --dark-gray: #545454;
+            --light-gray: #f4f6f9;
+            --white: #ffffff;
+            --black: #1a1a1a;
+
+            --font-headline: 'Oswald', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+
+            --gradient-main: linear-gradient(90deg, var(--primary-blue), var(--secondary-purple));
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 30px rgba(84, 84, 84, 0.12);
+            --border-radius: 12px;
+            
+            --bg-subtle-pattern: radial-gradient(circle, rgba(0,0,0,0.02) 1px, transparent 1px);
+        }
+
+        /* --- GLOBAL & RESET STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--white);
+            color: var(--dark-gray);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-headline);
+            color: var(--black);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1rem;
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            max-width: 700px;
+        }
+
+        /* --- LAYOUT & HELPERS --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 0;
+        }
+
+        section {
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .transition-text {
+            text-align: center;
+            font-family: var(--font-headline);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--dark-gray);
+            padding: 3rem 1rem;
+            background-color: var(--light-gray);
+            font-weight: 700;
+        }
+
+        /* --- BUTTON STYLES --- */
+        .cta-button {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white);
+            background: var(--gradient-main);
+            padding: 16px 32px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: var(--shadow-light);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .cta-button-pink {
+            background: var(--accent-pink);
+        }
+        .cta-button-pink:hover {
+            background: #d90e9f; /* Darker pink for hover */
+            box-shadow: 0 6px 20px rgba(242, 15, 178, 0.4);
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            text-decoration: none;
+        }
+        
+        .header-cta {
+             /* Inherits all styles from .cta-button now */
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+            color: var(--white); 
+        }
+        
+        #hero h1, #hero p, #hero h3 {
+            color: var(--white);
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            text-align: left;
+        }
+
+        .hero-content h1 {
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
+            text-fill-color: unset;
+            color: var(--white);
+        }
+        
+        .hero-content h3 {
+            font-weight: 400;
+        }
+
+        .hero-content .subheadline {
+            font-size: 1.25rem;
+            color: var(--white); 
+            margin: 1.5rem 0 2.5rem;
+        }
+        
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .video-container {
+            position: relative; 
+            padding-bottom: 56.25%; 
+            height: 0; 
+            overflow: hidden; 
+            max-width: 100%; 
+            background: #000;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+        }
+        .video-container iframe {
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+        }
+
+
+        /* --- SOCIAL PROOF SECTION --- */
+        #social-proof {
+            background-color: var(--light-gray);
+            padding: 4rem 0;
+        }
+        .logo-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4rem;
+            filter: grayscale(100%) opacity(0.7);
+            transition: filter 0.3s ease;
+        }
+        .logo-grid:hover {
+            filter: grayscale(0%) opacity(1);
+        }
+        .logo-grid img {
+            height: 50px;
+            width: auto;        
+        }
+
+        /* --- PROBLEM/ADVANTAGE SECTION --- */
+        #problem {
+            background-image: var(--bg-subtle-pattern);
+            background-size: 20px 20px;
+        }
+        
+        #problem .container, #solution .container {
+             display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        #problem p, #solution p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .bullet-point {
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-left: 5px solid var(--accent-pink);
+            text-align: left;
+            max-width: 800px;
+            box-shadow: var(--shadow-light);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            background: var(--white);
+        }
+        
+        .bullet-point p {
+            margin-bottom: 0;
+        }
+
+        /* --- CASE STUDY SECTION --- */
+         #case-study {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple)); 
+            color: var(--white);
+        }
+        #case-study .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #case-study h2, #case-study p {
+            color: var(--white);
+        }
+        #case-study p {
+             max-width: 800px;
+        }
+
+        /* --- AGENTS (Why Vibe) SECTION --- */
+        #agents, #benefits {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+        }
+        #agents h2, #agents .sub-heading, #benefits h2 {
+            color: var(--white);
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+        
+        .info-card {
+            padding: 2rem;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            border: 1px solid #e7e7e7;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .info-card h4 {
+            color: var(--dark-blue);
+            font-size: 1.4rem;
+        }
+
+        /* --- CAPABILITIES (How It Works) SECTION --- */
+        #capabilities, #process {
+            background-color: var(--light-gray);
+        }
+        
+        .step-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            position: relative;
+            text-align: left;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            background: var(--gradient-main);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            font-weight: 700;
+            border: 4px solid var(--light-gray);
+        }
+
+        /* --- FOUNDERS SECTION --- */
+        #founders .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #founders .pre-headline {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+            font-weight: 500;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- OFFER & FORM SECTION --- */
+        #offer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://uploads-ssl.webflow.com/643d93361be1745b63013854/64402377a285d836643c1ba0_waves-light.svg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        #offer h2, #offer h3, #offer p {
+            color: var(--white);
+        }
+
+        .offer-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: flex-start; /* Changed to align items to the top */
+            text-align: left;
+        }
+        
+        .offer-details h3 {
+            color: var(--accent-teal);
+        }
+        
+        .what-you-get-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+        
+        .what-you-get-list li {
+            padding-left: 2rem;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%230ff2b2'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-size: 24px;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .investment-box {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent-teal);
+        }
+        .investment-box p {
+            margin-bottom: 0;
+        }
+        
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        /* Fix: Change form header text color */
+        .form-header h3 {
+            color: var(--black);
+        }
+        .form-header p {
+            color: var(--dark-gray);
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: var(--accent-pink);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(60, 175, 242, 0.3);
+        }
+        
+        .submit-button {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        /* --- FINAL CTA SECTION --- */
+        #final-cta {
+            background-color: var(--dark-gray);
+        }
+        #final-cta h2, #final-cta p {
+            color: var(--white);
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #final-cta p {
+            max-width: 800px;
+        }
+        .trust-grid {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+            color: var(--light-gray);
+        }
+        .trust-item strong {
+            display: block;
+            color: var(--accent-teal);
+            font-family: var(--font-headline);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .hero-layout, .offer-layout {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-layout {
+                text-align: center;
+            }
+            
+            .hero-cta-group {
+                justify-content: center;
+            }
+            
+            .hero-content {
+                order: 2;
+            }
+
+            .video-container { /* Updated selector */
+                order: 1;
+                margin-bottom: 2rem;
+            }
+            
+            .offer-details {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 4rem 0;
+            }
+            
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        /* --- ANIMATIONS --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        /* Staggered animations are applied via JS now */
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#hero" class="logo">ROIMax</a>
+        <a href="#offer" class="cta-button header-cta">Start My Intelligence Audit</a>
+    </header>
+
+    <main>
+
+        <section id="hero">
+            <div class="container">
+                <div class="hero-layout">
+                    <div class="hero-content">
+                        <h1>AI Campaign Intelligence Factory</h1>
+                        <h3>Three AI Agents: Up to 220 Campaign Optimization Executions Per Second</h3>
+                        <p class="subheadline">ROIMax Intelligence Factory executes up to 220 campaign optimizations per second—automatically helps you shift your budget from unqualified prospects to high-intent buyers who actually close deals.</p>
+                        <div class="hero-cta-group">
+                            <a href="#offer" class="cta-button cta-button-pink">Start My FREE Intelligence Audit</a>
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/T0bHinJulP0" 
+                            title="YouTube video player"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="social-proof">
+             <div class="container" style="padding: 3rem 0;">
+                <h4 style="text-align: center; margin-bottom: 3rem; color: var(--dark-gray); font-weight: 500;">Trusted by Growth-Focused Companies</h4>
+                <div class="logo-grid">
+                    <img src="https://ronenhoren.com/wp-content/uploads/2025/05/audiocodes-logo.png" alt="AudioCodes Logo">
+                    <img src="https://ronenhoren.com/wp-content/uploads/2025/07/ChatGPT-Image-Jul-21-2025-04_51_15-PM-1.png" alt="Company Logo">
+                    <img src="https://ronenhoren.com/wp-content/uploads/2025/05/Dimri-logo.png" alt="Dimri Logo">
+                    <img src="https://ronenhoren.com/wp-content/uploads/2025/05/alomone-logo.png" alt="Alomone Labs Logo">
+                </div>
+             </div>
+        </section>
+        
+        <section id="problem">
+            <div class="container">
+                <h2>Optimizing for Leads Instead of Buyers Costs You Pipeline</h2>
+                <p>Every morning you report rising clicks and falling cost-per-lead to leadership. Meanwhile, sales complains: most leads lack budget, authority, or buying intent.</p>
+                <div class="bullet-point fade-in" style="--i: 1;">
+                    <h4>90% of World-Class Campaigns Are AI-Built—What About Yours?</h4>
+                    <p>While you manually adjust bids and guess at performance, competitors deploy AI making up to 220 optimization executions per second—getting better leads that actually close.</p>
+                </div>
+                <div class="bullet-point fade-in" style="--i: 2;">
+                    <h4>Most of Your Impressions Might be Wasted. Competitors Know It.</h4>
+                    <p>Industry studies show 60%+ of B2B impressions reach budget-less prospects. AI-powered competitors detect and eliminate these audiences automatically—your manual campaigns can't.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="transition-text">
+             The gap widens every day. What if every marketing dollar was optimized by AI—every second of the day?
+        </div>
+
+        <section id="solution">
+            <div class="container">
+                <h2>Always-On AI Agents Transform Wasteful Spend Into Pipeline Growth</h2>
+                <p>ROIMax is your always-on, multi-agent optimization system—designed to transform ad spend into predictable pipeline.</p>
+            </div>
+        </section>
+        
+        <section id="case-study">
+             <div class="container">
+                  <h2>What Happens When AI Agents Replace Campaign Guesswork</h2>
+                  <p>Real results from a B2B technology company that deployed ROIMax Intelligence Factory: <strong>31% less wasted ad spend</strong>, <strong>135% increase in qualified pipeline meetings</strong>, and campaign optimizations happening faster than humanly possible.</p>
+             </div>
+        </section>
+
+        <div class="transition-text">
+            Here's how three AI agents work as one intelligence factory to multiply your marketing results:
+        </div>
+        
+        <section id="agents">
+            <div class="container">
+                <h2>Three AI Agents. One Intelligence Factory.</h2>
+                <p class="sub-heading" style="text-align: center; max-width: 700px; margin: 0 auto 3rem auto; color: var(--white);">All orchestrated on one n8n automation canvas.</p>
+                <div class="grid-layout">
+                    <div class="info-card fade-in" style="--i: 1;">
+                        <h4>Data Retrieval Specialist</h4>
+                        <p>Pulls comprehensive performance reports from Google Ads and Analytics APIs to fuel the entire optimization engine. Never misses a signal, never sleeps.</p>
+                    </div>
+                    <div class="info-card fade-in" style="--i: 2;">
+                        <h4>Performance Analytics Pro</h4>
+                        <p>Real-time campaign analyst that crunches numbers, calculates ROI metrics, and identifies optimization opportunities from your advertising data as they happen.</p>
+                    </div>
+                    <div class="info-card fade-in" style="--i: 3;">
+                        <h4>Executive Report Builder</h4>
+                        <p>Professional report creator that turns campaign data into polished Google Docs and executive-ready insights—automatically delivered.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="capabilities">
+            <div class="container">
+                <h2>Four Core Capabilities That Outperform Manual Campaign Management</h2>
+                <div class="grid-layout" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <div class="step-card fade-in" style="--i: 1;">
+                        <div class="step-number">1</div>
+                        <h4>Intelligent Budget Allocation</h4>
+                        <p>Shifts spend from low-converting audiences to high-value decision-makers who actually have budget and authority to buy—at up to 220 executions per second.</p>
+                    </div>
+                    <div class="step-card fade-in" style="--i: 2;">
+                        <div class="step-number">2</div>
+                        <h4>Precision Keyword Expansion</h4>
+                        <p>Automatically discovers and tests intent keywords your competitors miss, expanding reach without diluting quality.</p>
+                    </div>
+                    <div class="step-card fade-in" style="--i: 3;">
+                        <div class="step-number">3</div>
+                        <h4>Real-Time Waste Detection</h4>
+                        <p>Flags budget caps, low-performing ad groups, and audience segments that drain budget without generating qualified pipeline.</p>
+                    </div>
+                    <div class="step-card fade-in" style="--i: 4;">
+                        <div class="step-number">4</div>
+                        <h4>Pipeline-First Optimization</h4>
+                        <p>Optimizes campaigns to actual customer acquisitions, not surface-level metrics like clicks or form fills.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="transition-text">
+            This is the marketing intelligence factory your competitors wish they had.
+        </div>
+
+        <section id="benefits">
+             <div class="container">
+                <h2>Stop Competing on Campaign Creativity. Start Competing on Campaign Intelligence.</h2>
+                 <div class="grid-layout" style="max-width: 1000px; margin: 3rem auto 0 auto;">
+                     <div class="info-card fade-in" style="--i: 1;">
+                         <h4>For Marketing Leaders:</h4>
+                         <p><strong>Predictable Pipeline Growth:</strong> Transform marketing from a cost center into a revenue engine with clear attribution from ad spend to closed deals—powered by AI agents that never stop optimizing.</p>
+                         <p style="margin-bottom:0;"><strong>Budget Efficiency That Scales:</strong> Every campaign dollar works harder with up to 220 optimization executions per second—automatically identifying and doubling down on what actually converts prospects to customers.</p>
+                     </div>
+                     <div class="info-card fade-in" style="--i: 2;">
+                         <h4>For Revenue Leaders:</h4>
+                         <p><strong>Higher Quality Pipeline:</strong> Marketing qualified leads that actually fit your ICP and have demonstrated buying intent through their engagement patterns—pre-qualified by AI intelligence.</p>
+                         <p style="margin-bottom:0;"><strong>Measurable Marketing ROI:</strong> Finally see the direct line from marketing spend to closed revenue, making budget decisions based on real-time AI analysis, not intuition.</p>
+                     </div>
+                 </div>
+             </div>
+        </section>
+        
+        <section id="process">
+             <div class="container">
+                <h2>Daily Intelligence Loop—Three Agents Execute via API at Enterprise Speed</h2>
+                 <div class="grid-layout" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                     <div class="info-card fade-in" style="--i: 1;">
+                         <h4>Morning Campaign Analysis</h4>
+                         <p>Data Retrieval Specialist scans all active campaigns for budget waste, performance drops, and optimization opportunities while you sleep—processing up to 220 workflows per second.</p>
+                     </div>
+                     <div class="info-card fade-in" style="--i: 2;">
+                         <h4>Real-Time Strategic Adjustments</h4>
+                         <p>Performance Analytics Pro implements bid optimizations, budget allocations, and negative keyword additions based on continuous analysis.</p>
+                     </div>
+                     <div class="info-card fade-in" style="--i: 3;">
+                         <h4>Executive Performance Reporting</h4>
+                         <p>Report Builder delivers actionable insights on what's working, what's not, and what to test next—formatted for stakeholders.</p>
+                     </div>
+                      <div class="info-card fade-in" style="--i: 4;">
+                         <h4>Continuous Learning</h4>
+                         <p>Every campaign interaction feeds all three agents, making tomorrow's campaigns smarter than today's.</p>
+                     </div>
+                 </div>
+             </div>
+        </section>
+
+        <section id="founders">
+            <div class="container" style="padding-bottom: 6rem;">
+                <h2>Meet the Founders—See ROIMax Multi-Agent System in Action</h2>
+                <p class="pre-headline">Our co-founder helped build and scale Google Israel's top-tier advertisers. Now, we're applying that same precision engineering to help B2B companies optimize their own revenue engines.</p>
+                <div class="video-container" style="max-width: 800px; width: 100%; margin: 2rem auto 0 auto;">
+                     <iframe 
+                         src="https://www.youtube.com/embed/T0bHinJulP0" 
+                         title="YouTube video player"
+                         frameborder="0" 
+                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                         allowfullscreen>
+                     </iframe>
+                </div>
+            </div>
+        </section>
+        
+        <div class="transition-text">
+            Every second without multi-agent AI is lost revenue.
+        </div>
+        
+        <section id="offer">
+            <div class="container">
+                <div class="offer-layout">
+                    <div class="offer-details">
+                        <h2>See Your Campaigns Through AI Eyes—Prove ROI Before You Commit</h2>
+                        <h3>3-Month Campaign Intelligence Audit + Live Multi-Agent Demo</h3>
+                        <p style="margin-top: 2rem;">We'll analyze your current Google Ads and LinkedIn campaigns to identify:</p>
+                        <ul class="what-you-get-list">
+                            <li>Exact budget waste and missed opportunities that AI agents would catch instantly</li>
+                            <li>Keywords your competitors are winning that you're not bidding on</li>
+                            <li>Audience segments with high intent that your campaigns aren't reaching</li>
+                            <li>Specific optimizations that could improve your cost-per-acquisition</li>
+                        </ul>
+                         <h4 style="color: var(--white); margin-top: 2rem;">What You'll Receive:</h4>
+                        <ul class="what-you-get-list">
+                            <li>Comprehensive campaign performance analysis processed by our AI agents</li>
+                            <li>Custom optimization roadmap with projected ROI improvements</li>
+                            <li>Live demo of ROIMax multi-agent system working with your actual campaign data</li>
+                        </ul>
+                        <div class="investment-box">
+                            <p><strong>Investment Aligned to Results:</strong> Only move forward if our analysis demonstrates clear ROI potential for your specific campaigns and market.</p>
+                        </div>
+                    </div>
+                    <form class="contact-form" action="#" method="POST">
+                        <div class="form-header">
+                            <h3>Get Your FREE Campaign Intelligence Audit</h3>
+                            <p>See exactly where your campaigns are wasting budget and how AI agents would optimize them differently.</p>
+                            <p style="font-weight: 700; margin-top: 1rem;">Takes 60 seconds. No sales pitch until we prove ROI potential.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="full-name">Full Name *</label>
+                            <input type="text" id="full-name" name="full_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="business-email">Business Email *</label>
+                            <input type="email" id="business-email" name="business_email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company-name">Company Name *</label>
+                            <input type="text" id="company-name" name="company_name" required>
+                        </div>
+                        <div class="form-group">
+                             <label for="ad-spend">Current Monthly Ad Spend *</label>
+                             <select id="ad-spend" name="ad_spend" required>
+                                 <option value="" disabled selected>Select an amount</option>
+                                 <option value="<10k">Under $10K</option>
+                                 <option value="10k-50k">$10K - $50K</option>
+                                 <option value="50k-100k">$50K - $100K</option>
+                                 <option value="100k-500k">$100K - $500K</option>
+                                 <option value=">500k">$500K+</option>
+                             </select>
+                         </div>
+                         <div class="form-group">
+                             <label for="challenge">Primary Challenge *</label>
+                             <select id="challenge" name="challenge" required>
+                                 <option value="" disabled selected>Select a challenge</option>
+                                 <option value="low-quality">Low lead quality</option>
+                                 <option value="high-cpa">High cost per acquisition</option>
+                                 <option value="wasted-spend">Wasted ad spend</option>
+                                 <option value="manual-management">Manual campaign management</option>
+                                 <option value="poor-attribution">Poor attribution</option>
+                                 <option value="other">Other</option>
+                             </select>
+                         </div>
+                         <div class="form-group">
+                            <label for="role">Your Role</label>
+                            <select id="role" name="role">
+                                <option value="" disabled selected>Select your role (optional)</option>
+                                <option value="founder">Founder / CEO</option>
+                                <option value="cmo">CMO</option>
+                                <option value="vp-marketing">VP Marketing</option>
+                                <option value="director-marketing">Marketing Director</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="cta-button submit-button">Start My Intelligence Audit</button>
+                        <p class="form-footer">✓ No spam, ever ✓ Response within 24 hours ✓ Only proceed if we find clear opportunities</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+         <section id="final-cta">
+            <div class="container">
+                <h2>Stop Guessing. Start Multiplying Marketing Intelligence.</h2>
+                <p>Your marketing budget deserves up to 220-executions-per-second intelligence, not intuition.</p>
+                <a href="#offer" class="cta-button" style="margin-top: 1rem;">Get Your Campaign Intelligence Audit</a>
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <strong>Trusted By</strong>
+                        B2B technology companies from Series A to enterprise scale.
+                    </div>
+                    <div class="trust-item">
+                        <strong>Built With</strong>
+                        Enterprise-grade multi-agent AI and proven optimization frameworks operating at up to 220 executions per second.
+                    </div>
+                     <div class="trust-item">
+                        <strong>Integration Ready</strong>
+                        Works with Google Ads, LinkedIn Ads, HubSpot, Salesforce, and your existing martech stack—no workflow disruption.
+                    </div>
+                    <div class="trust-item">
+                        <strong>Multi-Agent Architecture</strong>
+                        Three specialized AI agents working as one intelligence factory for your revenue operations.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <script>
+        // Simple Intersection Observer for fade-in animations on scroll
+        document.addEventListener("DOMContentLoaded", function() {
+            const animatedElements = document.querySelectorAll('.fade-in');
+
+            if ("IntersectionObserver" in window) {
+                let observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = `fadeInAnimation 0.8s ease-out forwards ${entry.target.style.getPropertyValue('--i') * 0.1}s`;
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                animatedElements.forEach(el => {
+                    observer.observe(el);
+                });
+                
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    @keyframes fadeInAnimation {
+                        from {
+                            opacity: 0;
+                            transform: translateY(20px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }`;
+                document.head.appendChild(style);
+            } else {
+                // Fallback for older browsers
+                animatedElements.forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            }
+        });
+    </script>
+
+
+</body>
+</html>
