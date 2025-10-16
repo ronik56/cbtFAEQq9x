@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>עידן רצבי – סטנד אפ ילדים | גרסת חלום</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f2f8ff;
+      --gradient: radial-gradient(circle at top right, rgba(68, 192, 255, 0.25), transparent 45%), radial-gradient(circle at bottom left, rgba(255, 123, 107, 0.35), transparent 50%);
+      --primary: #ff7b6b;
+      --primary-dark: #e26759;
+      --secondary: #44c0ff;
+      --accent: #ffe066;
+      --deep-blue: #14274e;
+      --text: #1b1b32;
+      --muted: #4b4a65;
+      --surface: #ffffff;
+      --shadow: 0 24px 48px rgba(20, 39, 78, 0.12);
+      --radius-xl: 36px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Heebo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      background-image: var(--gradient);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      padding: 32px 6vw 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: 1.22rem;
+      font-weight: 800;
+      color: var(--deep-blue);
+      letter-spacing: 0.04em;
+    }
+
+    .brand span.icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255, 123, 107, 0.4), rgba(68, 192, 255, 0.55));
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    nav a {
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(20, 39, 78, 0.05);
+      box-shadow: 0 16px 26px rgba(20, 39, 78, 0.08);
+      font-weight: 500;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 32px rgba(20, 39, 78, 0.12);
+    }
+
+    .wrapper {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 clamp(18px, 4vw, 36px) 120px;
+      display: grid;
+      gap: 120px;
+    }
+
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, rgba(20, 39, 78, 0.94), rgba(68, 192, 255, 0.88));
+      border-radius: var(--radius-xl);
+      padding: clamp(38px, 6vw, 68px);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: clamp(26px, 6vw, 48px);
+      color: #ffffff;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 -1px 0;
+      height: 140px;
+      background: url('data:image/svg+xml,%3Csvg width="1200" height="200" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"%3E%3Cpath d="M0 120L100 110C200 100 400 80 600 90C800 100 1000 140 1100 150L1200 160V200H0V120Z" fill="rgba(255,255,255,0.18)"/%3E%3C/svg%3E');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.22);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .hero h1 {
+      margin: 12px 0 0;
+      font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+      line-height: 1.16;
+      font-weight: 800;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 1.06rem;
+      max-width: 48ch;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .hero-cta a {
+      padding: 15px 26px;
+      border-radius: 999px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .hero-cta .primary {
+      background: #ffffff;
+      color: var(--secondary);
+      box-shadow: 0 20px 34px rgba(20, 39, 78, 0.3);
+    }
+
+    .hero-cta .secondary {
+      background: rgba(0, 0, 0, 0.12);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .hero-cta a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 38px rgba(20, 39, 78, 0.35);
+    }
+
+    .hero-visual {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+    }
+
+    .photo-placeholder {
+      width: clamp(240px, 40vw, 320px);
+      height: clamp(240px, 40vw, 320px);
+      border-radius: 32px 32px 120px 120px;
+      border: 4px dashed rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.16);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 700;
+      padding: 18px;
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: clamp(1.9rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: var(--deep-blue);
+    }
+
+    .section-heading span.icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 123, 107, 0.16), rgba(68, 192, 255, 0.2));
+      display: grid;
+      place-items: center;
+      font-size: 1.7rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: clamp(26px, 5vw, 38px);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -120px auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(255, 224, 102, 0.25);
+      z-index: -1;
+    }
+
+    .card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .feature {
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 1px solid rgba(20, 39, 78, 0.06);
+      box-shadow: 0 20px 32px rgba(20, 39, 78, 0.08);
+      display: grid;
+      gap: 14px;
+      transition: transform 0.22s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255, 123, 107, 0.28), rgba(255, 224, 102, 0.28));
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+    }
+
+    .feature h3 {
+      margin: 0;
+      font-size: 1.24rem;
+      color: var(--deep-blue);
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .diagonal-section {
+      position: relative;
+    }
+
+    .diagonal-section::before {
+      content: "";
+      position: absolute;
+      inset: -80px -60px;
+      transform: rotate(-2.5deg);
+      background: linear-gradient(135deg, rgba(255, 123, 107, 0.12), rgba(68, 192, 255, 0.12));
+      border-radius: var(--radius-xl);
+      z-index: -2;
+    }
+
+    .offers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .offer {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 24px 26px;
+      border: 2px solid transparent;
+      box-shadow: 0 18px 32px rgba(20, 39, 78, 0.1);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .offer:hover {
+      transform: translateY(-4px);
+      border-color: rgba(68, 192, 255, 0.35);
+    }
+
+    .offer h3 {
+      margin: 0 0 12px;
+      font-size: 1.22rem;
+      color: var(--deep-blue);
+    }
+
+    .offer p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-slot {
+      min-height: 180px;
+      border-radius: var(--radius-md);
+      border: 3px dashed rgba(68, 192, 255, 0.45);
+      background: rgba(255, 255, 255, 0.7);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 700;
+      color: var(--secondary);
+      padding: 20px;
+    }
+
+    .goals {
+      display: grid;
+      gap: 16px;
+    }
+
+    .goal-item {
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: var(--radius-md);
+      padding: 20px 26px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      box-shadow: 0 16px 28px rgba(20, 39, 78, 0.08);
+    }
+
+    .goal-item span {
+      font-size: 1.4rem;
+      color: var(--primary);
+    }
+
+    .vision-boxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+
+    .vision-box {
+      background: linear-gradient(135deg, rgba(255, 224, 102, 0.3), rgba(255, 255, 255, 0.9));
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: 0 22px 36px rgba(20, 39, 78, 0.12);
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .concept {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .concept-card {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 2px dashed rgba(255, 123, 107, 0.45);
+      box-shadow: 0 20px 32px rgba(20, 39, 78, 0.1);
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .testimonials {
+      display: grid;
+      gap: 20px;
+    }
+
+    .testimonial {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: 0 22px 36px rgba(20, 39, 78, 0.1);
+      border-right: 6px solid var(--accent);
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .contact {
+      background: linear-gradient(135deg, rgba(68, 192, 255, 0.2), rgba(255, 123, 107, 0.22));
+      border-radius: var(--radius-xl);
+      padding: clamp(32px, 6vw, 48px);
+      display: grid;
+      gap: 24px;
+      box-shadow: 0 24px 48px rgba(20, 39, 78, 0.14);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .contact-actions a {
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 20px 30px rgba(255, 123, 107, 0.32);
+      transition: transform 0.22s ease;
+    }
+
+    .contact-actions a:nth-of-type(2) {
+      background: var(--secondary);
+      box-shadow: 0 20px 30px rgba(68, 192, 255, 0.28);
+    }
+
+    .contact-actions a:hover {
+      transform: translateY(-3px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 34px 6vw 48px;
+      color: rgba(27, 27, 50, 0.6);
+      font-size: 0.96rem;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 26px 18px 18px;
+      }
+
+      .hero {
+        padding: 36px 24px;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .goal-item {
+        flex-direction: column;
+      }
+
+      .contact-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand"><span class="icon">🤹‍♂️</span>עידן רצבי • סטנד אפ ילדים</div>
+    <nav>
+      <a href="#about">מי אני</a>
+      <a href="#why">למה לבחור בי</a>
+      <a href="#services">סל המוצרים</a>
+      <a href="#goals">המטרות</a>
+      <a href="#concept">הקונספט</a>
+      <a href="#contact">צור קשר</a>
+    </nav>
+  </header>
+
+  <div class="wrapper">
+    <section class="hero" id="top">
+      <div class="hero-content">
+        <div class="hero-badge">🎯 צחוקים, ערכים ואמונה לילדים ולהורים</div>
+        <h1>צחוק ששובר מחסומים, ערכים שבונים דור חדש</h1>
+        <p>העולם של עידן רצבי מחבר בין סטנדאפ, אלתור, אמונה וערכים. אני דתי חובש כיפה, עם ניסיון בייעוץ והעצמה לצעירים ומאות שעות על הבמה מול קהלים מגוונים.</p>
+        <p>המופעים שלי מדברים בשפה של הילדים וההורים יחד – צחוק שמתגלגל, מסרים שמחברים, וחוויה שנשארת בלב הרבה אחרי שהמסך יורד.</p>
+        <div class="hero-cta">
+          <a class="primary" href="tel:0546600588">📞 054‑6600588</a>
+          <a class="secondary" href="https://wa.me/972546600588" target="_blank" rel="noreferrer">📲 שלחו הודעת וואטסאפ</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="photo-placeholder">מקום לתמונה מהמופע – ילדים צוחקים ומשתתפים</div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-heading"><span class="icon">👋</span> מי אני – הסיפור האישי</div>
+      <div class="card">
+        <p>אני עידן רצבי – בוגר תואר שני במנהל עסקים (ייעוץ ארגוני) ובוגר בית ספר למשחק. הופעתי בהצגות ילדים, סטנדאפ למבוגרים והרצאות בבתי ספר, לצד ליווי אישי לצעירים.</p>
+        <p>עם לידת הילדות שלי הבנתי את העולם של הילדים מבפנים: גן, תחפושות, סדרות ושיעורי בית. גיליתי שהסיפורים הקטנים מהיום יום הם החומר הכי טוב למופעים שמעצימים וגורמים לכולם לצחוק.</p>
+        <p>החומרים שלי נוגעים במה שכל ילד מכיר – בית ספר, חברים, טיולים, חלומות. הרבה מהם נולדים על הבמה באלתור חי יחד עם הקהל.</p>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="section-heading"><span class="icon">💡</span> למה לבחור בי?</div>
+      <div class="features">
+        <article class="feature">
+          <div class="feature-icon">🎤</div>
+          <h3>קומדיה שמתחדשת בכל מופע</h3>
+          <p>אלתור חי שמותאם לקהל ברגע האמת ומביא צחוקים חדשים בכל הופעה.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">💪</div>
+          <h3>ניסיון חינוכי אמיתי</h3>
+          <p>שנים של ייעוץ והרצאות לנוער מעניקות תשתית ערכית וחינוכית לכל מופע.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">✨</div>
+          <h3>אמונה שמחברת לבבות</h3>
+          <p>מסרים שמדברים לכולם – דתיים, מסורתיים וחילונים – ופותחים שיח משותף.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">🚀</div>
+          <h3>חוויית במה צבעונית</h3>
+          <p>תפאורה, מוזיקה ואנרגיה שמכניסות את הילדים למסע של צחוק ושיתוף פעולה.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="services" class="diagonal-section">
+      <div class="section-heading"><span class="icon">🎭</span> סל המוצרים – כל אירוע הופך לחגיגה</div>
+      <div class="offers">
+        <article class="offer">
+          <h3>מופעי סטנדאפ לילדים</h3>
+          <p>התאמה לכל חג ולכל עונה – פורים, פסח, חנוכה, ל"ג בעומר ועוד. מושלם לגילאי 4–14.</p>
+        </article>
+        <article class="offer">
+          <h3>ימי הולדת סטנדאפ</h3>
+          <p>הילד במרכז, עם משחקי אלתור, תיאטרון, פרסים והמון צחוק לאורך כל האירוע.</p>
+        </article>
+        <article class="offer">
+          <h3>הרצאות מצחיקות עם ערכים</h3>
+          <p>לבתי ספר ומוסדות – פרשת שבוע, אהבת לרעך, שבת, אמונה ועזרה לזולת בשפה שכולם מבינים.</p>
+        </article>
+        <article class="offer">
+          <h3>חידונים ושעות סיפור</h3>
+          <p>לגנים וחוגים – פעילות חווייתית שמכניסה את הילדים לשיתוף פעולה ושמחה.</p>
+        </article>
+        <article class="offer">
+          <h3>שיעורי תורה ואמונה</h3>
+          <p>"פרלמנט הילדים" הקבוע בשבתות – 60–100 ילדים בכל שבוע סביב ערכים וצחוק.</p>
+        </article>
+        <article class="offer">
+          <h3>הנחיית אירועים וכתיבת תוכן</h3>
+          <p>הנחיה משולבת הומור ואלתור בזמן אמת, לצד כתיבת תוכן שמחברת בין צחוק לערכים לקהילות וארגונים.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading"><span class="icon">🖼️</span> גלריה – מקומות לתמונות</div>
+      <div class="gallery">
+        <div class="gallery-slot">צילום להמחשת אינטראקציה עם הילדים</div>
+        <div class="gallery-slot">צילום של משפחות מחייכות ומוחאות כפיים</div>
+        <div class="gallery-slot">צילום מהבמה הצבעונית והאווירה</div>
+        <div class="gallery-slot">צילום של משחקי אלתור ושעשועונים</div>
+      </div>
+    </section>
+
+    <section id="goals">
+      <div class="section-heading"><span class="icon">🎯</span> המטרות שלי</div>
+      <div class="goals">
+        <div class="goal-item"><span>✶</span>ליצור חוויה ייחודית לילדים ולהורים – גם מצחיקה וגם מרגשת.</div>
+        <div class="goal-item"><span>✶</span>לשלב הומור, אלתור וערכים שמחזקים משפחות וקהילות.</div>
+        <div class="goal-item"><span>✶</span>להעניק כלים לחיים דרך צחוק – בבית, בבית הספר ובקהילה.</div>
+      </div>
+    </section>
+
+    <section id="vision">
+      <div class="section-heading"><span class="icon">🌟</span> החזון שלי</div>
+      <div class="vision-boxes">
+        <div class="vision-box">אני מאמין בכוח של צחוק ואמונה לחבר בין אנשים. החזון שלי הוא להנגיש ערכים, העצמה והומור לכל ילד ומשפחה בישראל – בלי גבולות של מגזר או סגנון.</div>
+        <div class="vision-box">אני רוצה לראות דור צעיר יותר שמח, חזק ומעורר השראה. השאיפה: להביא את התוכן לבמות הגדולות, לערוצי הילדים ואפילו למסכי הקולנוע.</div>
+      </div>
+    </section>
+
+    <section id="concept">
+      <div class="section-heading"><span class="icon">🎬</span> הקונספט במופעים – איך זה קורה?</div>
+      <div class="concept">
+        <div class="concept-card">סטנדאפ ואלתורים חיים – רגעים שנולדים על המקום ומשאירים את הילדים עירניים ושמחים.</div>
+        <div class="concept-card">שעשועון במה – הילדים עולים, משתתפים ומגלים שהם הכוכבים של הערב.</div>
+        <div class="concept-card">משחקי אלתור – פעילות אינטראקטיבית שממשיכה להדהד גם אחרי שהאירוע מסתיים.</div>
+      </div>
+    </section>
+
+    <section id="testimonials">
+      <div class="section-heading"><span class="icon">⭐</span> הביקורות מדברות</div>
+      <div class="testimonials">
+        <div class="testimonial">"הילדים לא הפסיקו לצחוק ולהתרגש – וגם אנחנו ההורים גילינו מופע עם ערכים אמיתיים."</div>
+        <div class="testimonial">"עידן, הצלחת ליצור חגיגה אמיתית – שילוב של צחוק, אמונה ורגש שכולם הרגישו."</div>
+        <div class="testimonial">"חוויה שמשאירה חותם – הילדים מדברים על זה גם שבועות אחרי האירוע."</div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-heading"><span class="icon">📞</span> צור קשר</div>
+      <div class="contact">
+        <p>רוצים אירוע שכולם ידברו עליו? בואו נבנה יחד חוויה מלאה בצחוק, ערכים והשראה – לילדים ולהורים.</p>
+        <div class="contact-actions">
+          <a href="tel:0546600588">📞 054‑6600588</a>
+          <a href="https://wa.me/972546600588" target="_blank" rel="noreferrer">📲 שלחו וואטסאפ</a>
+        </div>
+        <p>ספרו לי על החלום שלכם – אני כאן כדי להפוך אותו למופע צבעוני, מלא באור ובשמחה.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    © עידן רצבי – סטנד אפ ילדים | צחוק, ערכים והשראה לדור הבא
+  </footer>
+</body>
+</html>

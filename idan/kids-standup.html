@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>עידן רצבי – סטנדאפ ילדים | צחוק שמחבר בין ערכים למשפחות</title>
+    <meta name="description" content="עידן רצבי מביא מופעי סטנדאפ ילדים מלאי צחוק, ערכים וחוויה משפחתית בלתי נשכחת. הזמינו מופע, סדנה או אירוע בית ספרי עם אנרגיה של פעם בחיים." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Heebo", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+            },
+            colors: {
+              primary: {
+                DEFAULT: "#ff5fa2",
+                50: "#fff3f8",
+                100: "#ffe6f2",
+                500: "#ff5fa2",
+                600: "#f44b93",
+              },
+              secondary: {
+                DEFAULT: "#5d8aff",
+                100: "#e9efff",
+                200: "#c2d2ff",
+                500: "#5d8aff",
+              },
+              midnight: "#0f172a",
+              blush: "#ff6f91",
+              sunshine: "#ffd166",
+            },
+            boxShadow: {
+              glow: "0 20px 90px -35px rgba(255, 95, 162, 0.85)",
+              soft: "0 32px 56px -24px rgba(15, 23, 42, 0.35)",
+            },
+            backdropBlur: {
+              xs: "4px",
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography,forms"></script>
+    <style>
+      html,
+      body {
+        scroll-behavior: smooth;
+        background-color: #050816;
+      }
+
+      .orb {
+        position: absolute;
+        width: clamp(220px, 30vw, 420px);
+        height: clamp(220px, 30vw, 420px);
+        border-radius: 9999px;
+        filter: blur(60px);
+        opacity: 0.9;
+        transform: translate3d(0, 0, 0);
+        pointer-events: none;
+      }
+
+      .orb-primary {
+        background: radial-gradient(circle at 30% 30%, rgba(255, 95, 162, 0.68), rgba(255, 95, 162, 0));
+        top: -8rem;
+        inset-inline-start: -6rem;
+      }
+
+      .orb-secondary {
+        background: radial-gradient(circle at 70% 70%, rgba(93, 138, 255, 0.55), rgba(93, 138, 255, 0));
+        bottom: 12rem;
+        inset-inline-end: -8rem;
+      }
+
+      .noise {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+        pointer-events: none;
+        mix-blend-mode: overlay;
+      }
+
+      .gradient-border {
+        position: relative;
+        border-radius: 28px;
+      }
+
+      .gradient-border::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: inherit;
+        background: linear-gradient(135deg, rgba(255, 95, 162, 0.5), rgba(93, 138, 255, 0.4));
+        z-index: -1;
+        opacity: 0.9;
+      }
+
+      .depth-card {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .depth-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: inherit;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body class="font-sans text-slate-100 antialiased relative overflow-x-hidden">
+    <div class="orb orb-primary"></div>
+    <div class="orb orb-secondary"></div>
+    <div class="noise fixed inset-0 opacity-20"></div>
+
+    <header class="sticky top-0 z-50 backdrop-blur-xl bg-slate-900/75 border-b border-white/5">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <nav class="flex items-center justify-between py-4">
+          <a href="#hero" class="flex items-center gap-2">
+            <span class="flex size-10 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary text-white text-2xl shadow-glow">
+              😀
+            </span>
+            <div>
+              <p class="text-sm text-slate-300">עידן רצבי</p>
+              <p class="text-base font-semibold text-white">סטנדאפ ילדים</p>
+            </div>
+          </a>
+          <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-200">
+            <a href="#experience" class="hover:text-white transition">החוויה</a>
+            <a href="#about" class="hover:text-white transition">מי אני</a>
+            <a href="#show" class="hover:text-white transition">איך זה עובד</a>
+            <a href="#testimonials" class="hover:text-white transition">ביקורות</a>
+            <a href="#contact" class="hover:text-white transition">צור קשר</a>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="https://wa.me/972546600588" target="_blank" rel="noreferrer" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-emerald-400/15 text-emerald-200 px-5 py-2 text-sm font-semibold ring-1 ring-emerald-300/40 hover:bg-emerald-400/25 transition">
+              <i class="bx bxl-whatsapp text-lg"></i>
+              ווטסאפ
+            </a>
+            <a href="tel:0546600588" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-l from-primary to-secondary px-5 py-2 text-sm font-semibold text-white shadow-glow hover:shadow-soft transition">
+              <i class="bx bx-phone"></i>
+              054-6600588
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero" class="relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-20 lg:pt-24 lg:pb-28">
+          <div class="grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center">
+            <div class="space-y-6">
+              <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-slate-200 ring-1 ring-white/20">
+                צחוק. ערכים. השראה.
+              </span>
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight text-white drop-shadow-[0_16px_48px_rgba(255,95,162,0.35)]">
+                צחוק שובר מחסומים,<br />ערכים שבונים עתיד
+              </h1>
+              <p class="text-lg sm:text-xl text-slate-200/90 leading-relaxed max-w-2xl">
+                ברוכים הבאים לעולם של עידן רצבי – סטנדאפיסט, מרצה ומאלתר מלידה. מופע הילדים שלי מחבר בין אמונה, קצב ואנרגיה סוחפת לחוויה משפחתית שמעצימה את כולם – ילדים, הורים וצוותי חינוך.
+              </p>
+              <div class="flex flex-wrap gap-4">
+                <a href="https://wa.me/972546600588" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-l from-primary to-secondary px-6 py-3 text-base font-semibold text-white shadow-glow hover:translate-y-0.5 transition" target="_blank" rel="noreferrer">
+                  <i class="bx bxs-party text-xl"></i>
+                  קובעים חוויה
+                </a>
+                <a href="#experience" class="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-base font-semibold text-slate-100 hover:bg-white/10 transition">
+                  <i class="bx bx-play-circle text-xl"></i>
+                  מה מחכה לכם?
+                </a>
+              </div>
+              <div class="grid sm:grid-cols-3 gap-4 text-sm text-slate-200/90">
+                <div class="gradient-border depth-card rounded-3xl bg-white/5 p-5">
+                  <p class="text-3xl font-black text-white">1000+</p>
+                  <p class="mt-1 text-sm tracking-wide text-slate-300">ילדים מחייכים בכל שנה</p>
+                </div>
+                <div class="gradient-border depth-card rounded-3xl bg-white/5 p-5">
+                  <p class="text-3xl font-black text-white">15</p>
+                  <p class="mt-1 text-sm tracking-wide text-slate-300">שנות במה, אילתור והדרכה</p>
+                </div>
+                <div class="gradient-border depth-card rounded-3xl bg-white/5 p-5">
+                  <p class="text-3xl font-black text-white">360°</p>
+                  <p class="mt-1 text-sm tracking-wide text-slate-300">חוויה שמחברת את כל המשפחה</p>
+                </div>
+              </div>
+            </div>
+            <div class="relative max-lg:order-first">
+              <div class="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-slate-900/70 to-slate-800/50 p-6 shadow-soft">
+                <span class="absolute -top-8 inset-inline-end-8 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-slate-800 shadow-lg">
+                  <i class="bx bx-bulb text-lg text-primary"></i>
+                  מופע ב-3 שכבות
+                </span>
+                <div class="aspect-[4/5] rounded-[26px] bg-gradient-to-br from-secondary/40 via-primary/30 to-white/20 border border-white/20 flex items-center justify-center text-center text-white text-lg font-semibold">
+                  <div class="space-y-4 px-6">
+                    <p>מקום מושלם לויז'ואל מהמופע</p>
+                    <div class="grid grid-cols-3 gap-2 text-xs">
+                      <span class="rounded-full bg-white/20 py-2">ילדים</span>
+                      <span class="rounded-full bg-white/20 py-2">הורים</span>
+                      <span class="rounded-full bg-white/20 py-2">צוותים</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-6 grid grid-cols-2 gap-3 text-xs text-slate-200">
+                  <div class="rounded-2xl border border-white/10 bg-white/5 p-3">
+                    <p class="font-semibold text-white">שעשועון חי</p>
+                    <p class="mt-1 leading-relaxed">ילדים מהקהל הופכים לכוכבים על הבמה</p>
+                  </div>
+                  <div class="rounded-2xl border border-white/10 bg-white/5 p-3">
+                    <p class="font-semibold text-white">אילתור ללא גבולות</p>
+                    <p class="mt-1 leading-relaxed">הסיפור שלהם נולד תוך כדי מופע</p>
+                  </div>
+                  <div class="rounded-2xl border border-white/10 bg-white/5 p-3">
+                    <p class="font-semibold text-white">ערכים בלב צוחק</p>
+                    <p class="mt-1 leading-relaxed">אמונה, חברות וכבוד הדדי</p>
+                  </div>
+                  <div class="rounded-2xl border border-white/10 bg-white/5 p-3">
+                    <p class="font-semibold text-white">מתאים לכל המגזרים</p>
+                    <p class="mt-1 leading-relaxed">דתיים, מסורתיים וחילונים ביחד</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="relative py-20 sm:py-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          <div class="max-w-3xl">
+            <h2 class="text-3xl sm:text-4xl font-black text-white">חוויה צבעונית שמחברת בין בית ספר למשפחה</h2>
+            <p class="mt-4 text-lg text-slate-200/90">הילדים מרגישים בטוחים לצחוק, להעז ולדמיין. ההורים מופתעים לגלות כמה עמוק אפשר להגיע דרך הומור, והצוות החינוכי מקבל כלים פרקטיים לאנרגיה טובה ביום-יום.</p>
+          </div>
+          <div class="mt-12 grid gap-8 lg:grid-cols-3">
+            <article class="gradient-border depth-card rounded-[26px] bg-white/10 p-8 flex flex-col gap-6">
+              <div class="inline-flex size-12 items-center justify-center rounded-2xl bg-primary/20 text-primary text-2xl">
+                <i class="bx bx-planet"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white">צחוק שובר מחסומים</h3>
+              <p class="text-sm leading-relaxed text-slate-200/90">ילדים מכל קצוות החברה מתחברים דרך חוויות יומיומיות, סדרות, משחקים וקטעים שנולדים יחד איתם על הבמה.</p>
+            </article>
+            <article class="gradient-border depth-card rounded-[26px] bg-white/10 p-8 flex flex-col gap-6">
+              <div class="inline-flex size-12 items-center justify-center rounded-2xl bg-secondary/20 text-secondary text-2xl">
+                <i class="bx bx-heart"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white">ערכים שנשארים</h3>
+              <p class="text-sm leading-relaxed text-slate-200/90">המסרים ממוקדים בהעצמה, אמונה, כבוד הדדי ושמירה על קשר חם במשפחה – בלי דרשה, עם הרבה צחוק.</p>
+            </article>
+            <article class="gradient-border depth-card rounded-[26px] bg-white/10 p-8 flex flex-col gap-6">
+              <div class="inline-flex size-12 items-center justify-center rounded-2xl bg-emerald-300/20 text-emerald-200 text-2xl">
+                <i class="bx bx-cool"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white">מופע מותאם אישית</h3>
+              <p class="text-sm leading-relaxed text-slate-200/90">אירועי קהילה, בתי ספר, ערבי הורים, קייטנות וחוגים – כל אחד מקבל תסריט משלו, עם הפתעות שמתכתבות עם מי שהזמין.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="relative py-20 sm:py-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          <div class="grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center">
+            <div class="space-y-6">
+              <h2 class="text-3xl sm:text-4xl font-black text-white">
+                מי אני – הסיפור האישי
+              </h2>
+              <p class="text-lg text-slate-200/90 leading-relaxed">
+                אני עידן רצבי – סטנדאפיסט, מאלתר, בוגר תואר שני במנהל עסקים (ייעוץ ארגוני) ובוגר בית ספר למשחק. מאחוריי מאות שעות מול קהלים: הצגות ילדים, סטנדאפ למבוגרים, הרצאות בבתי ספר וליווי אישי לצעירים. הכול השתנה ביום שנולדו הילדות שלי – גיליתי מבפנים את האתגרים, החלומות והקסם של הילדים.
+              </p>
+              <p class="text-lg text-slate-200/90 leading-relaxed">
+                מאז אני מביא לבמות חוויה שמדברת בשפה שלהם, משלבת אמונה וערכים, ומוכיחה שכשצוחקים ביחד – אפשר לפתוח לבבות, להפיג מתחים ולבנות אמון אמיתי.
+              </p>
+              <div class="flex flex-wrap gap-3 text-sm">
+                <span class="rounded-full bg-white/10 px-4 py-2 text-white/90">איש חינוך וקומיקאי</span>
+                <span class="rounded-full bg-white/10 px-4 py-2 text-white/90">מאמין בכוח הקהילה</span>
+                <span class="rounded-full bg-white/10 px-4 py-2 text-white/90">חובש כיפה ומחבר עולמות</span>
+              </div>
+            </div>
+            <div class="grid gap-6"> 
+              <div class="gradient-border depth-card rounded-[28px] bg-white/10 p-6">
+                <div class="aspect-[16/11] rounded-[22px] bg-gradient-to-br from-secondary/40 via-white/10 to-primary/30 border border-white/20 flex items-center justify-center text-white text-lg font-semibold">
+                  <span>ויז'ואל מהמופע (הוסיפו תמונה)</span>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-4 text-xs text-slate-100/90">
+                <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+                  <p class="text-2xl font-black text-white">⚡</p>
+                  <p class="mt-2 font-semibold text-white">אילתור חי</p>
+                  <p class="leading-relaxed">התוכן נולד בזמן אמת, עם הילדים.</p>
+                </div>
+                <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+                  <p class="text-2xl font-black text-white">🎤</p>
+                  <p class="mt-2 font-semibold text-white">כל במה מתאימה</p>
+                  <p class="leading-relaxed">קייטנות, חגים, ערבי הורים, בתי ספר ועוד.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="show" class="relative py-20 sm:py-24 bg-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+            <div>
+              <h2 class="text-3xl sm:text-4xl font-black text-white">המופע – איך זה קורה על הבמה?</h2>
+              <p class="mt-4 text-lg text-slate-200/90">מופע ה-360° של עידן בנוי משלושה חלקים משלימים שמייצרים חוויה שכולם חוגגים בה יחד.</p>
+            </div>
+            <div class="flex gap-3 text-sm text-slate-100/90">
+              <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2">
+                <i class="bx bxs-bolt text-primary"></i>
+                חימום מהיר
+              </span>
+              <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2">
+                <i class="bx bx-diamond text-secondary"></i>
+                שיא אנרגיה
+              </span>
+              <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2">
+                <i class="bx bx-happy text-emerald-200"></i>
+                סוף מרגש
+              </span>
+            </div>
+          </div>
+          <div class="mt-12 grid gap-8 lg:grid-cols-3">
+            <div class="rounded-[28px] border border-white/10 bg-slate-900/80 p-8 shadow-soft">
+              <span class="text-5xl font-black text-primary">01</span>
+              <h3 class="mt-6 text-xl font-bold text-white">סטנדאפ ואילתור חי</h3>
+              <p class="mt-4 text-sm leading-relaxed text-slate-200/90">גיבורים אמיתיים, סיפורי יום-יום, סדרות שהילדים מכירים והפתעות שנוצרות מול העיניים.</p>
+            </div>
+            <div class="rounded-[28px] border border-white/10 bg-slate-900/80 p-8 shadow-soft">
+              <span class="text-5xl font-black text-secondary">02</span>
+              <h3 class="mt-6 text-xl font-bold text-white">שעשועון על הבמה</h3>
+              <p class="mt-4 text-sm leading-relaxed text-slate-200/90">הילדים הופכים לצוות מנצח – משימות חכמות, הומור ופרסים חווייתיים.</p>
+            </div>
+            <div class="rounded-[28px] border border-white/10 bg-slate-900/80 p-8 shadow-soft">
+              <span class="text-5xl font-black text-sunshine">03</span>
+              <h3 class="mt-6 text-xl font-bold text-white">משחקי אילתור</h3>
+              <p class="mt-4 text-sm leading-relaxed text-slate-200/90">הופכים את הילדים לשותפים ביצירה – כל מופע מרגיש אחר, חי ונוגע בלב.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="relative py-20 sm:py-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          <div class="grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center">
+            <div class="space-y-10">
+              <div>
+                <h2 class="text-3xl sm:text-4xl font-black text-white">למה לבחור בעידן?</h2>
+                <p class="mt-4 text-lg text-slate-200/90">כל מופע נבנה עם צוות ההפקה או החינוך, מותאם לתרבות הארגונית ומביא איתו שילוב נדיר של צחוק, ערכים ותקשורת אמיתית.</p>
+              </div>
+              <div class="grid gap-6 sm:grid-cols-2">
+                <div class="rounded-[26px] border border-white/10 bg-white/5 p-6">
+                  <h3 class="text-lg font-semibold text-white">חוצה מגזרים</h3>
+                  <p class="mt-3 text-sm text-slate-200/90">דתיים, מסורתיים וחילונים – כולם צוחקים יחד באותה שפה.</p>
+                </div>
+                <div class="rounded-[26px] border border-white/10 bg-white/5 p-6">
+                  <h3 class="text-lg font-semibold text-white">מתודולוגיה חינוכית</h3>
+                  <p class="mt-3 text-sm text-slate-200/90">כלי העצמה, שיח רגשי והעצמה אישית לילדים והורים.</p>
+                </div>
+                <div class="rounded-[26px] border border-white/10 bg-white/5 p-6">
+                  <h3 class="text-lg font-semibold text-white">ליווי צמוד</h3>
+                  <p class="mt-3 text-sm text-slate-200/90">התאמה מלאה לאירוע – תדרוך מקדים ויצירת שפה משותפת עם המזמין.</p>
+                </div>
+                <div class="rounded-[26px] border border-white/10 bg-white/5 p-6">
+                  <h3 class="text-lg font-semibold text-white">מופע רב-תחומי</h3>
+                  <p class="mt-3 text-sm text-slate-200/90">סטנדאפ, תיאטרון פלייבק, מוזיקה ומשחקים אינטראקטיביים.</p>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-6">
+              <div class="rounded-[28px] border border-white/10 bg-white/5 p-6">
+                <h3 class="text-lg font-semibold text-white">המטרות שלי</h3>
+                <ul class="mt-4 space-y-2 text-sm text-slate-200/90">
+                  <li>• ליצור חוויה ייחודית שמדברת ללב ולבטן.</li>
+                  <li>• לשלב הומור מושחז, אלתור וערכים מעצימים.</li>
+                  <li>• להעניק כלים לחיים בכל סביבה – בית, בית ספר וקהילה.</li>
+                </ul>
+              </div>
+              <div class="rounded-[28px] border border-white/10 bg-white/5 p-6">
+                <h3 class="text-lg font-semibold text-white">החזון שלי</h3>
+                <p class="mt-3 text-sm text-slate-200/90">להנגיש חוויות של צחוק ואמונה לכל ילד בישראל, על כל במה ובכל פלטפורמה: אולמות, ערוצי הילדים והמסכים בבית.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery" class="relative py-20 sm:py-24 bg-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 class="text-3xl sm:text-4xl font-black text-white">גלריית רגעים</h2>
+              <p class="mt-4 text-lg text-slate-200/90">שלבו כאן תמונות מהמופע, מהילדים ומהמפגשים עם ההורים. המסגרת כבר מוכנה.</p>
+            </div>
+            <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-slate-200/90">
+              <i class="bx bx-camera text-primary text-lg"></i>
+              מומלץ להוסיף 3–5 תמונות אקטואליות
+            </span>
+          </div>
+          <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-secondary/30 via-primary/30 to-white/10 shadow-soft">
+              <div class="aspect-[4/5] flex items-center justify-center text-center text-white/90 text-lg font-semibold px-6">
+                מקום לתמונה מהמופע
+              </div>
+            </div>
+            <div class="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-primary/30 via-purple-400/25 to-white/10 shadow-soft">
+              <div class="aspect-[4/5] flex items-center justify-center text-center text-white/90 text-lg font-semibold px-6">
+                ילדים משתתפים בשעשועון
+              </div>
+            </div>
+            <div class="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-emerald-300/25 via-primary/20 to-white/10 shadow-soft">
+              <div class="aspect-[4/5] flex items-center justify-center text-center text-white/90 text-lg font-semibold px-6">
+                מפגש מרגש עם הורים וצוות
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" class="relative py-20 sm:py-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 class="text-3xl sm:text-4xl font-black text-white">מה אומרים על המופע?</h2>
+              <p class="mt-4 text-lg text-slate-200/90">תגובות אמיתיות ממשפחות, מנהלי בתי ספר וקהילות שכבר חוו את עידן והצוות.</p>
+            </div>
+            <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-slate-200/90">
+              <i class="bx bx-star text-sunshine text-lg"></i>
+              ציון ממוצע: 4.9/5
+            </span>
+          </div>
+          <div class="mt-12 grid gap-8 lg:grid-cols-3">
+            <blockquote class="rounded-[28px] border border-white/10 bg-white/5 p-6 text-sm text-slate-200/90">
+              <p class="text-white text-lg font-semibold">"הילדים לא הפסיקו לדבר על זה, ואנחנו ההורים נהנינו לא פחות"</p>
+              <footer class="mt-4 text-xs">טל, אמא לשלושה – אירוע קהילתי בירושלים</footer>
+            </blockquote>
+            <blockquote class="rounded-[28px] border border-white/10 bg-white/5 p-6 text-sm text-slate-200/90">
+              <p class="text-white text-lg font-semibold">"רצבי, עשית לנו חגיגה אמיתית – עם ערכים, צחוק ואנרגיות"</p>
+              <footer class="mt-4 text-xs">רבקה, מנהלת בית ספר יסודי</footer>
+            </blockquote>
+            <blockquote class="rounded-[28px] border border-white/10 bg-white/5 p-6 text-sm text-slate-200/90">
+              <p class="text-white text-lg font-semibold">"זה לא סתם מופע – זאת חוויה שמשאירה חותם"</p>
+              <footer class="mt-4 text-xs">נועם, רכז חוגי עירייה</footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section class="relative py-20 sm:py-24 bg-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          <div class="grid gap-12 lg:grid-cols-2">
+            <div class="space-y-6">
+              <span class="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-2 text-sm font-semibold text-primary">
+                ⭐ מתנה לצוותים חינוכיים
+              </span>
+              <h2 class="text-3xl sm:text-4xl font-black text-white">העצמה שמשאירה כלים להמשך</h2>
+              <p class="text-lg text-slate-200/90 leading-relaxed">
+                מעבר למופע עצמו, עידן מעביר סדנאות קצרות לצוותים חינוכיים והורים שמסבירות איך להשתמש בהומור ככלי לפתרון קונפליקטים, ליצירת אמון ולחיבור בין ילדים מכל הסוגים.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-4 text-sm text-slate-200/90">
+                <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+                  <p class="text-white font-semibold">סדנת הורים</p>
+                  <p class="mt-2">60 דקות של צחוק וכלים לתקשורת חיובית בבית.</p>
+                </div>
+                <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+                  <p class="text-white font-semibold">ליווי צוותי חינוך</p>
+                  <p class="mt-2">אסטרטגיות לשיח כיתתי, חיבור והובלת תהליכים.</p>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-[32px] border border-white/10 bg-slate-900/80 p-8 shadow-soft">
+              <h3 class="text-xl font-bold text-white">שילובים פופולריים</h3>
+              <ul class="mt-6 space-y-4 text-sm text-slate-200/90">
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 inline-flex size-6 items-center justify-center rounded-full bg-primary/20 text-primary"><i class="bx bx-check"></i></span>
+                  <span>
+                    <strong class="text-white">אירועי פתיחת שנה</strong>
+                    <p>מופע + סדנת מורים להתחלה מסונכרנת ומלאת חיוך.</p>
+                  </span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 inline-flex size-6 items-center justify-center rounded-full bg-secondary/20 text-secondary"><i class="bx bx-check"></i></span>
+                  <span>
+                    <strong class="text-white">קייטנות וחוגי קיץ</strong>
+                    <p>תוכנית מותאמת לגילים שונים עם משחקי אילתור.</p>
+                  </span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 inline-flex size-6 items-center justify-center rounded-full bg-emerald-300/20 text-emerald-200"><i class="bx bx-check"></i></span>
+                  <span>
+                    <strong class="text-white">חגי תשרי וחנוכה</strong>
+                    <p>ערכים יהודיים בליווי חוויה חמה ומרגשת.</p>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="relative py-20 sm:py-24">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+          <div class="gradient-border depth-card rounded-[36px] bg-slate-900/80 px-6 py-12 sm:px-16 shadow-soft">
+            <div class="grid gap-10 lg:grid-cols-[1.1fr_1fr]">
+              <div class="space-y-6">
+                <h2 class="text-3xl sm:text-4xl font-black text-white">בואו לבנות את האירוע הבא שלכם</h2>
+                <p class="text-lg text-slate-200/90">תספרו לנו על האירוע, הגילאים והחלומות – ונרכיב ביחד מופע שיישאר בזיכרון של כל ילד.</p>
+                <div class="flex flex-wrap gap-3 text-sm text-slate-200/90">
+                  <a href="tel:0546600588" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-l from-primary to-secondary px-5 py-2 font-semibold text-white shadow-glow">
+                    <i class="bx bx-phone"></i>
+                    054-6600588
+                  </a>
+                  <a href="https://wa.me/972546600588" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-full bg-emerald-400/15 px-5 py-2 font-semibold text-emerald-200 ring-1 ring-emerald-300/40">
+                    <i class="bx bxl-whatsapp"></i>
+                    הודעת וואטסאפ
+                  </a>
+                  <a href="mailto:idan@rezvi.co.il" class="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2 font-semibold text-white hover:bg-white/10 transition">
+                    <i class="bx bx-envelope"></i>
+                    מייל לצוות
+                  </a>
+                </div>
+              </div>
+              <form class="space-y-5" action="https://formspree.io/f/your-form" method="POST">
+                <div>
+                  <label class="block text-sm font-semibold text-slate-100" for="name">שם מלא</label>
+                  <input id="name" name="name" type="text" required class="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/40" placeholder="דוגמה: נועה כהן" />
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label class="block text-sm font-semibold text-slate-100" for="phone">טלפון</label>
+                    <input id="phone" name="phone" type="tel" required class="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/40" placeholder="05X-XXXXXXX" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-semibold text-slate-100" for="email">אימייל</label>
+                    <input id="email" name="email" type="email" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/40" placeholder="you@example.com" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-slate-100" for="event">סוג האירוע</label>
+                  <select id="event" name="event" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white focus:border-primary focus:ring-2 focus:ring-primary/40">
+                    <option class="text-slate-800" value="school">אירוע בית ספר</option>
+                    <option class="text-slate-800" value="community">קהילה/בית כנסת</option>
+                    <option class="text-slate-800" value="private">אירוע פרטי</option>
+                    <option class="text-slate-800" value="camp">קייטנה/חוג</option>
+                    <option class="text-slate-800" value="other">אחר</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-slate-100" for="message">איך נראה האירוע החלומי שלכם?</label>
+                  <textarea id="message" name="message" rows="4" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/40" placeholder="ספרו לי על גילאי הילדים, המטרה שלכם וכל חלום מיוחד שיש לכם"></textarea>
+                </div>
+                <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-l from-primary to-secondary px-6 py-3 text-base font-semibold text-white shadow-glow hover:translate-y-0.5 transition">
+                  <i class="bx bx-paper-plane text-lg"></i>
+                  שלחו הצעה
+                </button>
+                <p class="text-xs text-slate-400">הטופס נשאר סטטי – חברו לשירות הטפסים המועדף עליכם (Formspree, Netlify Forms או כל כלי אחר).</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="relative border-t border-white/10 bg-slate-950/90">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p class="text-sm text-slate-400">©
+              <span class="font-semibold text-white">עידן רצבי</span> – סטנדאפ ילדים, כל הזכויות שמורות.</p>
+            <p class="mt-2 text-xs text-slate-500">צחוק שמחבר בין אמונה, ערכים וקהילות בכל רחבי הארץ.</p>
+          </div>
+          <div class="flex flex-wrap gap-3 text-xs text-slate-300">
+            <a href="tel:0546600588" class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2">
+              <i class="bx bx-phone"></i>
+              054-6600588
+            </a>
+            <a href="https://wa.me/972546600588" class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2" target="_blank" rel="noreferrer">
+              <i class="bx bxl-whatsapp"></i>
+              וואטסאפ
+            </a>
+            <a href="mailto:idan@rezvi.co.il" class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2">
+              <i class="bx bx-envelope"></i>
+              מייל
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("opacity-100", "translate-y-0");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      document.querySelectorAll("section, footer").forEach((elem) => {
+        elem.classList.add("opacity-0", "translate-y-6", "transition", "duration-700");
+        observer.observe(elem);
+      });
+    </script>
+  </body>
+</html>
