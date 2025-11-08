@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="עידן רצבי – סטנדאפיסט לילדים בכפר סבא, השרון והמרכז. מופעי סטנדאפ מצחיקים עם ערכים, אלתורים והעצמה. ימי הולדת, הרצאות, הפעלות בבתי ספר, גני ילדים וחגים. הזמינו עכשיו חוויה מצחיקה ומעצימה!">
+    <meta name="keywords" content="עידן רצבי, סטנדאפ ילדים, סטנדאפ ליום הולדת, סטנדאפיסט לילדים, מופעי ילדים, הפעלות לילדים, ימי הולדת בכפר סבא, ימי הולדת בשרון, ימי הולדת במרכז, מופע מצחיק לילדים, מופע ערכים לילדים">
+    <title>עידן רצבי – סטנדאפ ילדים | ימי הולדת והפעלות בכפר סבא, השרון והמרכז</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #4A90E2;
+            --primary-orange: #FF6B35;
+            --primary-yellow: #FFC857;
+            --primary-purple: #9B59B6;
+            --primary-pink: #E74C3C;
+            --primary-green: #2ECC71;
+            --bg-light: #FFF9F0;
+            --bg-cream: #FFF3E5;
+            --text-dark: #2C3E50;
+            --text-light: #FFFFFF;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Rubik', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 1.2rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+            border-image: linear-gradient(90deg, var(--primary-orange), var(--primary-yellow), var(--primary-pink), var(--primary-purple)) 1;
+        }
+
+        nav.scrolled {
+            padding: 0.8rem 2rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-pink), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-yellow));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(155, 89, 182, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 200, 87, 0.05) 0%, transparent 50%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes slide {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+            text-shadow:
+                2px 2px 8px rgba(0,0,0,0.8),
+                0 0 30px rgba(0,0,0,0.6),
+                4px 4px 12px rgba(0,0,0,0.7);
+            animation: fadeInUp 1s ease;
+            line-height: 1.3;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: #F0F0F0;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            animation: fadeInUp 1s ease 0.2s both;
+            text-shadow:
+                2px 2px 6px rgba(0,0,0,0.8),
+                0 0 20px rgba(0,0,0,0.5);
+            line-height: 1.7;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+        }
+
+        .hero-video {
+            max-width: 1000px;
+            margin: 2rem auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-video video {
+            width: 100%;
+            display: block;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Rubik', sans-serif;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: var(--text-light);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-blue));
+            color: var(--text-light);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 4rem;
+            width: 100%;
+        }
+
+        section:nth-child(even) {
+            background: var(--bg-cream);
+        }
+
+        .section-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--primary-yellow));
+            border-radius: 2px;
+        }
+
+        /* Special Section: Maaseh Tov */
+        .maaseh-tov {
+            background: linear-gradient(135deg, #FFF3E5, #F7F7F7);
+            padding: 5rem 4rem;
+            width: 100%;
+        }
+
+        .maaseh-tov .section-content {
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow);
+            border: 3px dashed var(--primary-orange);
+            background: white;
+        }
+
+        .maaseh-tov .section-title {
+            color: var(--primary-orange);
+        }
+
+        .maaseh-tov .section-title::before {
+            content: '🎁 ';
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--primary-orange));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 auto 1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Why Choose Me */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .feature-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Product Basket */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--primary-orange);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .product-card:nth-child(even) {
+            border-top-color: var(--primary-purple);
+        }
+
+        .product-card:nth-child(3n) {
+            border-top-color: var(--primary-green);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .product-card h3 {
+            color: var(--primary-blue);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Vision Section */
+        .vision-content {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            color: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* Concept Section */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .concept-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .concept-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .concept-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--primary-yellow), var(--primary-pink));
+        }
+
+        .concept-card h3 {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Reviews Section */
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .review-card::before {
+            content: '⭐';
+            font-size: 3rem;
+            position: absolute;
+            top: -15px;
+            right: 20px;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .review-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            text-align: center;
+            padding: 5rem 4rem;
+            width: 100%;
+        }
+
+        .contact .section-title {
+            color: white;
+        }
+
+        .contact .section-title::after {
+            background: white;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .contact-item {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .maaseh-tov {
+                padding: 3rem 1.5rem;
+            }
+
+            .maaseh-tov .section-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                gap: 0.5rem;
+                font-size: 0.85rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-links a {
+                padding: 0.5rem 0.8rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            .maaseh-tov {
+                padding: 2rem 1rem;
+            }
+
+            .maaseh-tov .section-content {
+                padding: 1.5rem 1rem;
+            }
+
+            .nav-links {
+                gap: 0.3rem;
+                width: 100%;
+            }
+
+            .nav-links a {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.75rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">עידן רצבי 🎤</div>
+            <ul class="nav-links">
+                <li><a href="#hero">ראשי</a></li>
+                <li><a href="#about">מי אני</a></li>
+                <li><a href="#why">למה לבחור בי</a></li>
+                <li><a href="#products">סל מוצרים</a></li>
+                <li><a href="#maaseh-tov">מעשה טוב</a></li>
+                <li><a href="#vision">החזון שלי</a></li>
+                <li><a href="#reviews">ביקורות</a></li>
+                <li><a href="#contact">צור קשר</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>צחוק שובר מחסומים, ערכים שבונים עתיד</h1>
+            <p class="hero-subtitle">ברוכים הבאים לעולם של עידן רצבי – סטנדאפיסט, מרצה, מאלתר מלידה ובחור דתי חובש כיפה, עם שילוב מנצח של הומור, כישרון אלתור נדיר וניסיון עשיר בייעוץ והעצמה לצעירים.</p>
+
+            <div class="hero-video">
+                <video controls poster="media/WhatsApp Image 2025-10-27 at 14.22.02.jpeg">
+                    <source src="media/WhatsApp Video 2025-10-27 at 14.22.00.mp4" type="video/mp4">
+                    הדפדפן שלך לא תומך בתגית וידאו.
+                </video>
+            </div>
+
+            <p style="font-size: 1.2rem; color: #F0F0F0; margin: 2rem auto; max-width: 900px; line-height: 1.8; text-shadow: 2px 2px 6px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5); background: rgba(0, 0, 0, 0.25); padding: 1rem 1.5rem; border-radius: 12px;">כאן תמצאו חוויה שלא דומה לשום דבר אחר – מופע שמחבר צחוק, אמונה וערכים, ומעצים את הילדים וההורים ביחד. המסרים שלי חוצים מגזרים – דתיים, מסורתיים וחילונים – כי ערכים טובים וצחוק אמיתי שייכים לכולם.</p>
+
+            <div class="cta-buttons">
+                <a href="tel:054-6600588" class="btn btn-primary">📞 התקשרו עכשיו – 054-6600588</a>
+                <a href="https://wa.me/972546600588" class="btn btn-secondary" target="_blank">📲 שלחו וואטסאפ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <div class="section-content">
+            <h2 class="section-title">מי אני – הסיפור האישי</h2>
+            <div class="about-content">
+            <div class="about-text">
+                <p>אני עידן רצבי – בוגר תואר שני במנהל עסקים (ייעוץ ארגוני) בהצטיינות, ובוגר בית ספר למשחק. מאחוריי מאות שעות מול קהל – בהצגות ילדים, סטנדאפ למבוגרים, הרצאות בבתי ספר וייעוץ אישי לצעירים.</p>
+
+                <p>הכול השתנה ביום שנולדו הילדות שלי. פתאום העולם שלי התמלא בגן, הכנת אוכל לבוקר, קניות של תחפושות, סדרות ילדים שאני יודע בעל פה, שיעורי בית, חוגים, שבתות וחגים. גיליתי את האתגרים, החלומות והשמחות של הילדים – מבפנים.</p>
+
+                <p>משם הבנתי – אני לא רק קומיקאי. אני חלק מהעולם שלהם. החומרים שלי נוגעים בכל מה שילדים מכירים: חוויות יומיומיות, משחקים, סדרות, חלומות, טיולים, חברים, בית ספר – והופכים את זה לצחוק מתגלגל על הבמה. הרבה מהתוכן נוצר חי בזמן המופע, דרך אינטראקציה עם הילדים – מה שמוציא ממני את האלתור במלוא הכוח.</p>
+            </div>
+            <div class="image-grid">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.01.jpeg" alt="עידן רצבי – סטנדאפיסט ילדים בכפר סבא" loading="lazy">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.01 (1).jpeg" alt="מופע סטנדאפ מצחיק לילדים והורים בשרון" loading="lazy">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.01 (2).jpeg" alt="ימי הולדת עם ערכים לילדים במרכז" loading="lazy">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.01 (3).jpeg" alt="אלתור חי במופע סטנדאפ לילדים" loading="lazy">
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Me Section -->
+    <section id="why" class="fade-in">
+        <div class="section-content">
+            <h2 class="section-title">למה לבחור בי?</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">אני מביא לבמה את השילוב המושלם:</p>
+        <div class="features-grid">
+            <div class="feature-card" style="background-image: linear-gradient(135deg, rgba(74, 144, 226, 0.95), rgba(155, 89, 182, 0.95)), url('media/WhatsApp Image 2025-10-27 at 15.03.27.jpeg');">
+                <div class="feature-icon">🎭</div>
+                <h3>קומדיה חיה ואלתור אמיתי</h3>
+                <p>רגעים מצחיקים שנולדים על המקום עם הקהל</p>
+            </div>
+            <div class="feature-card" style="background-image: linear-gradient(135deg, rgba(74, 144, 226, 0.95), rgba(155, 89, 182, 0.95)), url('media/WhatsApp Image 2025-10-27 at 15.03.26 (3).jpeg');">
+                <div class="feature-icon">💪</div>
+                <h3>העצמה וניסיון בייעוץ לצעירים</h3>
+                <p>שנים של ליווי, הרצאות והכוונה</p>
+            </div>
+            <div class="feature-card" style="background-image: linear-gradient(135deg, rgba(74, 144, 226, 0.95), rgba(155, 89, 182, 0.95)), url('media/WhatsApp Image 2025-10-27 at 15.03.28.jpeg');">
+                <div class="feature-icon">✨</div>
+                <h3>אמונה וערכים</h3>
+                <p>מותאמים לכל קהל, עם מסרים שמדברים לכולם</p>
+            </div>
+        </div>
+        <p style="text-align: center; font-size: 1.2rem; margin-top: 2rem;">כל מופע אצלי הוא חוויה מחברת, מצחיקה ומעצימה – שילוב של שחר חסון, יובל המבולבל וגדולי המנטורים – הכל בסטייל אישי משלי.</p>
+        <div class="cta-buttons" style="margin-top: 2rem;">
+            <a href="https://wa.me/972546600588" class="btn btn-secondary" target="_blank">📲 שלחו הודעת וואטסאפ עכשיו</a>
+        </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="fade-in">
+        <div class="section-content">
+            <h2 class="section-title">סל המוצרים</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">כי כל אירוע יכול להפוך לחגיגה בלתי נשכחת:</p>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.02 (4).jpeg" alt="מופעי סטנדאפ לילדים" loading="lazy">
+                <h3>🎤 מופעי סטנדאפ לילדים</h3>
+                <p>לכל השנה, עם התאמות לחגים ואירועים מיוחדים (פורים, פסח, חנוכה, ל"ג בעומר ועוד). לגילאי 4–14.</p>
+                <p style="margin-top: 1rem;"><strong>משך: 45–60 דקות</strong></p>
+            </div>
+            <div class="product-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.03 (3).jpeg" alt="ימי הולדת סטנדאפ" loading="lazy">
+                <h3>🎂 ימי הולדת סטנדאפ</h3>
+                <p>הילד במרכז, עם תיאטרון, משחקי אלתור, פרסים, ספורט, סיפורים ואנרגיה בשמיים.</p>
+                <p style="margin-top: 1rem;"><strong>משך: שעה ורבע עד שעתיים</strong></p>
+            </div>
+            <div class="product-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.24.24 (1).jpeg" alt="הרצאות מצחיקות עם ערכים" loading="lazy">
+                <h3>📚 הרצאות מצחיקות עם ערכים</h3>
+                <p>בבתי ספר, נושאים מותאמים: פרשת שבוע, אהבת לרעך, שבת, אמונה, עזרה לזולת.</p>
+                <p style="margin-top: 1rem;"><strong>משך: 45–60 דקות</strong></p>
+            </div>
+            <div class="product-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.21.jpeg" alt="חידונים והפעלות" loading="lazy">
+                <h3>🎯 חידונים, שעות סיפור והפעלות</h3>
+                <p>לגנים, חוגים ומסגרות קהילתיות.</p>
+            </div>
+            <div class="product-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.22.jpeg" alt="שיעורי תורה ואמונה" loading="lazy">
+                <h3>📖 שיעורי תורה ואמונה</h3>
+                <p>כולל "פרלמנט הילדים" הקבוע בשבתות – 60–100 ילדים בכל שבוע.</p>
+            </div>
+            <div class="product-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.34.36.jpeg" alt="הנחיית אירועים" loading="lazy">
+                <h3>🎪 הנחיית אירועים</h3>
+                <p>בשילוב הומור ואלתור בזמן אמת.</p>
+            </div>
+            <div class="product-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.28 (3).jpeg" alt="כתיבת תוכן" loading="lazy">
+                <h3>✍️ כתיבת תוכן</h3>
+                <p>בדגש על חיבור בין צחוק לערכים.</p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Maaseh Tov Section -->
+    <section id="maaseh-tov" class="maaseh-tov fade-in">
+        <div class="section-content">
+            <h2 class="section-title">מעשה טוב עד הבית</h2>
+        <p style="text-align: center; font-size: 1.3rem; margin-bottom: 2rem; font-weight: 500;">שולחים לי מעשה טוב מיוחד של הילד/ה — ואני מגיע עד הבית עם פתק נחת, מתנה קטנה ורגע מצולם של אושר.</p>
+
+        <p style="text-align: center; font-size: 1.1rem; line-height: 1.8; margin-bottom: 3rem;">הילדים עושים טוב כל יום: עוזרים לחבר, מכבדים הורים, מתגברים על קושי. בפרויקט מעשה טוב עד הבית אתם שולחים לי את הסיפור, ואני בוחר אחת לכמה זמן ילד/ה, מגיע עד הבית, מעניק פתק נחת אישי ומתנה (חולצה/כרטיסים/הפתעה), ומצלם קליפ קצר שעולה לאתר/לרשתות — באישורכם. כי כשנותנים מקום לטוב — הוא גדל.</p>
+
+        <h3 style="text-align: center; font-size: 1.8rem; margin: 3rem 0 2rem; color: var(--primary-purple);">איך זה עובד</h3>
+
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h4 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--primary-blue);">שולחים סיפור קצר</h4>
+                <p>שם הילד/ה, גיל, עיר ותיאור המעשה (2–5 משפטים).</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h4 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--primary-blue);">בחירה ותיאום</h4>
+                <p>מתקשרים, מתאמים ומכינים פתק נחת אישי.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h4 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--primary-blue);">מגיעים ומרגשים</h4>
+                <p>הגעה עד הבית, מתנה, צילום קליפ קצר (בהסכמת ההורים).</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; background: white; padding: 2rem; border-radius: 20px;">
+            <h4 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--primary-blue); text-align: center;">מי יכול להשתתף?</h4>
+            <ul style="list-style: none; padding: 0; text-align: center; font-size: 1.1rem;">
+                <li style="margin-bottom: 0.5rem;">✅ ילדים וילדות בגילאי 4–14</li>
+                <li>✅ כל אזור השרון והמרכז (וחוצה לאזורים אלה - בתיאום מיוחד)</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 2rem; background: white; padding: 2rem; border-radius: 20px;">
+            <h4 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--primary-blue); text-align: center;">פרסים אפשריים</h4>
+            <ul style="list-style: none; padding: 0; text-align: center; font-size: 1.1rem;">
+                <li style="margin-bottom: 0.5rem;">🎽 חולצת "עידן רצבי – צחוק וערכים"</li>
+                <li style="margin-bottom: 0.5rem;">🎬 זוג כרטיסים לקולנוע / "לבובו"</li>
+                <li>🎁 הפתעות קטנות משתנות</li>
+            </ul>
+        </div>
+
+        <div class="cta-buttons" style="margin-top: 3rem;">
+            <a href="https://wa.me/972546600588?text=היי%20עידן,%20אני%20רוצה%20להציע%20ילד/ה%20לפרויקט%20מעשה%20טוב%20עד%20הבית" class="btn btn-primary" target="_blank">📨 שולחים מעשה טוב</a>
+            <a href="tel:054-6600588" class="btn btn-secondary">✨ רוצים שאגיע אליכם?</a>
+        </div>
+
+        <p style="text-align: center; margin-top: 2rem; font-size: 0.95rem; color: #666;">🔒 הפרסום יתבצע רק באישור ההורים (אפשר ללא שם / שם פרטי בלבד / טשטוש פנים).</p>
+        </div>
+    </section>
+
+    <!-- Goals Section -->
+    <section id="goals" class="fade-in">
+        <div class="section-content">
+            <h2 class="section-title">המטרות שלי</h2>
+        <div class="concept-grid">
+            <div class="concept-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.26 (1).jpeg" alt="חוויה ייחודית לילדים" loading="lazy">
+                <h3>💝 חוויה ייחודית</h3>
+                <p>ליצור חוויה ייחודית לילדים ולהורים – כזאת שמדברת גם ללב וגם לבטן (מהצחוק).</p>
+            </div>
+            <div class="concept-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.26 (2).jpeg" alt="שילוב הומור וערכים" loading="lazy">
+                <h3>🎯 שילוב מנצח</h3>
+                <p>לשלב בין הומור מושחז, אלתור חופשי וערכים מעצימים.</p>
+            </div>
+            <div class="concept-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.28 (2).jpeg" alt="כלים לחיים דרך צחוק" loading="lazy">
+                <h3>🌱 כלים לחיים</h3>
+                <p>להעניק כלים לחיים דרך הצחוק – בבית, בבית הספר, עם חברים ובקהילה.</p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision" class="fade-in">
+        <div class="section-content">
+            <h2 class="section-title">החזון שלי</h2>
+        <div class="vision-content">
+            <p>אני עידן רצבי – בחור דתי, חובש כיפה, שמאמין בכוח של צחוק ואמונה לחבר בין אנשים.</p>
+            <p style="margin-top: 1.5rem;">החזון שלי הוא להנגיש את עולם הערכים, ההעצמה וההומור לכל ילד ומשפחה בישראל – דתיים, מסורתיים וחילונים כאחד.</p>
+            <p style="margin-top: 1.5rem;">אני שואף לראות דור צעיר יותר שמח, חזק ומחובר – דרך מופעים מצחיקים, מרגשים ומעוררי השראה.</p>
+            <p style="margin-top: 1.5rem;">מתוך אמביציה אמיתית, אני רוצה להביא את החוויה הזו אל הבמות הגדולות, לערוצי הילדים, ואף למסכי הקולנוע – כדי להגיע לכל ילד, בכל בית, בכל מקום.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Concept Section -->
+    <section id="concept" class="fade-in">
+        <div class="section-content">
+            <h2 class="section-title">הקונספט במופעים – איך זה קורה על הבמה?</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">המופע מורכב משלושה חלקים:</p>
+        <div class="concept-grid">
+            <div class="concept-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.27 (1).jpeg" alt="סטנדאפ ואלתורים חיים" loading="lazy">
+                <h3>🎭 סטנדאפ ואלתורים חיים</h3>
+                <p>צחוקים שנולדים ברגע</p>
+            </div>
+            <div class="concept-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.27 (2).jpeg" alt="שעשועון על הבמה" loading="lazy">
+                <h3>🎪 שעשועון על הבמה</h3>
+                <p>בהשתתפות ילדים מהקהל</p>
+            </div>
+            <div class="concept-card">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.28 (1).jpeg" alt="משחקי אלתור" loading="lazy">
+                <h3>🎮 משחקי אלתור</h3>
+                <p>שמכניסים את הילדים לתוך ההופעה ומשאירים אותם בעננים</p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="fade-in">
+        <div class="section-content">
+            <h2 class="section-title">גלריה – רגעים מהמופעים</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.02.jpeg" alt="הפעלה מצחיקה ליום הולדת בכפר סבא" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.02 (1).jpeg" alt="מופע סטנדאפ לילדים בשרון" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.02 (2).jpeg" alt="אלתור חי במופע לילדים" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.02 (3).jpeg" alt="מופע ערכים לילדים במרכז" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.02 (4).jpeg" alt="הופעה מצחיקה לילדים" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.03.jpeg" alt="עידן רצבי על הבמה" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.03 (1).jpeg" alt="מופע סטנדאפ אינטראקטיבי" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.03 (2).jpeg" alt="ילדים נהנים במופע" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.03 (3).jpeg" alt="הפעלה לילדים עם ערכים" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.22.30.jpeg" alt="מופע חגיגי לילדים" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.24.24.jpeg" alt="עידן רצבי מרגיש את הילדים" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.24.24 (1).jpeg" alt="הופעת ילדים מלאת אנרגיה" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 14.34.36.jpeg" alt="סטנדאפ מצחיק במרכז" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.21.jpeg" alt="הופעה לילדים בכפר סבא" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.22.jpeg" alt="מופע אלתור חי" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.26.jpeg" alt="ילדים משתתפים במופע" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.26 (1).jpeg" alt="חוויה בלתי נשכחת לילדים" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.26 (2).jpeg" alt="הפעלת יום הולדת בשרון" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.26 (3).jpeg" alt="מופע עם ערכים וצחוק" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.27.jpeg" alt="עידן רצבי עם הילדים" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.27 (1).jpeg" alt="מופע קומדיה לילדים" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.27 (2).jpeg" alt="הופעה משפחתית מצחיקה" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.27 (3).jpeg" alt="סטנדאפיסט ילדים בכפר סבא" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="media/WhatsApp Image 2025-10-27 at 15.03.28.jpeg" alt="מופע אינטראקטיבי לילדים" loading="lazy">
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="videos" class="fade-in">
+        <div class="section-content">
+            <h2 class="section-title">סרטונים מהמופעים</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+            <div style="border-radius: 20px; overflow: hidden; box-shadow: var(--shadow);">
+                <video controls style="width: 100%; display: block;">
+                    <source src="media/WhatsApp Video 2025-10-27 at 14.24.23.mp4" type="video/mp4">
+                    הדפדפן שלך לא תומך בתגית וידאו.
+                </video>
+            </div>
+            <div style="border-radius: 20px; overflow: hidden; box-shadow: var(--shadow);">
+                <video controls style="width: 100%; display: block;">
+                    <source src="media/WhatsApp Video 2025-10-27 at 14.24.24.mp4" type="video/mp4">
+                    הדפדפן שלך לא תומך בתגית וידאו.
+                </video>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="fade-in">
+        <div class="section-content">
+            <h2 class="section-title">ביקורות</h2>
+        <div class="reviews-container">
+            <div class="review-card">
+                <p class="review-text">"הילדים לא הפסיקו לדבר על זה – ואנחנו ההורים נהנינו לא פחות"</p>
+            </div>
+            <div class="review-card">
+                <p class="review-text">"רצבי, עשית לנו חגיגה אמיתית – עם ערכים, צחוק ואנרגיות"</p>
+            </div>
+            <div class="review-card">
+                <p class="review-text">"זה לא סתם מופע – זאת חוויה שמשאירה חותם"</p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact fade-in">
+        <div class="section-content">
+            <h2 class="section-title">צור קשר</h2>
+        <p style="font-size: 1.3rem; margin-bottom: 2rem;">רוצים אירוע שכולם ידברו עליו?</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <span>📱</span>
+                <a href="tel:054-6600588">054-6600588</a>
+            </div>
+            <div class="contact-item">
+                <span>💬</span>
+                <a href="https://wa.me/972546600588" target="_blank">שלחו וואטסאפ</a>
+            </div>
+        </div>
+        <div class="cta-buttons" style="margin-top: 3rem;">
+            <a href="tel:054-6600588" class="btn btn-primary">📞 התקשרו עכשיו</a>
+            <a href="https://wa.me/972546600588" class="btn btn-secondary" target="_blank">📲 וואטסאפ להזמנה</a>
+        </div>
+
+        <div style="margin-top: 3rem; background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">אזורי פעילות</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8;">כפר סבא, רעננה, הוד השרון, הרצליה, נתניה, פתח תקווה, ראש העין</p>
+            <p style="margin-top: 1rem; font-size: 1.1rem;"><strong>כל איזור השרון והמרכז</strong></p>
+            <p style="margin-top: 0.5rem; font-size: 1rem;">הגעה לכל הארץ בתיאום מראש</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 עידן רצבי – סטנדאפ ילדים עם ערכים | כל הזכויות שמורות</p>
+        <p style="margin-top: 1rem;">📞 054-6600588 | 💬 <a href="https://wa.me/972546600588" style="color: white;" target="_blank">וואטסאפ</a></p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Lazy loading for images
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.src = img.src;
+            });
+        } else {
+            // Fallback for browsers that don't support lazy loading
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+            document.body.appendChild(script);
+        }
+
+        // Add floating animation to some elements randomly
+        const floatingElements = document.querySelectorAll('.feature-card, .product-card');
+        floatingElements.forEach((el, index) => {
+            if (index % 3 === 0) {
+                el.style.animationDelay = `${index * 0.2}s`;
+            }
+        });
+
+        // WhatsApp CTA tracking (console log for demo)
+        document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+            link.addEventListener('click', () => {
+                console.log('WhatsApp CTA clicked');
+            });
+        });
+
+        // Phone CTA tracking (console log for demo)
+        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', () => {
+                console.log('Phone CTA clicked');
+            });
+        });
+    </script>
+</body>
+</html>
